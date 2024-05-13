@@ -1,2 +1,2 @@
 [tool.pyright]
-include = ["funcs"]
+include = ["funcs", "mobj"]
