@@ -1,8 +1,5 @@
 from manim import *
-from manim.mobject.logo import se
-from numpy import select
-from svgelements import write
-from functions import *
+from funcs.vec2D_tex import vec_matrix
 
 class Def(Scene):
     def construct(self):
@@ -71,7 +68,7 @@ class Def(Scene):
         self.play(Write(rt[2][5]))
         self.wait()
 
-        rtm = MathTex("=", Pvector(4, 3)).move_to(rt[2].get_center()).set_color(ORANGE)
+        rtm = MathTex("=", vec_matrix(4, 3)).move_to(rt[2].get_center()).set_color(ORANGE)
         self.play(TransformMatchingShapes(rt[2], rtm))
         self.wait()
         self.play(FadeOut(rtm, rt[:2]))
@@ -79,17 +76,17 @@ class Def(Scene):
         d1 = Dot([-3, 1, 0])
         d1t = MathTex("B=(-3,1)").next_to(d1, UP)
         r1 = Vector([-3, 1], color=GREEN)
-        r1t = MathTex(r"\vec b=", Pvector(-3, 1)).next_to(d1, UP).set_color(GREEN)
+        r1t = MathTex(r"\vec b=", vec_matrix(-3, 1)).next_to(d1, UP).set_color(GREEN)
 
         d2 = Dot([-4, -2, 0])
         d2t = MathTex("C=(-4,-2)").next_to(d2, DOWN)
         r2 = Vector([-4, -2], color=BLUE)
-        r2t = MathTex(r"\vec c=", Pvector(-4, -2)).next_to(d2, DOWN).set_color(BLUE)
+        r2t = MathTex(r"\vec c=", vec_matrix(-4, -2)).next_to(d2, DOWN).set_color(BLUE)
 
         d3 = Dot([2, -3, 0])
         d3t = MathTex("D=(2,-3)").next_to(d3, RIGHT)
         r3 = Vector([2, -3], color=PURPLE)
-        r3t = MathTex(r"\vec d=", Pvector(2, -3)).next_to(d3, RIGHT).set_color(PURPLE)
+        r3t = MathTex(r"\vec d=", vec_matrix(2, -3)).next_to(d3, RIGHT).set_color(PURPLE)
 
 
         self.play(Create(d1))

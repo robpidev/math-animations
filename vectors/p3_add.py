@@ -1,5 +1,5 @@
 from manim import *
-from functions import *
+from funcs.vec2D_tex import vec_matrix
 
 class Anim(Scene):
     def construct(self):
@@ -26,9 +26,9 @@ class Anim(Scene):
         v = Vector([4, -2], color=BLUE)
         r = Vector([6, 1], color=RED)
 
-        ul = MathTex(Pvector(2, 3)).set_color(GREEN).move_to([0.5, 2, 0])
-        vl = MathTex(Pvector(4, -2)).set_color(BLUE).move_to([5, 2.5, 0])
-        rl = MathTex(Pvector(6, 1)).set_color(RED).move_to([3, -0.7, 0])
+        ul = MathTex(vec_matrix(2, 3)).set_color(GREEN).move_to([0.5, 2, 0])
+        vl = MathTex(vec_matrix(4, -2)).set_color(BLUE).move_to([5, 2.5, 0])
+        rl = MathTex(vec_matrix(6, 1)).set_color(RED).move_to([3, -0.7, 0])
 
         vg = VGroup(u, v, r)
         vgt = VGroup(ul, vl, rl)
@@ -91,9 +91,9 @@ class Anim(Scene):
 
 
         # adition of two vectors
-        op = MathTex(Pvector(2,3), "+", Pvector(4, -2), 
-                     "=", Pvector("2+4", "3+(-2)"),
-                     "=", Pvector(6, 1),
+        op = MathTex(vec_matrix(2,3), "+", vec_matrix(4, -2), 
+                     "=", vec_matrix("2+4", "3+(-2)"),
+                     "=", vec_matrix(6, 1),
                      )
 
         op.move_to([3.5, -2.5, 0])
@@ -127,13 +127,13 @@ class Anim(Scene):
 
         # def de suma
         df = Tex(r"Def. Sea $\mathbf{u}, \mathbf{v} \in \mathbb{R}^2$: ", )
-        vecs = MathTex(r"\mathbf{u} =", Pvector("u_x", "u_y"),
-                       r", \quad \mathbf{v} = ", Pvector("v_x", "v_y"))
+        vecs = MathTex(r"\mathbf{u} =", vec_matrix("u_x", "u_y"),
+                       r", \quad \mathbf{v} = ", vec_matrix("v_x", "v_y"))
         text = Tex(r"Se define la adición (+) de $\mathbf{u}$ y $\mathbf{v}$: ")
         add = MathTex(r"\mathbf{u} + \mathbf{v} = ",
-                      Pvector("u_x", "u_y"), "+",
-                      Pvector("v_x", "v_y"),"=",
-                      Pvector("u_x + v_x", "u_y + v_y"))
+                      vec_matrix("u_x", "u_y"), "+",
+                      vec_matrix("v_x", "v_y"),"=",
+                      vec_matrix("u_x + v_x", "u_y + v_y"))
 
         defg = VGroup(df, vecs, text, add)
         defg.arrange(DOWN, aligned_edge=LEFT).move_to([-3.5, 0, 0])

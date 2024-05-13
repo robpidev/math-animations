@@ -1,6 +1,4 @@
-from collections.abc import Reversible
 from manim import *
-from manim.mobject.logo import se
 from funcs.vec2D_tex import *
 
 def vec_ab(a: list, b: list) -> list:
