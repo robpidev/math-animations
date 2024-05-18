@@ -67,3 +67,7 @@ def vec_sub_int(u: list = [0, 0], v: list = [0, 0]) -> tuple:
         sy = f"{u[1]} - ({v[1]})"
 
     return vec_matrix(sx, sy)
+
+
+def vec_mult(scale: int | str = 1, vec: list | str = [0, 0]) -> list [int | str]:
+    return f"{scale}" + f"{vec(vec)}"

@@ -6,7 +6,7 @@ from funcs.vec_algebra import *
 from numpy import arctan
 
 
-class Anim(Scene):
+class Add5(Scene):
     def construct(self):
         # self.next_section(skip_animations=True)
         self.wait()

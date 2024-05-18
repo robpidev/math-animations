@@ -1,10 +1,10 @@
 from manim import *
 
 
-class Anim(Scene):
+class Field(Scene):
     def construct(self):
         self.wait()
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
 
         group = MathTex(r"(\mathbb{R},+", ")")
         field = MathTex(r"(\mathbb{R},+", "," "\cdot", ")")
@@ -111,7 +111,7 @@ class Anim(Scene):
         VGroup(write, write_alt).arrange(DOWN, buff=1)
         # write_alt =
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=False)
 
         for i in range(0, len(write) - 2, 2):
             self.play(Write(write[i]))

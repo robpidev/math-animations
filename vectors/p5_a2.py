@@ -1,7 +1,7 @@
 from manim import *
 from funcs.vec2D_tex import *
 
-class Anim(Scene):
+class Add2(Scene):
     def construct(self):
         # self.next_section(skip_animations=True)
         self.wait()

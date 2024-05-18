@@ -27,7 +27,7 @@ def vec_tex_add(u, v):
     return r"\begin{bmatrix}" + f"{u}_x + {v}_x"+ r"\\" + f"{u}_y + {v}_y" + r"\end{bmatrix}"
 
 
-class Anim(Scene):
+class Add1(Scene):
     def construct(self):
         # self.next_section(skip_animations=True)
         plane = NumberPlane(

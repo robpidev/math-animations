@@ -2,7 +2,7 @@ from manim import *
 from funcs.vec2D_tex import *
 
 
-class Anime(Scene):
+class Add4(Scene):
     def construct(self):
         # self.next_section(skip_animations=True)
         self.wait()

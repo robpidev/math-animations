@@ -1,6 +1,6 @@
 from manim import *
 
-class Anim(Scene):
+class Vec_Set(Scene):
     def construct(self):
 
         # self.next_section(skip_animations=True)
