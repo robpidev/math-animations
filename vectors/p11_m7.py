@@ -1,5 +1,4 @@
 from manim import *
-from numpy import copy
 from funcs.vec_algebra import *
 from funcs.vec2D_tex import *
 
@@ -7,7 +6,7 @@ from funcs.vec2D_tex import *
 class Prop7(Scene):
     def construct(self):
         self.wait()
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
 
         d = MathTex(
             r"\text{(D). }",
@@ -17,7 +16,7 @@ class Prop7(Scene):
 
         self.play(Write(d))
         self.wait()
-        self.play(d.animate.to_edge(UP + LEFT).scale(0.8))
+        self.play(d.animate.scale(0.8).to_edge(UP + LEFT))
 
         plane = NumberPlane(
             background_line_style={
@@ -172,17 +171,12 @@ class Prop7(Scene):
         self.play(Write(l3[4]))
         self.play(
             TransformMatchingShapes(
-                Group(l3[3][1:4].copy(), l3[3][8:11].copy()),
-                l3[5]
+                Group(l3[3][1:4], l3[3][8:11]).copy(),l3[5]
             ),
+            TransformFromCopy(Group(l3[3][4], l3[3][11]),l3[6]),
             TransformMatchingShapes(
-                Group(l3[3][5:8].copy(), l3[3][12:15].copy()),
-                l3[7]
+                VGroup(l3[3][5:8], l3[3][12:15]).copy(),l3[7]
             ),
-            TransformMatchingShapes(
-                Group(l3[3][4].copy(), l3[3][11].copy()),
-                l3[6]
-            )
         )
         self.wait()
 
@@ -202,7 +196,7 @@ class Prop7(Scene):
 
         Group(name, result).move_to(ORIGIN)
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=False)
         self.play(
             Transform(l2[0:2], result[0:2]),
             Transform(l5[3:], result[2:-1]),

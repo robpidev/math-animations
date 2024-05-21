@@ -13,8 +13,8 @@ def vec_float(vec: list = [0, 0]) -> str:
 def vec_comps(vec_name: str = "u") -> str:
     """
     takes ```u``` and return 
-    ⎡u_x⎤
-    ⎣u_y⎦
+    ⎡u_x - v_x⎤
+    ⎣u_y - v_y⎦
     """
 
     return vec_matrix(f"{vec_name}_x", f"{vec_name}_y")
@@ -73,8 +73,9 @@ def vec_sub_comps(u: str = "u", v: str = "v") -> str:
 def vec_sub_int(u: list = [0, 0], v: list = [0, 0]) -> tuple:
     """
     Takes a vector ```u``` in ```Z``` and a vector ```v``` in ```Z```
-    and return  ⎡a - d⎤
-                ⎣c - d⎦
+    and return  
+    ⎡a - d⎤
+    ⎣c - d⎦
 
     or si c or d < 0
                 ⎡a - (-d)⎤
