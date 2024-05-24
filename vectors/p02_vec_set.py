@@ -1,4 +1,5 @@
 from manim import *
+from mobj.mobjets import number_plane
 
 class Vec_Set(Scene):
     def construct(self):
@@ -42,17 +43,7 @@ class Vec_Set(Scene):
         self.next_section(skip_animations=False)
 
 
-        plane = NumberPlane(
-            background_line_style={
-                "stroke_width": 1,
-                "stroke_opacity": 0.8
-            },
-            axis_config={
-                "stroke_width": 1,
-                "stroke_opacity": 0.8
-            },
-        )
-
+        plane = number_plane() 
         self.play(Create(plane))
         self.wait()
 

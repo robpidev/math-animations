@@ -1,5 +1,6 @@
 from manim import *
 from numpy import sin, cos
+from mobj.mobjets import number_plane
 
 def vec (r: ValueTracker, u: ValueTracker) -> list:
     return [
@@ -30,16 +31,8 @@ def vec_tex_add(u, v):
 class Add1(Scene):
     def construct(self):
         # self.next_section(skip_animations=True)
-        plane = NumberPlane(
-            background_line_style={
-                "stroke_width": 1,
-                "stroke_opacity": 0.8
-            },
-            axis_config={
-                "stroke_width": 1,
-                "stroke_opacity": 0.8
-            },
-        )
+        plane = number_plane()
+        
         self.wait()
         a1_tex = Tex("(A1). Si ", r"$ x, y \in \mathbb{R} \implies x + y \in \mathbb{R}$")
         self.play(Write(a1_tex))

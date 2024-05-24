@@ -1,5 +1,6 @@
 from manim import *
 from funcs.vec2D_tex import vec_matrix
+from mobj.mobjets import number_plane
 
 class Def(Scene):
     def construct(self):
@@ -11,36 +12,27 @@ class Def(Scene):
         # self.wait()
         # self.play(FadeOut(title))
 
-        plane = NumberPlane(
-            background_line_style={
-                "stroke_width": 1,
-                "stroke_opacity": 0.8
-            },
-            axis_config={
-                "stroke_width": 1,
-                "stroke_opacity": 0.8
-            },
-        )
+        plane = number_plane()
 
         self.play(Create(plane))
         self.wait()
 
         a = Dot([4, 3, 0])
-        at = MathTex("A=(4,3)").next_to(a, RIGHT)
+        al = MathTex("A=(4,3)").next_to(a, RIGHT)
         lx = Line(ORIGIN, 4*RIGHT, stroke_width=2).set_color(RED)
         ly = Line(ORIGIN, 3*UP, stroke_width=2).set_color(YELLOW)
 
 
         self.play(Create(a))
         self.wait()
-        self.play(Write(at[0][0:3]))
+        self.play(Write(al[0][0:3]))
         self.play(Create(lx))
         self.wait()
-        self.play(Transform(lx, at[0][3]))
-        self.play(Write(at[0][4]))
+        self.play(Transform(lx, al[0][3]))
+        self.play(Write(al[0][4]))
         self.play(Create(ly))
-        self.play(Transform(ly, at[0][5]))
-        self.play(Write(at[0][6:]))
+        self.play(Transform(ly, al[0][5]))
+        self.play(Write(al[0][6:]))
         self.wait()
 
         o = Dot(ORIGIN)
@@ -62,9 +54,9 @@ class Def(Scene):
         self.play(Write(rt[1]))
         self.wait()
         self.play(Write(rt[2][:2]))
-        self.play(TransformMatchingShapes(at[0][3].copy(), rt[2][2]))
+        self.play(TransformMatchingShapes(al[0][3].copy(), rt[2][2]))
         self.play(Write(rt[2][3]))
-        self.play(TransformMatchingShapes(at[0][5].copy(), rt[2][4]))
+        self.play(TransformMatchingShapes(al[0][5].copy(), rt[2][4]))
         self.play(Write(rt[2][5]))
         self.wait()
 
@@ -197,22 +189,21 @@ class Def(Scene):
         self.play(FadeOut(name))
         self.wait()
 
-        self.play(FadeOut(r1, r1t, o, ot, a, at, r, lx, ly))
+        self.play(FadeOut(r1, r1t, o, ot, a, al, r, lx, ly))
         self.wait()
 
-        self.next_section(skip_animations=False)
 
         a = Dot([-3, 2, 0])
-        at = MathTex("A=(", "-3", ",", "2", ")").next_to(a, UP)
+        al = MathTex("A=(", "-3", ",", "2", ")").next_to(a, UP)
         b = Dot([2, 1, 0])
-        bt = MathTex("B=(", "2", ",", "1", ")").next_to(b, UP)
+        bl = MathTex("B=(", "2", ",", "1", ")").next_to(b, UP + RIGHT)
 
         r = Arrow(a, b, buff=0)
 
         self.play(Create(a))
-        self.play(Write(at))
+        self.play(Write(al))
         self.play(Create(b))
-        self.play(Write(bt))
+        self.play(Write(bl))
         self.wait()
 
         self.play(Transform(plane, r))
@@ -226,7 +217,7 @@ class Def(Scene):
             include_tip=True,
         )
 
-        self.play(Transform(plane, line), FadeOut(a, at, b, bt))
+        self.play(Transform(plane, line), FadeOut(a, al, b, bl))
         self.wait()
 
         p2 = Dot([3, 0, 0]).set_color(ORANGE)
@@ -294,7 +285,7 @@ class Def(Scene):
 
         r = Arrow(a, b, buff=0)
 
-        self.play(FadeOut(rt1, p1, p2, ry), Transform(plane, r), FadeIn(a, at, b, bt))
+        self.play(FadeOut(rt1, p1, p2, ry), Transform(plane, r), FadeIn(a, al, b, bl))
 
         self.wait()
         # sigue con las animaciones
@@ -319,13 +310,13 @@ class Def(Scene):
         self.play(Write(rt1[-1]))
         self.wait()
 
-        self.play(TransformMatchingShapes(bt[1].copy(), rt1[2]))
+        self.play(TransformMatchingShapes(bl[1].copy(), rt1[2]))
         self.play(Write(rt1[3]))
-        self.play(TransformMatchingShapes(at[1].copy(), rt1[4]))
+        self.play(TransformMatchingShapes(al[1].copy(), rt1[4]))
         self.wait()
-        self.play(TransformMatchingShapes(bt[3].copy(), rt1[6]))
+        self.play(TransformMatchingShapes(bl[3].copy(), rt1[6]))
         self.play(Write(rt1[7]))
-        self.play(TransformMatchingShapes(at[3].copy(), rt1[8]))
+        self.play(TransformMatchingShapes(al[3].copy(), rt1[8]))
         self.wait()
 
         self.play(Write(resp[0]))
@@ -338,17 +329,7 @@ class Def(Scene):
 
 
 
-        plane = NumberPlane(
-            background_line_style={
-                "stroke_width": 1,
-                "stroke_opacity": 0.4
-            },
-            axis_config={
-                "stroke_width": 1,
-                "stroke_opacity": 0.8
-            },
-
-        )
+        plane = number_plane()
         self.play(Transform(r.copy(), plane))
         self.wait()
 
@@ -366,6 +347,14 @@ class Def(Scene):
 
         rx =  Arrow([-3, 1, 0], [2, 1, 0], buff=0).set_color(BLUE)
         self.play(Create(rx))
+
         self.wait()
+
+        self.remove(lx, ly)
+
+        # self.next_section(skip_animations=False)
+        self.play(rx.animate.shift(UP))
+        self.wait()
+        self.play(ry.animate.shift(RIGHT * 5))
 
 

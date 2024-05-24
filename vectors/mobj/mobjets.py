@@ -4,10 +4,10 @@ def number_plane():
     return NumberPlane(
             background_line_style={
                 "stroke_width": 2,
-                "stroke_opacity": 0.4,
+                "stroke_opacity": 0.3,
             },
             axis_config={
                 "stroke_width": 1,
-                "stroke_opacity": 0.8,
+                "stroke_opacity": 0.5,
             }
         )
