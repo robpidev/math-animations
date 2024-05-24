@@ -162,9 +162,9 @@ class Prop7(Scene):
         self.play(Write(l3[4]))
         self.play(
             TransformMatchingShapes(
-                Group(l3[3][1:4], l3[3][8:11]).copy(),l3[5]
+                VGroup(l3[3][1:4], l3[3][8:11]).copy(),l3[5]
             ),
-            TransformFromCopy(Group(l3[3][4], l3[3][11]),l3[6]),
+            TransformFromCopy(VGroup(l3[3][4], l3[3][11]),l3[6]),
             TransformMatchingShapes(
                 VGroup(l3[3][5:8], l3[3][12:15]).copy(),l3[7]
             ),
