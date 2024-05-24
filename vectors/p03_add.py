@@ -21,7 +21,7 @@ class Adition(Scene):
         vl = MathTex(vec_matrix(4, -2)).set_color(BLUE).move_to([5, 2.5, 0])
         rl = MathTex(vec_matrix(6, 1)).set_color(RED).move_to([3, -0.7, 0])
 
-        vg = VGroup(u, v, r)
+        VGroup(u, v, r)
         vgt = VGroup(ul, vl, rl)
 
         self.play(Create(u))

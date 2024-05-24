@@ -1,7 +1,7 @@
 from manim import *
 from funcs.vec_algebra import vec_scale
 from funcs.vec2D_tex import *
-from vectors.mobj.mobjets import number_plane
+from mobj.mobjets import number_plane
 
 
 class Prop9(Scene):

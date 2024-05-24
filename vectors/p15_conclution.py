@@ -4,7 +4,7 @@ from manim import *
 class Conclution(Scene):
     def construct(self):
         self.wait()
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
 
         de = MathTex(
             r"\mathbb{R}^2",
@@ -79,7 +79,7 @@ class Conclution(Scene):
         self.play(Write(el))
         self.wait()
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=False)
         self.wait()
 
         esp = Tex(r"$\mathbb{R}^2$", ": Espacio vectorial")
@@ -91,7 +91,7 @@ class Conclution(Scene):
         esp_gen = Tex(r"$V$", ": Espacio vectorial")
         vecs_gen = Tex(r"$\mathbf{u, v} \in V$", ": Vectores")
 
-        vec_space  = VGroup(esp, vecs).arrange(DOWN, aligned_edge=LEFT)
+        VGroup(esp, vecs).arrange(DOWN, aligned_edge=LEFT)
         esp_alt.move_to(esp.get_center())
         esp_gen.move_to(esp.get_center())
 

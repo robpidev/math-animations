@@ -12,7 +12,7 @@ class Vec_Set(Scene):
 
         o = MathTex(r"\vec 0", "=[", "0", ",", "0", "]", )
 
-        vg = VGroup(r, r1, r2, o).arrange(DOWN, aligned_edge=LEFT)
+        VGroup(r, r1, r2, o).arrange(DOWN, aligned_edge=LEFT)
 
         rec_o = SurroundingRectangle(o, buff=0.1)
 
@@ -27,7 +27,7 @@ class Vec_Set(Scene):
         self.play(Write(r2[3]))
         self.play(Write(r2[5]))
         self.wait()
-        
+       
         self.play(TransformFromCopy(r1[2], r2[2]))
         self.play(TransformFromCopy(r1[4], r2[4]))
         self.wait()
