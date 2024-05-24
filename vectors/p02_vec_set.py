@@ -83,7 +83,7 @@ class Vec_Set(Scene):
         ad3 = MathTex(r"3.\quad x + (y + z) = (x + y) + z")
         ad4 = MathTex(r"4. \quad \exists 0 \in \mathbb{R}: x + 0 = x")
         ad5 = MathTex(r"5.\quad \forall x, \exists -x \in \mathbb{R}: x + (-x) = 0")
-        esc = Tex(r"Se acosumbra escribir\\",
+        esc = Tex(r"Se acostumbra escribir\\",
                   "$(x + y) + z = z + y + z$, $x + (-y) = x - y$"
                   )
 

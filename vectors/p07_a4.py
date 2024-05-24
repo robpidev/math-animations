@@ -89,5 +89,10 @@ class Add4(Scene):
         )
         self.wait()
         self.play(Write(result[5]))
+        self.wait()
+
+        enum = Tex("4. ").next_to(result, LEFT)
+        self.play(Write(enum))
+        self.wait()
 
 

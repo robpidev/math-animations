@@ -1,5 +1,4 @@
 from manim import *
-from manim.mobject.logo import se
 from funcs.vec2D_tex import *
 from mobj.mobjets import number_plane
 from funcs.vec_algebra import *
@@ -8,7 +7,7 @@ from numpy import arctan
 
 class Add5(Scene):
     def construct(self):
-        # self.next_section(skip_animations=True)
+        self.next_section(skip_animations=True)
         self.wait()
 
         a5 = Tex("(A5). ",
@@ -280,7 +279,12 @@ class Add5(Scene):
         self.clear()
         self.add(a5, resultg)
 
-        self.play(FadeOut(a5, resultg))
+        enum = Tex("5. ").next_to(resultg, LEFT)
+        self.play(Write(enum))
+        self.wait()
+
+
+        self.play(FadeOut(a5, resultg, enum))
 
         # self.play(
             # Write(result[1]),
@@ -293,6 +297,7 @@ class Add5(Scene):
             "=", vec_matrix("u_x + (-v_x)", "u_y + (-v_y)")
         )
         self.play(Write(eq[0:5]))
+
         self.play(Write(eq[5]))
         self.play(TransformFromCopy(eq[2], eq[6]))
         self.play(Write(eq[7]))

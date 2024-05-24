@@ -266,7 +266,7 @@ class Add3(Scene):
 
 
         result = MathTex(
-            r"\text{(A3). }",
+            r"\text{3. }",
             r"(\mathbf{u} + \mathbf{v}) + \mathbf{w}", "=",
             r"\mathbf{u} + (\mathbf{v} + \mathbf{w})",
             r",\quad \forall \mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathbb{R}^2"
@@ -274,7 +274,7 @@ class Add3(Scene):
 
         res_g = VGroup(
             result,
-            Tex("Suele escribirse: "),
+            Tex("Se acostumbra escribir: "),
             MathTex(
                 r"\mathbf{u} + \mathbf{v} + \mathbf{w}",
                 "=", 

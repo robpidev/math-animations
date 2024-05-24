@@ -6,10 +6,10 @@ class Def(Scene):
         # self.next_section(skip_animations=True)
 
         self.wait()
-        title = Text("1. Definición de un Vector")
-        self.play(Write(title))
-        self.wait()
-        self.play(FadeOut(title))
+        # title = Text("1. Definición de un Vector")
+        # self.play(Write(title))
+        # self.wait()
+        # self.play(FadeOut(title))
 
         plane = NumberPlane(
             background_line_style={
@@ -190,7 +190,7 @@ class Def(Scene):
 
         self.play(FadeOut(vg))
         
-        name = Text("Vector en posició normal").move_to([0, -2, 0])
+        name = Text("Vector en posición normal").move_to([0, -2, 0])
         self.wait()
         self.play(Write(name))
         self.wait()

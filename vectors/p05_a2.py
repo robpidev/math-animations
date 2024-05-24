@@ -171,7 +171,7 @@ class Add2(Scene):
         self.play(TransformFromCopy(l2[-2], l3[3]))
         self.play(TransformFromCopy(l2[-1], l3[-1]))
 
-        result = MathTex(r"\text{(A2). }", r"\mathbf{u}+\mathbf{v}=", r"\mathbf{v}+\mathbf{u}",
+        result = MathTex(r"\text{2. }", r"\mathbf{u}+\mathbf{v}=", r"\mathbf{v}+\mathbf{u}",
                          r",\quad \forall \mathbf{u}, \mathbf{v} \in \mathbb{R}^2")
 
         result.move_to([-2, 0, 0])
