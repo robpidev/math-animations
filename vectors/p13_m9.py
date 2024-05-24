@@ -1,6 +1,7 @@
 from manim import *
 from funcs.vec_algebra import vec_scale
 from funcs.vec2D_tex import *
+from vectors.mobj.mobjets import number_plane
 
 
 class Prop9(Scene):
@@ -19,16 +20,7 @@ class Prop9(Scene):
         self.play(m3.animate.scale(0.8).to_edge(UP + LEFT))
         self.wait()
 
-        plane = NumberPlane(
-            background_line_style={
-                "stroke_width": 2,
-                "stroke_opacity": 0.4,
-            },
-            axis_config={
-                "stroke_width": 1,
-                "stroke_opacity": 0.5,
-            },
-        )
+        plane = number_plane() 
 
         self.play(Create(plane))
         self.wait()
