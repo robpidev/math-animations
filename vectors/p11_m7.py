@@ -1,7 +1,7 @@
 from manim import *
 from funcs.vec_algebra import *
 from funcs.vec2D_tex import *
-from mobj import number_plane
+from mobj.mobjets import number_plane
 
 
 class Prop7(Scene):
@@ -101,7 +101,7 @@ class Prop7(Scene):
 
         l1 = MathTex(
             r"c\in\mathbb{R}", r"\wedge"
-                + "\mathbf{u}, \mathbf{v}\in \mathbb{R}^2", ",",
+                + r"\mathbf{u}, \mathbf{v}\in \mathbb{R}^2", ",",
         )
 
         l2 = MathTex(
