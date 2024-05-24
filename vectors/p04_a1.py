@@ -209,7 +209,7 @@ class Add1(Scene):
         self.play(Write(proof[4]))
         self.wait()
 
-        result = MathTex(r"\text{(A1). }", r"\mathbf{u}, \mathbf{v} \in \mathbb{R}^2 \implies",
+        result = MathTex(r"\text{1. }", r"\mathbf{u}, \mathbf{v} \in \mathbb{R}^2 \implies",
                          r"\mathbf{u} + \mathbf{v} \in \mathbb{R}^2")
 
 
