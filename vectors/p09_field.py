@@ -14,7 +14,7 @@ class Field(Scene):
         self.play(TransformMatchingTex(group, field))
         self.wait()
 
-        a = MathTex(r"\text{(A). } (\mathbb{R}, +) \text{ es un grupo}.")
+        a = MathTex(r"\text{(A). } (\mathbb{R}, +) \text{ es un grupo Abeliano}.")
         m = Tex("(M). Propiedades de la multiplicación: ")
         m1 = MathTex(
             r"\quad 1. \quad",
@@ -44,7 +44,7 @@ class Field(Scene):
         )
 
         d = MathTex(
-            r"\text{(D). Ley Distributiba: }",
+            r"\text{(D). Ley Distributiva: }",
         )
 
         d1 = MathTex(

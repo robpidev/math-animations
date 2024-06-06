@@ -36,14 +36,13 @@ class Prop8(Scene):
         self.wait()
         self.play(Create(u2), Write(u2l))
         self.wait()
-        self.play(Create(u3), Write(u3l))
-        self.wait()
-
         self.play(
             u2.animate.move_to([-2, -3, 0]),
             u2l.animate.move_to([-2.5, -2.5, 0])
         )
-
+        self.wait()
+        self.play(Create(u3), Write(u3l))
+        self.wait()
         self.play(
             u3.animate.move_to([3, -0.5, 0]),
             u3l.animate.move_to([2.4, -0.3, 0])
@@ -53,7 +52,7 @@ class Prop8(Scene):
         r = Arrow([-4, -4, 0], [6, 1, 0], buff=0, color=RED).set_z_index(6)
         r.set_opacity(0.6)
         rl = MathTex(
-            "3", r"\mathbf{u}",
+            "5", r"\mathbf{u}",
             "=", r"2\mathbf{u} + 3\mathbf{u}",
             color=RED
         ).move_to([2.5, -2.5, 0])
@@ -189,7 +188,7 @@ class Prop8(Scene):
 
         self.play(
             result.animate.scale(0.8).to_edge(UP + LEFT),
-            FadeOut(d_alt, fig)
+            FadeOut(d_alt[1:], fig)
         )
         self.wait()
 

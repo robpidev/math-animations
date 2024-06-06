@@ -56,7 +56,10 @@ class Prop9(Scene):
 
 
 
-        self.play(ReplacementTransform(u2, u3), u3l.animate.move_to([-0.5, 0.5, 0]))
+        self.play(
+            ReplacementTransform(u2, u3),
+            u3l.animate.move_to([-0.5, 0.5, 0])
+        )
         self.wait()
 
         u3_alt = u3.copy().set_color(YELLOW).set_z_index(12)
@@ -64,7 +67,7 @@ class Prop9(Scene):
 
         self.play(ReplacementTransform(ul, u3_altl))
 
-        self.play(ReplacementTransform(u, u3_alt), Write(u3_altl))
+        self.play(ReplacementTransform(u, u3_alt))
         self.wait()
 
         eq = MathTex(
@@ -78,8 +81,11 @@ class Prop9(Scene):
         self.play(TransformMatchingShapes(Group(u3l, u3_altl).copy(), eq))
         self.wait()
 
-        self.play(ReplacementTransform(
-            eq, eq_alt, transform_mismatches=True))
+        self.play(
+            ReplacementTransform(
+                eq, eq_alt, transform_mismatches=True
+            )
+        )
         self.wait()
 
         self.play(FadeOut(u3l, u3_altl, eq_alt, u3, u3_alt, plane))
@@ -180,8 +186,8 @@ class Prop9(Scene):
         #NOTE: ################ example #####################
 
         eq = MathTex(
-            "3 (2\mathbf{u} + 5\mathbf{v})",
-            "=", "(3\cdot2)", r"\mathbf{u}", "+", r"(3\cdot5)", "\mathbf{v}",
+            r"3 (2\mathbf{u} + 5\mathbf{v})",
+            "=", r"(3\cdot2)", r"\mathbf{u}", "+", r"(3\cdot5)", "\mathbf{v}",
         )
 
         eq1 = MathTex(

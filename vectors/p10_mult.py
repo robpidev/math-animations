@@ -41,7 +41,7 @@ def vec_scalar_name(k: ValueTracker, a: str) -> MathTex:
 class Def_Mult(Scene):
     def construct(self):
         self.wait()
-        # self.next_section(skip_animations=True)
+        self.next_section(skip_animations=True)
 
         a = [2, 1, 0]
         b = [4, 2, 0]
@@ -179,13 +179,15 @@ class Def_Mult(Scene):
         ################# Def de product #####################
         ######################################################
 
+        self.next_section(skip_animations=False)
+
         l1 = MathTex(
             r"\text{Def. }", r"\mathbf{u} \in \mathbb{R}^2",
             r"\wedge c \in \mathbb{R}",
             r",(c \text{ es llamado \textit{escalar}})"
         )
         l2 = Tex(
-            "Se de fine el producto:",
+            "Se define el producto escalar:",
         )
         
         l3 = MathTex(
@@ -270,6 +272,7 @@ class Def_Mult(Scene):
         self.play(FadeOut(m1, def_g))
 
 
+        self.next_section(skip_animations=True)
         #######################################################
         ################ More about scalars ##################
         #######################################################
