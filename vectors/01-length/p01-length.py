@@ -1,4 +1,6 @@
 from manim import *
+from manim._config.logger_utils import set_file_logger
+from manim.mobject.logo import se
 from mobj.mobjets import number_plane
 from funcs.vec2D_tex import *
 from funcs.vec_algebra import *
@@ -8,7 +10,7 @@ from funcs.vec_algebra import *
 class P01_Length(Scene):
     def construct(self):
         self.wait()
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
         plane = number_plane()
         self.play(Create(plane))
         self.wait()
@@ -145,7 +147,7 @@ class P01_Length(Scene):
 
         l2 = MathTex(
             r"\text{de un vector } ",
-            r"\mathbf{r} =" + vec(["x", "y"]) + "\in \mathbb{R}^2",
+            r"\mathbf{r} =", vec(["x", "y"]), "\in \mathbb{R}^2",
         )
 
         l3 = MathTex(
@@ -163,7 +165,13 @@ class P01_Length(Scene):
         self.wait()
         self.play(Write(l3))
         self.wait()
-        self.play(Write(eq))
+        self.play(Write(eq[0]))
+        self.play(Write(eq[1]))
+        self.play(
+            TransformMatchingShapes(
+                l2[-2][1:-1].copy(), eq[-1]
+            )
+        )
         self.wait()
         
         #NOTE: ===================== ||cR|| =====================
@@ -188,7 +196,8 @@ class P01_Length(Scene):
 
         mod_r1 = MathTex(
             r"\implies \|\mathbf{r}\| =", "\sqrt{(-2)^2 + 1^2}",
-            "=", "\sqrt{5}"
+            "=", "\sqrt{5}",
+            color=YELLOW_B
         ).next_to(r1l, RIGHT)
         self.play(Write(mod_r1[0][0:2]))
         self.play(TransformMatchingShapes(
@@ -279,18 +288,20 @@ class P01_Length(Scene):
 
         result = MathTex(
             r"\implies",
-            r"\|-3\mathbf{r}\|", "=",
-            r"|-3|\|\mathbf{r}\|", "=|-3|\sqrt{5}"
+            r"\|-3\mathbf{r}\|=",
+            r"|-3|\|\mathbf{r}\|", "=|-3|\sqrt{5}",
+            color=GREEN_B
         ).move_to([0, -2.5, 0])
 
         self.play(
             fig.animate.scale(2).move_to(ORIGIN),
-            ReplacementTransform(l1[0:2], result[1]),
-            ReplacementTransform(l5[-1], result[-1]),
+            TransformMatchingShapes(l1[0:2], result[1]),
+            TransformMatchingShapes(l5[-2:], result[-1]),
             Write(result[0]),
             Write(result[2:-1]),
-            FadeOut(l1[2:], l2, l3, l4, l5[:-1])
+            FadeOut(l1[2:], l2[1:], l3[1:], l4[1:], l5[:-1])
         )
+
 
         self.play(FadeOut(fig[1:], result))
 
@@ -477,7 +488,7 @@ class P01_Length(Scene):
 
         self.wait()
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=False)
         result = MathTex(
             r"\|c\mathbf{r}\|=",
             r"|c|\|\mathbf{r}\|"
@@ -487,12 +498,10 @@ class P01_Length(Scene):
         VGroup(l1c, result).arrange(DOWN, buff=0.2).move_to(ORIGIN)
 
 
+        self.play(FadeOut(l2[3:], l2[0], l3[2:], l4[2:-2]))
         self.play(
-            FadeOut(proof),
-            ReplacementTransform(l2[1:3], result[0]),
-            ReplacementTransform(l5[-1], result[1]),
+            TransformMatchingShapes(l2[1:3], result[0]),
+            ReplacementTransform(l4[-2:], result[1]),
             ReplacementTransform(l1,l1c)
         )
-
-
 
