@@ -1,6 +1,4 @@
 from manim import *
-from manim._config.logger_utils import set_file_logger
-from manim.mobject.logo import se
 from mobj.mobjets import number_plane
 from funcs.vec2D_tex import *
 from funcs.vec_algebra import *
@@ -289,23 +287,28 @@ class P01_Length(Scene):
         result = MathTex(
             r"\implies",
             r"\|-3\mathbf{r}\|=",
-            r"|-3|\|\mathbf{r}\|", "=|-3|\sqrt{5}",
+            r"|-3|\|\mathbf{r}\|", "=", r"|-3|\sqrt{5}",
             color=GREEN_B
         ).move_to([0, -2.5, 0])
+        self.wait()
+
+
 
         self.play(
             fig.animate.scale(2).move_to(ORIGIN),
             TransformMatchingShapes(l1[0:2], result[1]),
-            TransformMatchingShapes(l5[-2:], result[-1]),
+            TransformMatchingShapes(l5[-2:], result[-2:]),
             Write(result[0]),
-            Write(result[2:-1]),
-            FadeOut(l1[2:], l2[1:], l3[1:], l4[1:], l5[:-1])
+            Write(result[2:-2]),
+            FadeOut(l1[2:], l2[1:], l3[1:], l4[1:], l5[1:-2])
         )
+
+        self.wait()
 
 
         self.play(FadeOut(fig[1:], result))
 
-        #NOTE: =========== generalizando for all vector =============
+        #NOTE: =========== Proof for all vector =============
         dp = [1.5, 1]
         r = Vector(dp, color=RED).set_z_index(2)
         rl = MathTex(
