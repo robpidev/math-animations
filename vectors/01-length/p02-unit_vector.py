@@ -1,13 +1,15 @@
 from manim import *
 from manim.mobject.logo import se
-from numpy import copy
 from mobj.mobjets import number_plane
+from funcs.vec2D_tex import *
 
+def vut(name: str) -> str:
+    return r"\mathbf{\hat{" + name + r"}}"
 
 class P02_UnitVector(Scene):
     def construct(self):
         self.wait()
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
         plane = number_plane()
         # self.play(Create(plane))
 
@@ -140,7 +142,7 @@ class P02_UnitVector(Scene):
 
         eqs = VGroup(eq, imp.copy(), eq1, imp.copy(), eq2).arrange(RIGHT)
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=True)
 
         self.play(ReplacementTransform(eqc, eq))
         self.wait()
@@ -191,5 +193,106 @@ class P02_UnitVector(Scene):
 
         self.play(Create(plane))
         self.wait()
+
+        # self.next_section(skip_animations=False)
+        self.wait()
+
+        up = [-2, -1, 0]
+        ut = MathTex(r"\mathbf{u}", "=", vec(up), color=GREEN )
+        uv = Vector(up, color=GREEN)
+        ut.next_to(uv, LEFT)
+
+        self.play(Write(ut))
+        self.play(Create(uv))
+
+        self.wait()
+
+        uut = MathTex(
+            r"\mathbf{\hat{u}}",
+            "=",
+            r"\frac{1}{\sqrt{(-2)^2 + (-1)^2}}",
+            vec(up),
+        ).next_to(uv, RIGHT)
+
+
+        uu1 = MathTex(
+            r"\mathbf{\hat{u}}",
+            "=",
+            r"\frac{1}{\sqrt{5}}",
+            vec(up),
+        ).move_to(uut)
+
+        self.play(Write(uut[:-2]), Write(uut[-2][:4]))
+        self.wait(0.5)
+        self.play(
+            TransformMatchingShapes(ut[-1].copy(), uut[-2][4:])
+        )
+        self.wait(0.5)
+        self.play(TransformFromCopy(ut[-1], uut[-1]))
+        self.wait(0.5)
+        self.play(ReplacementTransform(
+            uut, uu1,
+            fade_transform_mismatches=False
+        ))
+
+        self.wait()
+
+        uup = [-2/5**0.5, -1/5**0.5, 0]
+        uuv = Vector(uup).set_z_index(2)
+
+        self.play(TransformFromCopy(uu1, uuv))
+        self.wait()
+        self.play(FadeOut(Group(ut, uv)))
+        self.wait()
+
+
+        # self.next_section(skip_animations=False)
+        rt = MathTex(r"\mathbf{r}", "=", "4", r"\mathbf{\hat{r}}")
+        rtc = MathTex(r"\mathbf{r}", "=", "4", r"\mathbf{\hat{u}}")
+        rt.next_to(mod_vec, DOWN)
+        rtc.move_to(rt)
+
+        rvt = MathTex(r"\mathbf{r}", "=",
+                      r"\frac{4}{\sqrt{5}}", vec([-2, -1]),
+                      "=",
+                      vec([r"-8/\sqrt{5}", r"-4/\sqrt{5}"]),
+                      )
+        rP = [-2 * 4/5**0.5, -1 * 4/5**0.5, 0]
+        rv = Vector(rP, color=YELLOW) 
+        rvt.set_color(YELLOW).next_to(rv, DOWN)
+
+
+
+        self.play(TransformMatchingShapes(
+            mod_vec.copy(), rt,
+            fade_transform_mismatches=False
+        ))
+
+        self.wait(0.5)
+
+        self.play(Transform(rt, rtc))
+        self.wait()
+
+        self.play(Create(rv))
+        self.wait()
+        self.play(
+            Transform(rt[:2].copy(), rvt[:2]),
+            TransformMatchingShapes(rt[2].copy(), rvt[2][0]),
+            TransformMatchingShapes(uut[2][1:].copy(), rvt[2][1:]),
+            TransformFromCopy(uut[3], rvt[3])
+        )
+        self.wait()
+        self.play(Write(rvt[4]))
+        self.play(
+            TransformFromCopy(rvt[2:4], rvt[-1])
+        )
+        self.wait()
+
+        self.clear()
+        self.add(mod_vec, plane, uuv, uut, rt, rvt)
+        self.wait()
+
+
+
 
 

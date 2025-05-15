@@ -491,7 +491,7 @@ class P01_Length(Scene):
 
         self.wait()
 
-        # self.next_section(skip_animations=False)
+        self.next_section(skip_animations=False)
         result = MathTex(
             r"\|c\mathbf{r}\|=",
             r"|c|\|\mathbf{r}\|"
