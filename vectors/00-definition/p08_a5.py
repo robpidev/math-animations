@@ -7,7 +7,7 @@ from numpy import arctan
 
 class Add5(Scene):
     def construct(self):
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
         self.wait()
 
         a5 = Tex("(A5). ",
@@ -83,10 +83,10 @@ class Add5(Scene):
 
         self.wait()
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=False)
         self.play(x.animate.set_value(3), y.animate.set_value(1))
         self.play(x.animate.set_value(0), y.animate.set_value(-2), run_time=2)
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
         self.play(x.animate.set_value(-2), y.animate.set_value(0), run_time=1.5)
         self.wait()
         self.play(x.animate.set_value(0), y.animate.set_value(0))

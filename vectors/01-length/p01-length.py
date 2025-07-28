@@ -8,6 +8,10 @@ from funcs.vec_algebra import *
 class P01_Length(Scene):
     def construct(self):
         self.wait()
+        title = Tex(r"Longitud de un vector $\|\mathbf{r}\|$")
+        self.play(Write(title))
+        self.wait()
+        self.play(FadeOut(title))
         # self.next_section(skip_animations=True)
         plane = number_plane()
         self.play(Create(plane))

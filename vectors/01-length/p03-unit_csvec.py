@@ -3,23 +3,15 @@ from manim import *
 
 from  mobj.mobjets import number_plane
 from funcs.vec2D_tex import *
+from funcs.vec_algebra import *
 
-
-def vec_angle(mod: float, angle: float) -> list:
-    return [mod * np.cos(angle * np.pi/180), mod * np.sin(angle * np.pi/180), 0]
-
-def xvec(mod: float, angle: float) -> list:
-    return [mod * np.cos(angle * np.pi/180), 0, 0]
-
-def yvec(mod: float, angle: float) -> list:
-    return [0, mod * np.sin(angle * np.pi/180), 0]
 
 class P03_UnitCsvec(Scene):
     def construct(self):
 
         self.wait()
 
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
         title = Tex(r"Vector unitario $[\sin(\theta), \cos(\theta)]$")
         title.scale(1.5)
         self.play(Write(title))

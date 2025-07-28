@@ -1,5 +1,4 @@
 from manim import *
-from manim.mobject.logo import se
 from mobj.mobjets import number_plane
 from funcs.vec2D_tex import *
 
@@ -9,6 +8,11 @@ def vut(name: str) -> str:
 class P02_UnitVector(Scene):
     def construct(self):
         self.wait()
+        title = Tex(r"Vector unitario $\mathbf{\hat{u}}$")
+        self.play(Write(title))
+        self.wait()
+        self.play(FadeOut(title))
+
         # self.next_section(skip_animations=True)
         plane = number_plane()
         # self.play(Create(plane))

@@ -2,7 +2,7 @@ from math import cos, sin, pi
 
 
 def vec_ab(a: list, b: list) -> list:
-    return [i - j for i, j in zip(a, b)]
+    return [j - i for i, j in zip(a, b)]
 
 
 def vec_add(u: list, v: list) -> list:

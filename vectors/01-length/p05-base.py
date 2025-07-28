@@ -5,10 +5,10 @@ from mobj.mobjets import number_plane
 from funcs.vec2D_tex import *
 
 
-class P04_Base(Scene):
+class P05_Base(Scene):
     def construct(self):
         self.wait()
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
         title = Tex(r"Base en $\mathbb{R}^2$")
         title.scale(1.5)
         self.play(Write(title))
@@ -82,7 +82,7 @@ class P04_Base(Scene):
         base.to_edge(LEFT+DOWN)
 
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=False)
         self.play(
             rx.animate.set_opacity(0.2).set_color(WHITE),
             ry.animate.set_opacity(0.2).shift(4 * LEFT).set_color(WHITE),

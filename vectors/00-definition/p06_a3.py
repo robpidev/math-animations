@@ -66,6 +66,7 @@ class Add3(Scene):
         self.play(Write(ruvl[1]))
         self.play(TransformFromCopy(wl, ruvl[2]))
         
+        self.next_section(skip_animations=False)
         eq1 = MathTex(
             "\left(", vec(vec_ab(pp, pq)), "+", vec(vec_ab(pq, pr)), r"\right)",
             "+", vec(vec_ab(pr, ps)),
@@ -114,6 +115,8 @@ class Add3(Scene):
                   )
 
         self.wait()
+
+        # self.next_section(skip_animations=True)
 
         vwg = VGroup(v, w, vl, wl)
         self.play(Create(vw), vwg.animate.set_opacity(0.4))
@@ -366,6 +369,7 @@ class Add3(Scene):
         self.play(d.animate.move_to([2.5, 1.5, 0]))
         self.wait()
         self.play(r.animate.move_to([1.5, 1.5, 0]))
+
 
 
 
