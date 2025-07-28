@@ -5,32 +5,38 @@ import random
 
 
 
-def rgb(color=[0, 0, 0]):
+def rgb(r=0, g=0, b=0):
+    color = [r, g, b]
     color = [int(c % 256) for c in color]
     return f"#{color[0]:02x}{color[1]:02x}{color[2]:02x}"
 
 
 def create_imgob(pixels=[[0, 0, 0]]):
-        return VGroup(
-            *[
-                VGroup(
-                    *[
-                        Square().set_fill(
-                            color=pixels[i][j],
-                            opacity=1,
-                        ).set_stroke(width=0) for j in range(len(pixels[0]))
-                    ]
-                ).arrange(RIGHT) for i in range(len(pixels))
-        ]).arrange(DOWN)
+    
+    return VGroup(
+        *[
+            VGroup(
+                *[
+                    Square().set_fill(
+                        color=pixels[i][j],
+                        opacity=1,
+                    ).set_stroke(width=0) for j in range(len(pixels[0]))
+                ]
+            ).arrange(RIGHT) for i in range(len(pixels))
+    ]).arrange(DOWN)
 
-def pixel_rgb(red=0, green=0, blue=0):
+
+def pixel_rgb(red=0, green=0, blue=0, fill=False):
+    """
+    return VGroup(border, VGroup(leds), VGroup(rgb_values))
+    """
     r = RoundedRectangle(height=1, width=4, corner_radius=0.1)
     g = RoundedRectangle(height=1, width=4, corner_radius=0.1)
     b = RoundedRectangle(height=1, width=4, corner_radius=0.1)
 
-    r.set_fill(color=rgb([red, 0, 0]), opacity=1)
-    g.set_fill(color=rgb([0, green, 0]), opacity=1)
-    b.set_fill(color=rgb([0, 0, blue]), opacity=1)
+    r.set_fill(color=rgb(red, 0, 0), opacity=1)
+    g.set_fill(color=rgb(0, green, 0), opacity=1)
+    b.set_fill(color=rgb(0, 0, blue), opacity=1)
 
     leds = VGroup(r, g, b).arrange(DOWN, buff=0.5)
     leds.arrange(DOWN, buff=0.5)
@@ -44,6 +50,9 @@ def pixel_rgb(red=0, green=0, blue=0):
     border = SurroundingRectangle(leds, corner_radius=0.1, buff=0.5)
     border.set_color(WHITE)
 
+    if fill:
+        border.set_fill(color=rgb([red, green, blue]), opacity=1)
+
     return VGroup(border, leds, rgb_values)
 
 
@@ -53,81 +62,107 @@ def rgb_to_hex(color = (0, 0, 0)):
     return f"#{color[0]:02x}{color[1]:02x}{color[2]:02x}"
 
 
+def pixel_with_updaters(red=0, green=0, blue=0):
+    """
+    return VGroup(border, Vgroup(leds), VGroup(rgb_values)),
+    ValueTrackers [r, g, v]  
+    set fill in border and leds is same value of pixel arg
+    """
+
+    sq = RoundedRectangle(
+        height=5,
+        width=5,
+        corner_radius=0.1
+    )
+
+    r = RoundedRectangle(height=1, width=4, corner_radius=0.1)
+    g = RoundedRectangle(height=1, width=4, corner_radius=0.1)
+    b = RoundedRectangle(height=1, width=4, corner_radius=0.1)
+
+    leds = [r, g, b]
+
+    prgb = VGroup(r, g, b).arrange(DOWN, buff=0.5)
+
+    r.set_fill(color=rgb(red, 0, 0), opacity=1)
+    g.set_fill(color=rgb(0, green, 0), opacity=1)
+    b.set_fill(color=rgb(0, 0, blue), opacity=1)
+
+        
+    rt = Text(f"{red}", font=f).move_to(r)
+    gt = Text(f"{green}", font=f).move_to(g)
+    bt = Text(f"{blue}", font=f).move_to(b)
+
+    values = [rt, gt, bt]
+
+    pixel = VGroup(sq, prgb, VGroup(rt, gt, bt))
+
+
+    rvt = ValueTracker(red)
+    gvt = ValueTracker(green)
+    bvt = ValueTracker(blue)
+
+    r.add_updater(
+        lambda m: m.set_fill(
+            color=rgb(rvt.get_value(), 0, 0),
+            opacity=1
+        )
+    )
+
+    g.add_updater(
+        lambda m: m.set_fill(
+            color=rgb(0, gvt.get_value(), 0),
+            opacity=1
+        )
+    )
+
+    b.add_updater(
+        lambda m: m.set_fill(
+            color=rgb(0, 0, bvt.get_value()),
+            opacity=1
+        )
+    )
+
+    sq.add_updater(
+        lambda m: m.set_fill(
+            color=rgb(rvt.get_value(), gvt.get_value(), bvt.get_value()),
+        )
+    )
+
+        # Text updater
+    rt.add_updater(
+        lambda m: m.become(
+            Text(f"{int(rvt.get_value())}", font=f).move_to(r)
+        )
+     )
+
+    gt.add_updater(
+        lambda m: m.become(
+            Text(f"{int(gvt.get_value())}", font=f).move_to(g)
+        )
+    )
+
+    bt.add_updater(
+        lambda m: m.become(
+            Text(f"{int(bvt.get_value())}", font=f).move_to(b)
+        )
+    )
+
+    return pixel, [rvt, gvt, bvt]
+
 
 class P7Pixel(Scene):
     def construct(self):
         self.wait()
 
-        # self.next_section(skip_animations=True)
-        # self.play(Create(Text("Hola :3")))
-        # self.wait()
 
-        sq = RoundedRectangle(
-            height=5,
-            width=5,
-            corner_radius=0.1
-        )
+        pixel, value_trackers = pixel_with_updaters(0, 0, 0)
 
-        r = RoundedRectangle(height=1, width=4, corner_radius=0.1)
-        g = RoundedRectangle(height=1, width=4, corner_radius=0.1)
-        b = RoundedRectangle(height=1, width=4, corner_radius=0.1)
+        sq = pixel[0]
+        r, g, b = pixel[1]
+        rt, gt, bt = pixel[2]
 
-        prgb = VGroup(r, g, b).arrange(DOWN, buff=0.5)
-
-        r.set_fill(color=rgb([0, 0, 0]), opacity=1)
-        g.set_fill(color=rgb([0, 0, 0]), opacity=1)
-        b.set_fill(color=rgb([0, 0, 0]), opacity=1)
-
-
-
+        rvt, gvt, bvt = value_trackers
         
-        rt = Text("0", font=f).move_to(r)
-        gt = Text("0", font=f).move_to(g)
-        bt = Text("0", font=f).move_to(b)
-
-        rvt = ValueTracker(0)
-        gvt = ValueTracker(0)
-        bvt = ValueTracker(0)
-
-        r.add_updater(
-            lambda m: m.set_fill(
-                color=rgb([rvt.get_value(), 0, 0]),
-                opacity=1
-            )
-        )
-
-        g.add_updater(
-            lambda m: m.set_fill(
-                color=rgb([0, gvt.get_value(), 0]),
-                opacity=1
-            )
-        )
-
-        b.add_updater(
-            lambda m: m.set_fill(
-                color=rgb([0, 0, bvt.get_value()]),
-                opacity=1
-            )
-        )
-
-        # Text updater
-        rt.add_updater(
-            lambda m: m.become(
-                Text(f"{int(rvt.get_value())}", font=f).move_to(r)
-            )
-        )
-
-        gt.add_updater(
-            lambda m: m.become(
-                Text(f"{int(gvt.get_value())}", font=f).move_to(g)
-            )
-        )
-
-        bt.add_updater(
-            lambda m: m.become(
-                Text(f"{int(bvt.get_value())}", font=f).move_to(b)
-            )
-        )
 
 
         self.play(Create(sq))
@@ -176,7 +211,7 @@ class P7Pixel(Scene):
 
         pixel.add_updater(
             lambda m: m.set_fill(
-                color=rgb([rvt.get_value(), gvt.get_value(), bvt.get_value()]),
+                color=rgb(rvt.get_value(), gvt.get_value(), bvt.get_value()),
                 opacity=1
             )
         )
@@ -220,7 +255,7 @@ class P7Pixel(Scene):
         # self.next_section(skip_animations=False)
 
         pixels = [
-            [rgb([119, 117, 205]) for _ in range(16)]
+            [rgb(119, 117, 205) for _ in range(16)]
             for _ in range(9)
         ]
         
@@ -265,7 +300,7 @@ class P7Pixel(Scene):
         self.play(FadeOut(brace_w, brace_wt, brace_h, brace_ht))
 
         img_white = [
-            [rgb([255, 255, 255]) for _ in range(16)]
+            [rgb(255, 255, 255) for _ in range(16)]
             for _ in range(9)
         ]
 
@@ -276,7 +311,7 @@ class P7Pixel(Scene):
         self.wait()
 
         img_grad = [
-            [rgb([2 * i * j,2 * i * j,2 * i * j]) for i in range(16)]
+            [rgb(2 * i * j,2 * i * j,2 * i * j) for i in range(16)]
             for j in range(9)
         ]
 
@@ -288,7 +323,7 @@ class P7Pixel(Scene):
 
 
         img_rand = [
-            [rgb([random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]) for _ in range(16)]
+            [rgb(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)) for _ in range(16)]
             for _ in range(9)
         ]
 
@@ -299,7 +334,7 @@ class P7Pixel(Scene):
         self.wait()
 
         img_16x16 = [
-            [rgb([random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]) for _ in range(16)]
+            [rgb(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)) for _ in range(16)]
             for _ in range(16)
         ]
 
@@ -338,8 +373,5 @@ class P7Pixel(Scene):
             Transform(img_ob, create_imgob(img_heart).scale(0.2))
         )
 
-
         self.wait()
-
-
 
