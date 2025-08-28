@@ -79,7 +79,7 @@ def pixel_with_updaters(red=0, green=0, blue=0):
     g = RoundedRectangle(height=1, width=4, corner_radius=0.1)
     b = RoundedRectangle(height=1, width=4, corner_radius=0.1)
 
-    leds = [r, g, b]
+    # leds = [r, g, b]
 
     prgb = VGroup(r, g, b).arrange(DOWN, buff=0.5)
 
@@ -92,7 +92,7 @@ def pixel_with_updaters(red=0, green=0, blue=0):
     gt = Text(f"{green}", font=f).move_to(g)
     bt = Text(f"{blue}", font=f).move_to(b)
 
-    values = [rt, gt, bt]
+    # values = [rt, gt, bt]
 
     pixel = VGroup(sq, prgb, VGroup(rt, gt, bt))
 
@@ -153,6 +153,8 @@ def pixel_with_updaters(red=0, green=0, blue=0):
 class P7Pixel(Scene):
     def construct(self):
         self.wait()
+
+        self.next_section(skip_animations=True)
 
 
         pixel, value_trackers = pixel_with_updaters(0, 0, 0)
@@ -375,3 +377,49 @@ class P7Pixel(Scene):
 
         self.wait()
 
+        # self.next_section(skip_animations=False)
+
+        self.play(img_ob.animate.scale(0.8).move_to(UP))
+
+        hb = Brace(img_ob, LEFT, buff=0.2)
+        hb_text = hb.get_text(f"{len(img_heart)}")
+
+        wb = Brace(img_ob, DOWN, buff=0.2)
+        wb_text = wb.get_text(f"{len(img_heart[0])}")
+
+        self.play(Write(wb))
+        self.play(Write(wb_text))
+        self.wait()
+        self.play(Write(hb))
+        self.play(Write(hb_text))
+        self.wait()
+
+        inf = MathTex(f"16", "\\times", "16", "\\times", "3", r"\text{ Bytes}")
+        inf.scale(1.5).to_edge(DOWN)
+
+        self.next_section(skip_animations=False)
+
+        self.play(
+            TransformMatchingShapes(
+                VGroup(hb_text, wb_text), inf[:3]
+            ),
+            FadeOut(hb, wb)
+        )
+
+        self.wait()
+
+        self.play(Write(inf[3:-1]))
+
+        self.wait()
+
+        self.play(Write(inf[-1]))
+        self.wait()
+
+        self.play(
+            TransformMatchingTex(
+                inf,
+                MathTex(f"{16*16*3}", r"\text{ Bytes}").scale(1.5).to_edge(DOWN)
+            )
+        )
+
+        self.wait()
