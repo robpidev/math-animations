@@ -4,11 +4,10 @@ from bites import create_byte
 from p7_pixel import pixel_with_updaters, rgb
 
 
-
 class P8PixelBit(Scene):
     def construct(self):
         self.wait()
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
 
         color = [220, 123, 222]
 
@@ -147,7 +146,7 @@ class P8PixelBit(Scene):
         self.wait()
 
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=False)
         
         bc = Brace(red_byte, direction=UP, buff=0.1)
         bc_text = bc.get_tex(r"\text{Byte (B)}").scale(1.5)

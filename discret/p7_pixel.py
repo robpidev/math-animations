@@ -154,7 +154,7 @@ class P7Pixel(Scene):
     def construct(self):
         self.wait()
 
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=True)
 
 
         pixel, value_trackers = pixel_with_updaters(0, 0, 0)
@@ -397,7 +397,7 @@ class P7Pixel(Scene):
         inf = MathTex(f"16", "\\times", "16", "\\times", "3", r"\text{ Bytes}")
         inf.scale(1.5).to_edge(DOWN)
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=False)
 
         self.play(
             TransformMatchingShapes(
