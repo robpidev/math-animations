@@ -1,11 +1,25 @@
-from manim import * 
+from manim import (
+    DOWN,
+    RIGHT,
+    UP,
+    YELLOW,
+    Brace,
+    Create,
+    Scene,
+    Square,
+    Text,
+    Transform,
+    Vector,
+    VGroup,
+    Write,
+)
 
 
 def create_bits(bits: str) -> VGroup:
     bits = bits.replace(" ", "")
     vg = VGroup()
     for b in bits:
-        sq = Square().set_fill(YELLOW, 1 if b == '1' else 0)
+        sq = Square().set_fill(YELLOW, 1 if b == "1" else 0)
         text = Text(b).scale(2).next_to(sq, DOWN)
         bit = VGroup(sq, text).arrange(DOWN)
         vg.add(bit)
@@ -17,7 +31,7 @@ class P5BbComparation(Scene):
     def construct(self):
         self.wait()
         # self.next_section(skip_animations=True)
-        
+
         byte = create_bits("0010 1101").scale(0.5)
         arrow = Vector(DOWN).next_to(byte[3], UP)
         bit_name = Text("bit (b)").next_to(arrow, UP)
@@ -25,11 +39,9 @@ class P5BbComparation(Scene):
         brace = Brace(byte, DOWN)
         brace_text = brace.get_text("Byte (B)").scale(1.5)
 
-        vg = VGroup(
-            byte, arrow, bit_name, brace, brace_text
-        )
+        vg = VGroup(byte, arrow, bit_name, brace, brace_text)
 
-        self.play(Create(byte), run_time = 2)
+        self.play(Create(byte), run_time=2)
         self.play(Create(arrow), Write(bit_name))
         self.wait()
 
@@ -55,4 +67,3 @@ class P5BbComparation(Scene):
             self.wait(0.5)
 
         self.wait()
-

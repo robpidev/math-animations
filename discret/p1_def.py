@@ -1,18 +1,38 @@
-from manim import *
+from manim import (
+    DOWN,
+    ORIGIN,
+    RIGHT,
+    UP,
+    YELLOW,
+    Create,
+    FadeOut,
+    MathTex,
+    ReplacementTransform,
+    Scene,
+    Square,
+    SurroundingRectangle,
+    Text,
+    Transform,
+    TransformMatchingShapes,
+    Vector,
+    VGroup,
+    Write,
+)
+
 
 class P1Def(Scene):
     def construct(self):
         # grid = NumberPlane().set_opacity(0.2)
         # self.add(grid)
         # self.next_section(skip_animations=True)
-        
+
         self.wait()
         sq = Square().set_fill(YELLOW, 0)
         text = Text("1").scale(2)
         bite = Text("bit").scale(2).to_edge(UP)
 
         vg = VGroup(sq, text).arrange(DOWN, buff=0.5)
-        
+
         self.play(Create(sq))
         self.wait()
 
@@ -23,23 +43,18 @@ class P1Def(Scene):
 
         tex2 = Text("0").scale(2).move_to(text)
 
-        self.play(
-            sq.animate.set_fill(opacity=0),
-            text.animate.become(tex2)
-        )
+        self.play(sq.animate.set_fill(opacity=0), text.animate.become(tex2))
 
         self.wait()
         self.play(Write(bite))
         self.wait()
 
-
         byte = VGroup()
         for i in range(8):
             sq = Square().set_fill(YELLOW, 0).scale(0.5)
-            text = Text(str("0"))
+            text = Text("0")
             vg_aux = VGroup(sq, text).arrange(DOWN, buff=0.5)
             byte.add(vg_aux)
-
 
         byte.arrange(RIGHT, buff=0.5)
 
@@ -65,7 +80,6 @@ class P1Def(Scene):
         ]
 
         for i in range(5):
-
             byte1 = VGroup()
             for j in range(8):
                 bite = bits_matrix[i][j]
@@ -74,14 +88,11 @@ class P1Def(Scene):
                 vg_aux = VGroup(sq, text).arrange(DOWN, buff=0.5)
                 byte1.add(vg_aux)
 
-
             if i == 4:
                 byte_aux = byte.copy()
             byte1.arrange(RIGHT, buff=0.5)
             self.play(Transform(byte, byte1))
             self.wait()
-
-            
 
         # Elevar las potencias
         # self.next_section(skip_animations=False)
@@ -91,14 +102,8 @@ class P1Def(Scene):
 
         for i in range(8):
             arrow = Vector(DOWN).next_to(byte[i], DOWN)
-            twos.add(
-                MathTex(
-                    "2^{}".format(7 - i)
-                ).next_to(arrow, DOWN).scale(1.5)
-            )
-            pows.add(
-                MathTex(f"{2**(7 - i)}").next_to(arrow, DOWN).scale(1.5)
-            )
+            twos.add(MathTex(f"2^{7 - i}").next_to(arrow, DOWN).scale(1.5))
+            pows.add(MathTex(f"{2 ** (7 - i)}").next_to(arrow, DOWN).scale(1.5))
             arrows.add(arrow)
 
         eq = MathTex("32", "+", "8", "+", "4", "+", "1")
@@ -116,7 +121,7 @@ class P1Def(Scene):
             self.wait()
             self.play(Write(twos[i][0][0]))
             self.wait()
-            rect = SurroundingRectangle(byte[i + 1:])
+            rect = SurroundingRectangle(byte[i + 1 :])
             self.play(Create(rect))
             self.wait(0.5)
             self.play(ReplacementTransform(rect, twos[i][0][1]))
@@ -132,7 +137,7 @@ class P1Def(Scene):
             ReplacementTransform(pows[4].copy(), eq[2]),
             ReplacementTransform(pows[5].copy(), eq[4]),
             ReplacementTransform(pows[7].copy(), eq[6]),
-            Write(eq[1::2])
+            Write(eq[1::2]),
         )
         # Animacion de binario a entero
         self.wait()
@@ -158,7 +163,7 @@ class P1Def(Scene):
             TransformMatchingShapes(pows[0].copy(), eq[0]),
             TransformMatchingShapes(pows[2].copy(), eq[2]),
             TransformMatchingShapes(pows[3].copy(), eq[4]),
-            Write(eq[1::2])
+            Write(eq[1::2]),
         )
         self.wait()
 
@@ -169,7 +174,6 @@ class P1Def(Scene):
         self.wait()
         self.play(FadeOut(eq))
         self.wait()
-
 
         # Numero entero a bynero
         # self.next_section(skip_animations=False)
@@ -190,23 +194,16 @@ class P1Def(Scene):
         self.play(ReplacementTransform(number, sum))
         self.wait()
 
-        self.play(
-            TransformMatchingShapes(sum[0], pows[1]),
-            FadeOut(sum[1])
-        )
+        self.play(TransformMatchingShapes(sum[0], pows[1]), FadeOut(sum[1]))
         self.wait()
 
         self.play(
             byte[1][0].animate.set_fill(opacity=1),
-            Transform(
-                byte[1][1],
-                Text("1").move_to(byte[1][1].get_center())
-            )
+            Transform(byte[1][1], Text("1").move_to(byte[1][1].get_center())),
         )
         self.wait()
 
-        self.play(Transform(req, SurroundingRectangle(pows[4]))
-        )
+        self.play(Transform(req, SurroundingRectangle(pows[4])))
         self.wait()
 
         sum1 = MathTex("8", "+", "1").scale(2)
@@ -215,18 +212,12 @@ class P1Def(Scene):
         self.play(ReplacementTransform(sum[-1], sum1))
         self.wait()
 
-        self.play(
-            ReplacementTransform(sum1[0], pows[4]),
-            FadeOut(sum1[1])
-        )
+        self.play(ReplacementTransform(sum1[0], pows[4]), FadeOut(sum1[1]))
         self.wait()
 
         self.play(
             byte[4][0].animate.set_fill(opacity=1),
-            Transform(
-            byte[4][1],
-            Text("1").move_to(byte[4][1].get_center())
-            )
+            Transform(byte[4][1], Text("1").move_to(byte[4][1].get_center())),
         )
 
         self.wait()
@@ -242,10 +233,7 @@ class P1Def(Scene):
 
         self.play(
             byte[-1][0].animate.set_fill(opacity=1),
-            Transform(
-            byte[-1][1],
-            Text("1").move_to(byte[-1][1].get_center())
-            )
+            Transform(byte[-1][1], Text("1").move_to(byte[-1][1].get_center())),
         )
 
         self.wait()
