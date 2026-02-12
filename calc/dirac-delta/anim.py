@@ -23,7 +23,7 @@ class Anim(Scene):
                 # "include_numbers": True
             },
             x_length=8,
-            y_length=6
+            y_length=6,
         )
 
         axes.set_opacity(0.7)
@@ -36,7 +36,6 @@ class Anim(Scene):
                 0 & x > \epsilon
             \end{cases}
         """)
-
 
         self.play(Write(dtex[0][:5]))
         self.wait(0.5)
@@ -65,8 +64,8 @@ class Anim(Scene):
 
         eps = 1
         p1 = [-eps, 0, 0]
-        p2 = [-eps, 1/(2 * eps), 0]
-        p3 = [eps, 1/(2 * eps), 0]
+        p2 = [-eps, 1 / (2 * eps), 0]
+        p3 = [eps, 1 / (2 * eps), 0]
         p4 = [eps, 0, 0]
 
         f = VGroup(
@@ -77,7 +76,5 @@ class Anim(Scene):
             MathTex(r"\epsilon").next_to(p4, DOWN),
         )
 
-
         self.play(Create(f))
         self.wait()
-

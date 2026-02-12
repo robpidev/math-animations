@@ -1,14 +1,13 @@
 import numpy as np
 from manim import *
 
-from  mobj.mobjets import number_plane
+from mobj.mobjets import number_plane
 from funcs.vec2D_tex import *
 from funcs.vec_algebra import *
 
 
 class P03_UnitCsvec(Scene):
     def construct(self):
-
         self.wait()
 
         # self.next_section(skip_animations=True)
@@ -28,19 +27,23 @@ class P03_UnitCsvec(Scene):
         self.wait()
 
         r = 3.5
-        rv = Vector([r * np.cos(t.get_value()), r * np.sin(t.get_value()), 0], color=YELLOW)
+        rv = Vector(
+            [r * np.cos(t.get_value()), r * np.sin(t.get_value()), 0], color=YELLOW
+        )
         arc = Angle(Line(ORIGIN, RIGHT), Line(ORIGIN, vec_angle(r, t.get_value())))
         ang = MathTex(r"\theta")
         ang.move_to(
-            Angle(Line(ORIGIN, RIGHT), Line(ORIGIN, vec_angle(r, t.get_value())),
-                  radius=0.5 + 3 * SMALL_BUFF).point_from_proportion(0.5)
+            Angle(
+                Line(ORIGIN, RIGHT),
+                Line(ORIGIN, vec_angle(r, t.get_value())),
+                radius=0.5 + 3 * SMALL_BUFF,
+            ).point_from_proportion(0.5)
         )
 
         rv.add_updater(
             lambda m: m.become(
                 Vector(
-                    vec_angle(r, t.get_value())
-                    ,
+                    vec_angle(r, t.get_value()),
                     color=YELLOW,
                 )
             )
@@ -53,9 +56,13 @@ class P03_UnitCsvec(Scene):
         )
 
         ang.add_updater(
-            lambda m: m.move_to(Angle(Line(ORIGIN, RIGHT), Line(ORIGIN, vec_angle(r, t.get_value())),
-                  radius=0.5 + 3 * SMALL_BUFF).point_from_proportion(0.5)
-)
+            lambda m: m.move_to(
+                Angle(
+                    Line(ORIGIN, RIGHT),
+                    Line(ORIGIN, vec_angle(r, t.get_value())),
+                    radius=0.5 + 3 * SMALL_BUFF,
+                ).point_from_proportion(0.5)
+            )
         )
 
         self.play(Create(rv), Create(arc), Write(ang))
@@ -66,18 +73,18 @@ class P03_UnitCsvec(Scene):
         self.play(t.animate.set_value(50), run_time=2, rate_func=linear)
         self.wait()
 
-
         xline = DashedLine([0, 0, 0], xvec(r, t.get_value()), color=RED)
-        yline = DashedLine(xvec(r, t.get_value()), vec_angle(r, t.get_value()), color=GREEN)
+        yline = DashedLine(
+            xvec(r, t.get_value()), vec_angle(r, t.get_value()), color=GREEN
+        )
 
         self.play(Create(xline), Create(yline))
 
         self.wait()
 
-
         # NOTE: ============== Axis Lines ==================
         # self.next_section(skip_animations=False)
-        
+
         rvt = MathTex("r", color=YELLOW).next_to(rv, LEFT)
         rvt.shift(0.5 * RIGHT)
         self.play(Write(rvt))
@@ -88,7 +95,6 @@ class P03_UnitCsvec(Scene):
 
         yl = MathTex("y", "=", r"r \sin(\theta)", color=GREEN)
         yl.next_to(yline, RIGHT)
-        
 
         self.play(Write(xl))
         self.wait()
@@ -107,23 +113,19 @@ class P03_UnitCsvec(Scene):
 
         t.set_value(50)
 
-        rv = Vector(
-            vec_angle(r, t.get_value()),
-            color=YELLOW
-        )
+        rv = Vector(vec_angle(r, t.get_value()), color=YELLOW)
 
         self.add(rv)
 
-        self.play(
-            TransformFromCopy(rv, rt[0])
-        )
+        self.play(TransformFromCopy(rv, rt[0]))
 
         self.wait()
         self.play(
             Write(rt[1]),
             TransformMatchingShapes(
-                VGroup(xl[-1].copy(), yl[-1].copy()), rt[2],
-            )
+                VGroup(xl[-1].copy(), yl[-1].copy()),
+                rt[2],
+            ),
         )
         self.wait()
 
@@ -133,24 +135,32 @@ class P03_UnitCsvec(Scene):
         rtc = MathTex(
             r"\mathbf{r}",
             "=",
-            "r", vec([r"\cos(\theta)", r"\sin(\theta)"]),
+            "r",
+            vec([r"\cos(\theta)", r"\sin(\theta)"]),
         ).move_to(rt)
 
         self.play(TransformMatchingShapes(rt, rtc))
 
         rtmod = MathTex(
-            r"\implies", r"\|\mathbf{r}\|", "=",
-            r"r", r"\sqrt{\cos^2(\theta) + \sin^2(\theta)}",
+            r"\implies",
+            r"\|\mathbf{r}\|",
+            "=",
+            r"r",
+            r"\sqrt{\cos^2(\theta) + \sin^2(\theta)}",
         ).next_to(rtc, DOWN)
 
-
         rtmodc = MathTex(
-            r"\implies", r"\|\mathbf{r}\|", "=",
-            r"r", r"\sqrt{1}",
+            r"\implies",
+            r"\|\mathbf{r}\|",
+            "=",
+            r"r",
+            r"\sqrt{1}",
         ).next_to(rtmod, DOWN)
 
         rtmodc2 = MathTex(
-            r"\implies", r"\|\mathbf{r}\|", "=",
+            r"\implies",
+            r"\|\mathbf{r}\|",
+            "=",
             r"r",
         ).next_to(rtmodc, DOWN)
 
@@ -158,8 +168,7 @@ class P03_UnitCsvec(Scene):
         rtmodG.arrange(DOWN, aligned_edge=LEFT, buff=0.5)
         rtmodG.next_to(rtc, DOWN)
 
-        self.play(TransformMatchingShapes(rtc.copy(), rtmod[1:]),
-                  Write(rtmod[0]))
+        self.play(TransformMatchingShapes(rtc.copy(), rtmod[1:]), Write(rtmod[0]))
         self.wait()
         self.play(ReplacementTransform(rtmod.copy(), rtmodc))
         self.wait()
@@ -169,27 +178,35 @@ class P03_UnitCsvec(Scene):
         self.play(FadeOut(rtmodG[:-1]), rtmodc2.animate.next_to(rtc, DOWN))
 
         ur = MathTex(
-            r"\mathbf{\hat{r}}", "=",
-            r"\frac{1}{\|\mathbf{r}\|}","r" + vec([r"\cos(\theta)", r"\sin(\theta)"]),
+            r"\mathbf{\hat{r}}",
             "=",
-            r"\frac{r}{r}", vec([r"\cos(\theta)", r"\sin(\theta)"]),
+            r"\frac{1}{\|\mathbf{r}\|}",
+            "r" + vec([r"\cos(\theta)", r"\sin(\theta)"]),
+            "=",
+            r"\frac{r}{r}",
+            vec([r"\cos(\theta)", r"\sin(\theta)"]),
             "=",
             vec([r"\cos(\theta)", r"\sin(\theta)"]),
         )
 
         urs = [
             MathTex(
-                r"\mathbf{\hat{r}}", "=",
-                r"\frac{1}{\|\mathbf{r}\|}","r" + vec([r"\cos(\theta)", r"\sin(\theta)"]),
+                r"\mathbf{\hat{r}}",
+                "=",
+                r"\frac{1}{\|\mathbf{r}\|}",
+                "r" + vec([r"\cos(\theta)", r"\sin(\theta)"]),
             ),
             MathTex(
-                r"\mathbf{\hat{r}}", "=",
-                r"\frac{r}{r}", vec([r"\cos(\theta)", r"\sin(\theta)"]),
-            ),
-            MathTex(
-                r"\mathbf{\hat{r}}", "=",
+                r"\mathbf{\hat{r}}",
+                "=",
+                r"\frac{r}{r}",
                 vec([r"\cos(\theta)", r"\sin(\theta)"]),
-            )
+            ),
+            MathTex(
+                r"\mathbf{\hat{r}}",
+                "=",
+                vec([r"\cos(\theta)", r"\sin(\theta)"]),
+            ),
         ]
 
         for ur in urs:
@@ -203,5 +220,3 @@ class P03_UnitCsvec(Scene):
         self.wait()
         self.play(TransformMatchingShapes(urs[1], urs[2]))
         self.wait()
-
-

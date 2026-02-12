@@ -1,6 +1,6 @@
 def vec_matrix(r1, r2) -> str:
     """
-    takes two strings ```r1``` and ```r2``` and return 
+    takes two strings ```r1``` and ```r2``` and return
     ⎡r1⎤
     ⎣r2⎦
     """
@@ -10,7 +10,7 @@ def vec_matrix(r1, r2) -> str:
 
 def vec(vec: list[int | str] = [0, 0]) -> str:
     """
-    takes a vector ```u``` and return 
+    takes a vector ```u``` and return
     ⎡u_x⎤
     ⎣u_y⎦
     """
@@ -23,12 +23,13 @@ def vec_float(vec: list = [0, 0]) -> str:
 
 def vec_comps(vec_name: str = "u") -> str:
     """
-    takes ```u``` and return 
+    takes ```u``` and return
     ⎡u_x - v_x⎤
     ⎣u_y - v_y⎦
     """
 
     return vec_matrix(f"{vec_name}_x", f"{vec_name}_y")
+
 
 def vec_add_int(u: list = [0, 0], v: list = [0, 0]) -> tuple:
     if v[0] >= 0:
@@ -45,11 +46,11 @@ def vec_add_int(u: list = [0, 0], v: list = [0, 0]) -> tuple:
 
 
 def vec_less_int(u: list = [0, 0], v: list = [0, 0]) -> tuple:
-
     sx = f"{u[0]} - {v[0]}"
     sy = f"{u[1]} - {v[1]}"
 
     return vec_matrix(sx, sy)
+
 
 def vec_add_float(u: list = [0, 0], v: list = [0, 0]) -> tuple:
     if v[0] > 0:
@@ -73,6 +74,7 @@ def vec_add_comps(u: str = "u", v: str = "v") -> str:
 
     return vec_matrix(f"{u}_x + {v}_x", f"{u}_y + {v}_y")
 
+
 def vec_sub_comps(u: str = "u", v: str = "v") -> str:
     """
     return ⎡u_x - v_x⎤
@@ -80,10 +82,11 @@ def vec_sub_comps(u: str = "u", v: str = "v") -> str:
     """
     return vec_matrix(f"{u}_x - {v}_x", f"{u}_y - {v}_y")
 
+
 def vec_sub_int(u: list = [0, 0], v: list = [0, 0]) -> tuple:
     """
     Takes a vector ```u``` in ```Z``` and a vector ```v``` in ```Z```
-    and return  
+    and return
     ⎡a - d⎤
     ⎣c - d⎦
 
@@ -105,20 +108,21 @@ def vec_sub_int(u: list = [0, 0], v: list = [0, 0]) -> tuple:
     return vec_matrix(sx, sy)
 
 
-def vec_scalar(scale: int | str = 1, vec_comps: list | str = [0, 0]) -> list [int | str]:
-    """this return in LaTeX 
-    k⎡u_x⎤  
-     ⎣u_y⎦  
+def vec_scalar(scale: int | str = 1, vec_comps: list | str = [0, 0]) -> list[int | str]:
+    """this return in LaTeX
+    k⎡u_x⎤
+     ⎣u_y⎦
     """
     return f"{scale}" + f"{vec(vec_comps)}"
 
 
-def vec_scalar_comps(scale: int|str, vec: list[int|str]) -> str:
-    """This return in LaTex 
-    ⎡k . u_x⎤  
-    ⎣k . v_y⎦  
+def vec_scalar_comps(scale: int | str, vec: list[int | str]) -> str:
+    """This return in LaTex
+    ⎡k . u_x⎤
+    ⎣k . v_y⎦
     """
     return vec_matrix(f"{scale} \\cdot {vec[0]}", f"{scale} \\cdot {vec[1]}")
+
 
 def vec_scalar_var_comps(scalar="c", vec="u") -> str:
     """
@@ -127,4 +131,3 @@ def vec_scalar_var_comps(scalar="c", vec="u") -> str:
     ⎣c u_y⎦
     """
     return vec_matrix(f"{scalar} \\cdot {vec}_x", f"{scalar} \\cdot {vec}_y")
-

@@ -2,14 +2,14 @@ from manim import *
 from funcs.vec2D_tex import vec_matrix
 from mobj.mobjets import number_plane
 
+
 class Adition(Scene):
     def construct(self):
-
         # self.next_section(skip_animations=True)
 
         self.wait()
 
-        plane = number_plane() 
+        plane = number_plane()
         self.play(Create(plane))
         self.wait()
 
@@ -37,7 +37,6 @@ class Adition(Scene):
         for mo in vgt:
             self.play(Write(mo))
             self.wait()
-
 
         ux = Vector([2, 0], color=GREEN_A)
         uy = Vector([0, 3], color=GREEN_B)
@@ -72,7 +71,7 @@ class Adition(Scene):
 
         vgy = VGroup(uy, vy)
         self.play(Transform(vgy, ry))
-        self.play(vgy.animate.shift(RIGHT*6))
+        self.play(vgy.animate.shift(RIGHT * 6))
         self.wait(0.5)
         self.play(Transform(vgy, rl[0][-2]))
         self.wait()
@@ -80,12 +79,16 @@ class Adition(Scene):
 
         self.play(FadeOut(plane))
 
-
         # adition of two vectors
-        op = MathTex(vec_matrix(2,3), "+", vec_matrix(4, -2), 
-                     "=", vec_matrix("2+4", "3+(-2)"),
-                     "=", vec_matrix(6, 1),
-                     )
+        op = MathTex(
+            vec_matrix(2, 3),
+            "+",
+            vec_matrix(4, -2),
+            "=",
+            vec_matrix("2+4", "3+(-2)"),
+            "=",
+            vec_matrix(6, 1),
+        )
 
         op.move_to([3.5, -2.5, 0])
 
@@ -98,14 +101,15 @@ class Adition(Scene):
         self.play(
             TransformMatchingShapes(op[0][1].copy(), op[4][1]),
             TransformMatchingShapes(op[2][1].copy(), op[4][3]),
-            TransformFromCopy(op[1], op[4][2]))
-        
+            TransformFromCopy(op[1], op[4][2]),
+        )
+
         self.wait()
 
         self.play(
             TransformMatchingShapes(op[0][2].copy(), op[4][4]),
             TransformMatchingShapes(op[2][2:4].copy(), op[4][6:10]),
-            TransformFromCopy(op[1], op[4][5])
+            TransformFromCopy(op[1], op[4][5]),
         )
         self.play(Write(op[5]))
         self.play(Write(op[6][0]), Write(op[6][-1]))
@@ -115,16 +119,25 @@ class Adition(Scene):
         )
         self.play(op[6].animate.set_color(RED))
 
-
         # def de suma
-        df = Tex(r"Def. Sea $\mathbf{u}, \mathbf{v} \in \mathbb{R}^2$: ", )
-        vecs = MathTex(r"\mathbf{u} =", vec_matrix("u_x", "u_y"),
-                       r", \quad \mathbf{v} = ", vec_matrix("v_x", "v_y"))
+        df = Tex(
+            r"Def. Sea $\mathbf{u}, \mathbf{v} \in \mathbb{R}^2$: ",
+        )
+        vecs = MathTex(
+            r"\mathbf{u} =",
+            vec_matrix("u_x", "u_y"),
+            r", \quad \mathbf{v} = ",
+            vec_matrix("v_x", "v_y"),
+        )
         text = Tex(r"Se define la adición (+) de $\mathbf{u}$ y $\mathbf{v}$: ")
-        add = MathTex(r"\mathbf{u} + \mathbf{v} = ",
-                      vec_matrix("u_x", "u_y"), "+",
-                      vec_matrix("v_x", "v_y"),"=",
-                      vec_matrix("u_x + v_x", "u_y + v_y"))
+        add = MathTex(
+            r"\mathbf{u} + \mathbf{v} = ",
+            vec_matrix("u_x", "u_y"),
+            "+",
+            vec_matrix("v_x", "v_y"),
+            "=",
+            vec_matrix("u_x + v_x", "u_y + v_y"),
+        )
 
         defg = VGroup(df, vecs, text, add)
         defg.arrange(DOWN, aligned_edge=LEFT).move_to([-3.5, 0, 0])
@@ -144,37 +157,42 @@ class Adition(Scene):
         self.play(
             TransformMatchingShapes(add[1][1:3].copy(), add[5][1:3]),
             TransformMatchingShapes(add[3][1:3].copy(), add[5][4:6]),
-            Transform(add[2].copy(), add[5][3])
+            Transform(add[2].copy(), add[5][3]),
         )
         self.wait()
         self.play(
             TransformMatchingShapes(add[1][3:-1].copy(), add[5][6:9]),
             TransformMatchingShapes(add[3][3:-1].copy(), add[5][10:13]),
-            Transform(add[2].copy(), add[5][9])
+            Transform(add[2].copy(), add[5][9]),
         )
 
         self.wait()
-
 
         self.play(FadeOut(op))
 
         self.wait()
 
         ulv = MathTex(r"\mathbf{u}").set_color(GREEN).move_to(ul.get_center())
-        vlv = MathTex(r"\mathbf{v}").set_color(BLUE).move_to(vl.get_center()).shift(LEFT*0.5)
-        rlv = MathTex(r"\mathbf{u} + \mathbf{v}").set_color(RED).move_to(rl.get_center()).shift(UP*0.5)
+        vlv = (
+            MathTex(r"\mathbf{v}")
+            .set_color(BLUE)
+            .move_to(vl.get_center())
+            .shift(LEFT * 0.5)
+        )
+        rlv = (
+            MathTex(r"\mathbf{u} + \mathbf{v}")
+            .set_color(RED)
+            .move_to(rl.get_center())
+            .shift(UP * 0.5)
+        )
 
         self.play(Transform(ul, ulv), Transform(vl, vlv), Transform(rl, rlv))
         self.wait()
 
-
         self.wait()
         self.play(Create(plane))
         self.wait()
-        self.play(
-            v.animate.move_to([2, -1, 0]),
-            vl.animate.move_to([1.5, -1.5,0])
-        )
+        self.play(v.animate.move_to([2, -1, 0]), vl.animate.move_to([1.5, -1.5, 0]))
         self.wait()
 
         # haz una linea punteada
@@ -190,5 +208,3 @@ class Adition(Scene):
         self.wait()
 
         # self.next_section(skip_animations=False)
-
-        

@@ -1,5 +1,6 @@
 from manim import Circle, Create, MathTex, Scene, Text, Write
 
+
 class P00Intro(Scene):
     def construct(self):
         self.wait()

@@ -4,6 +4,7 @@ from manim import SurroundingRectangle
 from manim import Write, Create, VGroup
 from manim import Transform
 from manim import FadeOut
+
 # from manim import NumberPlane
 from manim import Arrow
 from manim import DOWN, LEFT
@@ -12,7 +13,6 @@ from manim import GREEN, RED, PURPLE_A
 
 class Logic(Scene):
     def construct(self):
-
         # self.add(NumberPlane().set_opacity(0.5))
         self.wait()
         self.logo()
@@ -24,7 +24,6 @@ class Logic(Scene):
         self.notation()
 
     def intro(self):
-
         # Title
         title = Text("¿Qué es una proposición?")
         self.play(Write(title))
@@ -32,9 +31,11 @@ class Logic(Scene):
         self.play(title.animate.set_y(3.5).set_x(-2))
 
         # prop
-        prop = Text("Es una expresión que se puede aseverar sin" +
-                    "\nambigüdad y se puede contrastar con la realidad",
-                    line_spacing=1)
+        prop = Text(
+            "Es una expresión que se puede aseverar sin"
+            + "\nambigüdad y se puede contrastar con la realidad",
+            line_spacing=1,
+        )
         prop.scale(0.7).set_y(2)
         self.play(Write(prop), run_time=3)
         self.wait()
@@ -63,8 +64,13 @@ class Logic(Scene):
         ej6 = MathTex(r"6. \quad x^2 + y^2 = 4^2")
         ej7 = Text("7. ¿Cómo estas?").scale(0.6)
 
-        eG = VGroup(ejem, ej1, ej2, ej3, ej4, ej5, ej6, ej7).arrange(
-                DOWN, aligned_edge=LEFT).set_x(3.5).set_y(-1.5).scale(0.8)
+        eG = (
+            VGroup(ejem, ej1, ej2, ej3, ej4, ej5, ej6, ej7)
+            .arrange(DOWN, aligned_edge=LEFT)
+            .set_x(3.5)
+            .set_y(-1.5)
+            .scale(0.8)
+        )
 
         self.play(Write(ejem))
         self.wait()
@@ -105,15 +111,10 @@ class Logic(Scene):
         self.next_section(skip_animations=False)
         tea = Text("0. Enunciados abiertos:").scale(0.7).set_color(PURPLE_A)
         ej1 = MathTex("1 + x < 8")
-        sol1 = MathTex(r"\text{si }x = 0 \Rightarrow 1 + 0 = 1 < 8",
-                       r"\quad (V)")
-        sol2 = MathTex(r"\text{si }x = 8 \Rightarrow 1 + 8 = 9 < 8",
-                       r"\quad (F)")
+        sol1 = MathTex(r"\text{si }x = 0 \Rightarrow 1 + 0 = 1 < 8", r"\quad (V)")
+        sol2 = MathTex(r"\text{si }x = 8 \Rightarrow 1 + 8 = 9 < 8", r"\quad (F)")
 
-        ea = VGroup(tea,
-                    ej1,
-                    sol1,
-                    sol2).arrange(DOWN, aligned_edge=LEFT).scale(0.9)
+        ea = VGroup(tea, ej1, sol1, sol2).arrange(DOWN, aligned_edge=LEFT).scale(0.9)
         ea.move_to([-3.5, 1.5, 0])
         self.play(Write(tea))
         self.wait(0.5)
@@ -134,10 +135,7 @@ class Logic(Scene):
         ej1 = Text("(a) Juan tiene 12 años.").scale(0.6)
         ej2 = Text("(b) El número 73 es primo.").scale(0.6)
         ej3 = Text("(c) Elizabeth baila.").scale(0.6)
-        ps = VGroup(tps,
-                    ej1,
-                    ej2,
-                    ej3).arrange(DOWN, aligned_edge=LEFT).scale(0.9)
+        ps = VGroup(tps, ej1, ej2, ej3).arrange(DOWN, aligned_edge=LEFT).scale(0.9)
         ps.move_to([3, 1.5, 0])
         for mo in ps:
             self.play(Write(mo))
@@ -150,11 +148,7 @@ class Logic(Scene):
         ej2 = Text("(b) María es matemática.").scale(0.6)
         ej3 = Text("(c) La guitarra es mía.").scale(0.6)
 
-        pp = VGroup(
-                tpp,
-                ej1,
-                ej2,
-                ej3).arrange(DOWN, aligned_edge=LEFT).scale(0.9)
+        pp = VGroup(tpp, ej1, ej2, ej3).arrange(DOWN, aligned_edge=LEFT).scale(0.9)
         pp.move_to([-3.6, -1.7, 0])
         for mo in pp:
             self.play(Write(mo))
@@ -170,11 +164,7 @@ class Logic(Scene):
         ej2 = MathTex(r"(b) \quad 3 > 2.")
         ej3 = Text("(c) 3 es igual 8.").scale(0.6)
 
-        pr = VGroup(
-                tpr,
-                ej1,
-                ej2,
-                ej3).arrange(DOWN, aligned_edge=LEFT).scale(0.9)
+        pr = VGroup(tpr, ej1, ej2, ej3).arrange(DOWN, aligned_edge=LEFT).scale(0.9)
         pr.move_to([3.5, -1.7, 0])
         for mo in pr:
             self.play(Write(mo))
@@ -199,7 +189,6 @@ class Logic(Scene):
             self.play(FadeOut(r1))
             self.wait()
 
-
     def compuestas(self):
         self.wait()
         notation = Text("Notación de Proposiciones simples")
@@ -208,10 +197,10 @@ class Logic(Scene):
 
         self.next_section(skip_animations=False)
         sg = VGroup(
-                Text("p = Elizabeth baila."),
-                Text("r = Juan y María son hermanos."),
-                Text("q = 2 es mayor que 8."),
-                ).arrange(DOWN, aligned_edge=LEFT)
+            Text("p = Elizabeth baila."),
+            Text("r = Juan y María son hermanos."),
+            Text("q = 2 es mayor que 8."),
+        ).arrange(DOWN, aligned_edge=LEFT)
 
         for s in sg:
             self.play(Write(s[2:]))
@@ -231,23 +220,44 @@ class Logic(Scene):
 
         # Proposiciones Adjuntivas
         self.next_section(skip_animations=False)
-        pa = VGroup(
-                Tex("2.1 Adjuntivas ",
-                    r"(... y ..., $\wedge$)").set_color(PURPLE_A),
-                Tex("(a) ", "$2 > 8$ ", "y ", "$4 = 5$.",
-                    r"$\quad(p$ ", r"$\wedge$ ", r"$q)$"),
-                Tex("(b) ", "Mary canta ", "y ", "baila.",
-                    r"$\quad(r$ ", r"$\wedge$ ", r"$s)$"),
-                Tex("(c) ", "Canto ", "mientras ", "camino.",
-                    r"$\quad(t$ ", r"$\wedge$ ", r"$u)$"),
+        pa = (
+            VGroup(
+                Tex("2.1 Adjuntivas ", r"(... y ..., $\wedge$)").set_color(PURPLE_A),
                 Tex(
-                    "Otros:",
-                    " asimismo, pero, ademas, sin embargo, también,"
-                    ).scale(0.6),
+                    "(a) ",
+                    "$2 > 8$ ",
+                    "y ",
+                    "$4 = 5$.",
+                    r"$\quad(p$ ",
+                    r"$\wedge$ ",
+                    r"$q)$",
+                ),
                 Tex(
-                    "no obstante,",
-                    " incluso, etc.").scale(0.6)
-                ).arrange(DOWN, aligned_edge=LEFT).scale(0.8)
+                    "(b) ",
+                    "Mary canta ",
+                    "y ",
+                    "baila.",
+                    r"$\quad(r$ ",
+                    r"$\wedge$ ",
+                    r"$s)$",
+                ),
+                Tex(
+                    "(c) ",
+                    "Canto ",
+                    "mientras ",
+                    "camino.",
+                    r"$\quad(t$ ",
+                    r"$\wedge$ ",
+                    r"$u)$",
+                ),
+                Tex("Otros:", " asimismo, pero, ademas, sin embargo, también,").scale(
+                    0.6
+                ),
+                Tex("no obstante,", " incluso, etc.").scale(0.6),
+            )
+            .arrange(DOWN, aligned_edge=LEFT)
+            .scale(0.8)
+        )
 
         pa.move_to([-3.6, 1.5, 0])
 
@@ -262,16 +272,42 @@ class Logic(Scene):
 
         # Proposiciones Disyuntivas débiles
         self.next_section(skip_animations=False)
-        pdd = VGroup(
-                Tex("2.2 Disyuntivas débiles",
-                    r" (... o ..., $\vee$)").set_color(PURPLE_A),
-                Tex("(a) ", "$2 > 8$ ", "o ", "$4 = 5.$",
-                    r"$\quad(p$ ", r"$\vee$ ", r"$q)$"),
-                Tex("(b) ", "Mary canta ", "o ", "baila.",
-                    r"$\quad(r$ ", r"$\vee$ ", r"$s)$"),
-                Tex("(c) ", "Escucho música ", "o ", "juego.",
-                    r"$\quad(t$ ", r"$\vee$ ", r"$u)$"),
-                ).arrange(DOWN, aligned_edge=LEFT).scale(0.8)
+        pdd = (
+            VGroup(
+                Tex("2.2 Disyuntivas débiles", r" (... o ..., $\vee$)").set_color(
+                    PURPLE_A
+                ),
+                Tex(
+                    "(a) ",
+                    "$2 > 8$ ",
+                    "o ",
+                    "$4 = 5.$",
+                    r"$\quad(p$ ",
+                    r"$\vee$ ",
+                    r"$q)$",
+                ),
+                Tex(
+                    "(b) ",
+                    "Mary canta ",
+                    "o ",
+                    "baila.",
+                    r"$\quad(r$ ",
+                    r"$\vee$ ",
+                    r"$s)$",
+                ),
+                Tex(
+                    "(c) ",
+                    "Escucho música ",
+                    "o ",
+                    "juego.",
+                    r"$\quad(t$ ",
+                    r"$\vee$ ",
+                    r"$u)$",
+                ),
+            )
+            .arrange(DOWN, aligned_edge=LEFT)
+            .scale(0.8)
+        )
         pdd.move_to([-3.6, -1.7, 0])
 
         self.play(Write(pdd[0]))
@@ -280,32 +316,58 @@ class Logic(Scene):
 
         # Proposiciones Disyuntivas fuertes
         self.next_section(skip_animations=False)
-        pdf = VGroup(
-                Tex("2.3 Disyuntivas fuertes ",
-                    "(O ... o ...", r"$\nleftrightarrow$)").set_color(PURPLE_A),
-                Tex("(a) ", "$2 > 8$ ", "o ", "$2 < 8$.",
-                    r"$\quad(p$ ", r"$\nleftrightarrow$ ", r"$q)$"),
-                Tex("(b) ", "O cantas ", "o ", "bailas.",
-                    r"$\quad(u$ ", r"$\nleftrightarrow$ ", r"$v)$"),
-                Tex("(c) ", "Yo corro ", "o ", "camino.",
-                    r"$\quad(s$ ", r"$\nleftrightarrow$ ", r"$t)$"),
-                ).arrange(DOWN, aligned_edge=LEFT).scale(0.8)
+        pdf = (
+            VGroup(
+                Tex(
+                    "2.3 Disyuntivas fuertes ", "(O ... o ...", r"$\nleftrightarrow$)"
+                ).set_color(PURPLE_A),
+                Tex(
+                    "(a) ",
+                    "$2 > 8$ ",
+                    "o ",
+                    "$2 < 8$.",
+                    r"$\quad(p$ ",
+                    r"$\nleftrightarrow$ ",
+                    r"$q)$",
+                ),
+                Tex(
+                    "(b) ",
+                    "O cantas ",
+                    "o ",
+                    "bailas.",
+                    r"$\quad(u$ ",
+                    r"$\nleftrightarrow$ ",
+                    r"$v)$",
+                ),
+                Tex(
+                    "(c) ",
+                    "Yo corro ",
+                    "o ",
+                    "camino.",
+                    r"$\quad(s$ ",
+                    r"$\nleftrightarrow$ ",
+                    r"$t)$",
+                ),
+            )
+            .arrange(DOWN, aligned_edge=LEFT)
+            .scale(0.8)
+        )
         pdf.move_to([3.6, 1.9, 0])
         self.play(Write(pdf[0]))
         self.part_animate(pdf[1:])
-       
+
         # Proposiciones Negativas
         self.next_section(skip_animations=False)
-        pn = VGroup(
-                Tex("2.3 Negativas",
-                    r" (no ... , $\neg$)").set_color(PURPLE_A),
-                Tex("(a) ", "No ", "hay vida en marte.",
-                    r"$\quad(\neg$ ",  "$p)$"),
-                Tex("(b) ", "Es falso que ", "2 = 5.",
-                    r"$\quad(\neg$ ",  "$q)$"),
-                Tex("(c) ", "No ocurre que ", "juego.",
-                    r"$\quad(\neg$ ",  "$r)$"),
-                ).arrange(DOWN, aligned_edge=LEFT).scale(0.8)
+        pn = (
+            VGroup(
+                Tex("2.3 Negativas", r" (no ... , $\neg$)").set_color(PURPLE_A),
+                Tex("(a) ", "No ", "hay vida en marte.", r"$\quad(\neg$ ", "$p)$"),
+                Tex("(b) ", "Es falso que ", "2 = 5.", r"$\quad(\neg$ ", "$q)$"),
+                Tex("(c) ", "No ocurre que ", "juego.", r"$\quad(\neg$ ", "$r)$"),
+            )
+            .arrange(DOWN, aligned_edge=LEFT)
+            .scale(0.8)
+        )
         pn.move_to([3.5, -1.7, 0])
 
         self.play(Write(pn[0]))
@@ -328,33 +390,67 @@ class Logic(Scene):
 
         # Proposiciones conditionals
         self.next_section(skip_animations=False)
-        pc = VGroup(
-                Tex("2.3 Condicionales",
-                    r" (Si [antecedente] entonces [consecuente], $\to$)").scale(1.2).set_color(PURPLE_A),
-                Tex("(a) Si corres entonces llegas rápido.",
-                    r"\quad ($p \to q$)"),
+        pc = (
+            VGroup(
+                Tex(
+                    "2.3 Condicionales",
+                    r" (Si [antecedente] entonces [consecuente], $\to$)",
+                )
+                .scale(1.2)
+                .set_color(PURPLE_A),
+                Tex("(a) Si corres entonces llegas rápido.", r"\quad ($p \to q$)"),
                 Tex("(b) Si ", "$9 > 8$", ", ", "$9 > 7$", r"$\quad(u \to v)$"),
-                Tex("(c) Si ", r"$ax^2 + bx + x = 0$", " entonces ",
+                Tex(
+                    "(c) Si ",
+                    r"$ax^2 + bx + x = 0$",
+                    " entonces ",
                     r"$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.",
-                    r"$\quad (s \to t)$"),
+                    r"$\quad (s \to t)$",
+                ),
                 Tex("drakenfor"),
-                Tex("2.3.1 Forma especial",
-                     r" ([consecuente] porque [antecedente], ", r"$\leftarrow$)").scale(1.1).set_color(PURPLE_A),
-                Tex("(a) ", "Aprobé ",  "porque ", "estudié. ",
-                    r"$\quad(p \leftarrow q)\quad$", r"o $\quad(q \to p)$"),
-                Tex("(b) ", "0.5 es racional ", "ya que ", "0.5 = 1/2.",
-                    r"$\quad(r \leftarrow s)\quad$", r" o $\quad(s \to r)$"),
-                Tex("(c) ", "Llegué temprano ", "dado que ", "vine corriendo.",
-                    r"$\quad(m \leftarrow n)\quad$", r" o $\quad(n \to m)$"),
-                ).arrange(DOWN, aligned_edge=LEFT).scale(0.8)
+                Tex(
+                    "2.3.1 Forma especial",
+                    r" ([consecuente] porque [antecedente], ",
+                    r"$\leftarrow$)",
+                )
+                .scale(1.1)
+                .set_color(PURPLE_A),
+                Tex(
+                    "(a) ",
+                    "Aprobé ",
+                    "porque ",
+                    "estudié. ",
+                    r"$\quad(p \leftarrow q)\quad$",
+                    r"o $\quad(q \to p)$",
+                ),
+                Tex(
+                    "(b) ",
+                    "0.5 es racional ",
+                    "ya que ",
+                    "0.5 = 1/2.",
+                    r"$\quad(r \leftarrow s)\quad$",
+                    r" o $\quad(s \to r)$",
+                ),
+                Tex(
+                    "(c) ",
+                    "Llegué temprano ",
+                    "dado que ",
+                    "vine corriendo.",
+                    r"$\quad(m \leftarrow n)\quad$",
+                    r" o $\quad(n \to m)$",
+                ),
+            )
+            .arrange(DOWN, aligned_edge=LEFT)
+            .scale(0.8)
+        )
 
         self.play(Write(pc[0][0]))
         self.wait(0.5)
         self.play(Write(pc[0][1]))
         self.wait(0.5)
         self.play(Write(pc[1][0]))
-       
-       # Ejem 1
+
+        # Ejem 1
         self.next_section(skip_animations=False)
         r1 = SurroundingRectangle(pc[1][0][3:11])
         self.play(Create(r1))
@@ -378,10 +474,10 @@ class Logic(Scene):
         self.play(Transform(r1, r2))
         self.play(Write(pc[2][-1][3:]))
         self.play(FadeOut(r1))
-        
+
         # Ejem3
         self.next_section(skip_animations=False)
-        self.play(Write(pc[3][:-1]), run_time = 3)
+        self.play(Write(pc[3][:-1]), run_time=3)
         r1 = SurroundingRectangle(pc[3][1])
         self.play(Create(r1))
         self.play(Write(pc[3][-1][:2]))
@@ -421,26 +517,60 @@ class Logic(Scene):
 
         self.play(FadeOut(pc))
 
-
         # biconditionals
+
     def biconditionals(self):
         self.wait()
-        pb = VGroup(
-                Tex("2.4 Bicondicionales ", "(... si y solo si ..., ",
-                    r"$\leftrightarrow)$").scale(1.2).set_color(PURPLE_A),
-                Tex("(a) ", "Juan baila ", "si y solo si ", "Mary canta.",
-                    r"$\quad(p$", r" $\leftrightarrow$ ", r"$q)$"),
-                Tex(r"$\Rightarrow$ ", "Si Juan baila entonces Mary canta ", r"y\\",
+        pb = (
+            VGroup(
+                Tex(
+                    "2.4 Bicondicionales ",
+                    "(... si y solo si ..., ",
+                    r"$\leftrightarrow)$",
+                )
+                .scale(1.2)
+                .set_color(PURPLE_A),
+                Tex(
+                    "(a) ",
+                    "Juan baila ",
+                    "si y solo si ",
+                    "Mary canta.",
+                    r"$\quad(p$",
+                    r" $\leftrightarrow$ ",
+                    r"$q)$",
+                ),
+                Tex(
+                    r"$\Rightarrow$ ",
+                    "Si Juan baila entonces Mary canta ",
+                    r"y\\",
                     r"si Mary canta entonces Juan baila.\\",
-                    r"$(p \rightarrow q)$", r" $\wedge$ ", r"$(q \rightarrow p)$"),
+                    r"$(p \rightarrow q)$",
+                    r" $\wedge$ ",
+                    r"$(q \rightarrow p)$",
+                ),
                 Tex("h"),
-                Tex("(b) ", r"$n$ es primo ", "si y solo si ", 
+                Tex(
+                    "(b) ",
+                    r"$n$ es primo ",
+                    "si y solo si ",
                     r"$n$ tiene 2 divisores",
-                    r"$\quad(s$", r" $\leftrightarrow$ ", r"$t)$"),
-                Tex(r"$\Rightarrow$ ", "Si $n$ es primo entonces tiene 2 divisores ",
-                    r"y\\", r"Si $n$ tiene 2 divisores entonces es primo.\\",
-                    r"$(s \rightarrow t)$", r" $\wedge$ ", r"$(t \rightarrow s)$")
-                ).arrange(DOWN, aligned_edge=LEFT).move_to([0, -0.25, 0])
+                    r"$\quad(s$",
+                    r" $\leftrightarrow$ ",
+                    r"$t)$",
+                ),
+                Tex(
+                    r"$\Rightarrow$ ",
+                    "Si $n$ es primo entonces tiene 2 divisores ",
+                    r"y\\",
+                    r"Si $n$ tiene 2 divisores entonces es primo.\\",
+                    r"$(s \rightarrow t)$",
+                    r" $\wedge$ ",
+                    r"$(t \rightarrow s)$",
+                ),
+            )
+            .arrange(DOWN, aligned_edge=LEFT)
+            .move_to([0, -0.25, 0])
+        )
 
         self.next_section(skip_animations=False)
         self.play(Write(pb[0][0]))
@@ -452,7 +582,6 @@ class Logic(Scene):
 
         self.next_section(skip_animations=False)
         for i in range(1, 6):
-
             if len(pb[i]) < 2:
                 continue
 
@@ -478,18 +607,20 @@ class Logic(Scene):
         self.play(Write(title))
         self.play(title.animate.move_to([0, 2.4, 0]))
 
-        vg = VGroup(
+        vg = (
+            VGroup(
                 MathTex(r"A\equiv", r"p\wedge q"),
                 MathTex(r"B\equiv", r"p\leftrightarrow q"),
-                MathTex(r"C\equiv", r"(p \wedge q) \leftrightarrow (p \vee q)")
-                ).arrange(DOWN, aligned_edge=LEFT).scale(1.3)
+                MathTex(r"C\equiv", r"(p \wedge q) \leftrightarrow (p \vee q)"),
+            )
+            .arrange(DOWN, aligned_edge=LEFT)
+            .scale(1.3)
+        )
 
         for mo in vg:
             self.play(Write(mo[1]))
             self.wait(0.5)
             self.play(Write(mo[0]))
-            
 
         self.wait()
         self.play(FadeOut(title, vg))
-

@@ -22,10 +22,6 @@ class Anim(Scene):
         bc2 = Brace(f[1]).set_color(PINK)
         bt2 = bc2.get_tex("q").set_color(PINK)
 
-
-        vg2 = VGroup(
-                t1, f, p, bc, bt, bc2, bt2
-                ).scale(0.8).move_to([-4, 0, 0])
+        vg2 = VGroup(t1, f, p, bc, bt, bc2, bt2).scale(0.8).move_to([-4, 0, 0])
 
         self.add(t1, f, bc, bt, bc2, bt2, p, vg)
-        

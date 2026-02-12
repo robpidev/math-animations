@@ -4,7 +4,6 @@ from funcs.vec2D_tex import *
 from funcs.vec_algebra import *
 
 
-
 class P01_Length(Scene):
     def construct(self):
         self.wait()
@@ -33,7 +32,8 @@ class P01_Length(Scene):
 
         self.play(
             TransformMatchingShapes(rl.copy(), eq[0]),
-            Write(eq[1][0]), Write(eq[1][-1]),
+            Write(eq[1][0]),
+            Write(eq[1][-1]),
         )
 
         self.wait()
@@ -42,7 +42,7 @@ class P01_Length(Scene):
         self.wait()
 
         rx = Vector([4, 0], color=RED)
-        ry = Vector([0, 3], color=GREEN).shift(4*RIGHT)
+        ry = Vector([0, 3], color=GREEN).shift(4 * RIGHT)
         rxl = MathTex("4", color=RED).next_to(rx, DOWN)
         ryl = MathTex("3", color=GREEN).next_to(ry, RIGHT)
 
@@ -56,14 +56,10 @@ class P01_Length(Scene):
         self.play(TransformFromCopy(eq[1][2], ryl))
         self.wait()
 
-        
-        l4 = Arrow(ORIGIN, [4/7 * 4, 4/7 * 3, 0], buff=0, color=YELLOW)
-        l3 = Arrow([4/7 * 4, 4/7 * 3, 0], [4, 3, 0], buff=0, color=YELLOW)
+        l4 = Arrow(ORIGIN, [4 / 7 * 4, 4 / 7 * 3, 0], buff=0, color=YELLOW)
+        l3 = Arrow([4 / 7 * 4, 4 / 7 * 3, 0], [4, 3, 0], buff=0, color=YELLOW)
 
-        self.play(
-            Transform(rx, l4),
-            Transform(ry, l3)
-        )
+        self.play(Transform(rx, l4), Transform(ry, l3))
 
         self.play(FadeOut(rx, ry))
         self.wait()
@@ -73,11 +69,16 @@ class P01_Length(Scene):
         self.wait()
 
         pitagoras = MathTex(
-            "r^2", "=", "4^2", "+", "3^2",
-            "=", "25",
+            "r^2",
+            "=",
+            "4^2",
+            "+",
+            "3^2",
+            "=",
+            "25",
         )
 
-        result = MathTex(r"\implies", "r", "=", r"\sqrt{25}", "=", "5" )
+        result = MathTex(r"\implies", "r", "=", r"\sqrt{25}", "=", "5")
 
         VGroup(pitagoras, result).arrange(DOWN).move_to([-3, 2, 0])
 
@@ -94,37 +95,35 @@ class P01_Length(Scene):
         self.play(Write(pitagoras[5]))
         self.play(TransformFromCopy(pitagoras[2:5], pitagoras[-1]))
         self.wait()
-        
+
         self.play(Write(result[0]))
         self.play(
             TransformFromCopy(pitagoras[0][0], result[1]),
             TransformFromCopy(pitagoras[1], result[2]),
             TransformMatchingShapes(
-                pitagoras[-1].copy(),
-                result[3][2:],
-                fade_transform_mismatches=True
+                pitagoras[-1].copy(), result[3][2:], fade_transform_mismatches=True
             ),
-            TransformFromCopy(pitagoras[0][1], result[3][0:2])
+            TransformFromCopy(pitagoras[0][1], result[3][0:2]),
         )
         self.play(Write(result[4]))
         self.play(TransformFromCopy(result[3], result[-1]))
         self.wait()
 
-        
-
         brace = Brace(r, direction=r.copy().rotate(90 * DEGREES).get_unit_vector())
         bracel = brace.get_tex("5")
         self.wait()
-        
+
         self.play(
             FadeOut(result[:-1], pitagoras),
             ReplacementTransform(result[-1], brace),
-            ReplacementTransform(rl, bracel)
+            ReplacementTransform(rl, bracel),
         )
 
         self.wait()
 
-        rl_alt = MathTex(r"\mathbf{r}=" + vec(["x", "y"]), color=YELLOW).move_to(rl.get_center())
+        rl_alt = MathTex(r"\mathbf{r}=" + vec(["x", "y"]), color=YELLOW).move_to(
+            rl.get_center()
+        )
         rxl_alt = MathTex("x", color=RED).next_to(lx, DOWN)
         ryl_alt = MathTex("y", color=GREEN).next_to(ly, RIGHT)
 
@@ -132,7 +131,7 @@ class P01_Length(Scene):
             ReplacementTransform(Group(brace, bracel), rl_alt),
             Transform(rxl, rxl_alt),
             Transform(ryl, ryl_alt),
-            FadeOut(eq)
+            FadeOut(eq),
         )
         self.wait()
 
@@ -140,8 +139,7 @@ class P01_Length(Scene):
         self.play(FadeOut(plane), fig.animate.move_to([4, 0, 0]))
         self.wait()
 
-
-        #NOTE:  ================ def longitud =============
+        # NOTE:  ================ def longitud =============
 
         l1 = MathTex(
             r"\text{Def. La \textit{\textbf{longitud}} (o \textit{\textbf{norma}})}",
@@ -149,12 +147,12 @@ class P01_Length(Scene):
 
         l2 = MathTex(
             r"\text{de un vector } ",
-            r"\mathbf{r} =", vec(["x", "y"]), "\in \mathbb{R}^2",
+            r"\mathbf{r} =",
+            vec(["x", "y"]),
+            "\in \mathbb{R}^2",
         )
 
-        l3 = MathTex(
-            r"\text{es un escalar } \|\mathbf{r}\| \text{ definido por }"
-        )
+        l3 = MathTex(r"\text{es un escalar } \|\mathbf{r}\| \text{ definido por }")
 
         eq = MathTex(r"\|\mathbf{r}\|", "=", r"\sqrt{x^2 + y^2}")
 
@@ -169,56 +167,56 @@ class P01_Length(Scene):
         self.wait()
         self.play(Write(eq[0]))
         self.play(Write(eq[1]))
-        self.play(
-            TransformMatchingShapes(
-                l2[-2][1:-1].copy(), eq[-1]
-            )
-        )
+        self.play(TransformMatchingShapes(l2[-2][1:-1].copy(), eq[-1]))
         self.wait()
-        
-        #NOTE: ===================== ||cR|| =====================
+
+        # NOTE: ===================== ||cR|| =====================
         self.play(
             Create(plane),
             FadeOut(df, square, lx, ly, rxl, ryl),
-            r.animate.move_to([2, 1.5, 0])
+            r.animate.move_to([2, 1.5, 0]),
         )
         self.wait()
 
         dp = [-2, 1]
         r1 = Vector(dp, color=YELLOW)
-        r1l = MathTex(r"\mathbf{r} = ", vec(dp),
-                      color=YELLOW).move_to([-1, 2, 0])
-        
+        r1l = MathTex(r"\mathbf{r} = ", vec(dp), color=YELLOW).move_to([-1, 2, 0])
+
         self.play(
             ReplacementTransform(r, r1),
-            TransformMatchingShapes(rl_alt, r1l,
-                                    transform_mismatches=True)
-        ) 
+            TransformMatchingShapes(rl_alt, r1l, transform_mismatches=True),
+        )
         self.wait()
 
         mod_r1 = MathTex(
-            r"\implies \|\mathbf{r}\| =", "\sqrt{(-2)^2 + 1^2}",
-            "=", "\sqrt{5}",
-            color=YELLOW_B
+            r"\implies \|\mathbf{r}\| =",
+            "\sqrt{(-2)^2 + 1^2}",
+            "=",
+            "\sqrt{5}",
+            color=YELLOW_B,
         ).next_to(r1l, RIGHT)
         self.play(Write(mod_r1[0][0:2]))
-        self.play(TransformMatchingShapes(
-            r1l[0].copy(), mod_r1[0][2:],
-            fade_transform_mismatches=True
-        ))
+        self.play(
+            TransformMatchingShapes(
+                r1l[0].copy(), mod_r1[0][2:], fade_transform_mismatches=True
+            )
+        )
 
-        self.play(TransformMatchingShapes(
-            r1l[1].copy(), mod_r1[1],
-            fade_transform_mismatches=True,
-            path_arc=PI/2
-        ))
+        self.play(
+            TransformMatchingShapes(
+                r1l[1].copy(),
+                mod_r1[1],
+                fade_transform_mismatches=True,
+                path_arc=PI / 2,
+            )
+        )
 
         self.play(Write(mod_r1[2]))
-        self.play(TransformMatchingShapes(
-            mod_r1[1].copy(), mod_r1[-1],
-            transform_mismatches=True,
-            path_arc=PI/2
-        ))
+        self.play(
+            TransformMatchingShapes(
+                mod_r1[1].copy(), mod_r1[-1], transform_mismatches=True, path_arc=PI / 2
+            )
+        )
 
         self.wait()
 
@@ -226,28 +224,20 @@ class P01_Length(Scene):
 
         r1_3 = Vector(dq, color=GREEN)
         r1_3l = MathTex(
-            r"-3\mathbf{r}", "=",
-            vec_scalar_comps("-3", ["(-2)", 1]),
-            color=GREEN
+            r"-3\mathbf{r}", "=", vec_scalar_comps("-3", ["(-2)", 1]), color=GREEN
         ).move_to([4, -0.5, 0])
 
         self.play(
-            TransformMatchingShapes(r1l.copy(), r1_3l,
-                                    fade_transform_mismatches=True)
+            TransformMatchingShapes(r1l.copy(), r1_3l, fade_transform_mismatches=True)
         )
-
-        
 
         self.wait()
         self.play(Create(r1_3))
         self.wait()
 
         fig = VGroup(plane, r1, r1_3, r1l, r1_3l, mod_r1)
-        self.play(
-            fig.animate.scale(0.5).move_to([3, -2, 0])
-        )
+        self.play(fig.animate.scale(0.5).move_to([3, -2, 0]))
         self.wait()
-
 
         mtex = r"\|-3\mathbf{r}\|"
 
@@ -257,25 +247,26 @@ class P01_Length(Scene):
         l4 = MathTex(mtex, "=", r"\sqrt{(-3)^2}\sqrt{5}")
         l5 = MathTex(mtex, "=", r"|-3|\sqrt{5}")
 
-
         mod = VGroup(l1, l2, l3, l4, l5)
         mod.arrange(DOWN, aligned_edge=LEFT).move_to([-1, 1, 0])
         self.wait()
 
         self.play(Write(l1[0]))
         self.play(Write(l1[1]))
-        self.play(TransformMatchingShapes(
-            r1_3l[-1].copy(), l1[-1],
-            fade_transform_mismatches=True
-        ))
+        self.play(
+            TransformMatchingShapes(
+                r1_3l[-1].copy(), l1[-1], fade_transform_mismatches=True
+            )
+        )
         self.wait()
 
         for i in range(1, len(mod)):
             self.play(Write(mod[i][-2]))
-            self.play(TransformMatchingShapes(
-                mod[i-1][-1].copy(), mod[i][-1],
-                transform_mismatches=True
-            ))
+            self.play(
+                TransformMatchingShapes(
+                    mod[i - 1][-1].copy(), mod[i][-1], transform_mismatches=True
+                )
+            )
             self.wait()
         # self.play(Write(l2[-2]))
         # self.play(TransformMatchingShapes(
@@ -291,12 +282,12 @@ class P01_Length(Scene):
         result = MathTex(
             r"\implies",
             r"\|-3\mathbf{r}\|=",
-            r"|-3|\|\mathbf{r}\|", "=", r"|-3|\sqrt{5}",
-            color=GREEN_B
+            r"|-3|\|\mathbf{r}\|",
+            "=",
+            r"|-3|\sqrt{5}",
+            color=GREEN_B,
         ).move_to([0, -2.5, 0])
         self.wait()
-
-
 
         self.play(
             fig.animate.scale(2).move_to(ORIGIN),
@@ -304,211 +295,205 @@ class P01_Length(Scene):
             TransformMatchingShapes(l5[-2:], result[-2:]),
             Write(result[0]),
             Write(result[2:-2]),
-            FadeOut(l1[2:], l2[1:], l3[1:], l4[1:], l5[1:-2])
+            FadeOut(l1[2:], l2[1:], l3[1:], l4[1:], l5[1:-2]),
         )
 
         self.wait()
 
-
         self.play(FadeOut(fig[1:], result))
 
-        #NOTE: =========== Proof for all vector =============
+        # NOTE: =========== Proof for all vector =============
         dp = [1.5, 1]
         r = Vector(dp, color=RED).set_z_index(2)
         rl = MathTex(
-            r"\mathbf{r} &= " + vec(["x", "y"]), r"\\\implies",
+            r"\mathbf{r} &= " + vec(["x", "y"]),
+            r"\\\implies",
             "\|\mathbf{r}\| &= \sqrt{x^2 + y^2}",
-            color=RED
+            color=RED,
         ).move_to([-2, 0, 0])
 
         dpe = vec_scale(2.7, dp)
         re = Vector(dpe, color=GREEN).set_z_index(1)
         rel = MathTex(
-            r"c\mathbf{r}&=" + vec_scalar("c", ["x", "y"]), r"\\\implies",
-            r"\|c\mathbf{r}\|", r"&=", r"|c|\|\mathbf{r}\| \\", 
-            r"&=",  "|c|\sqrt{x^2 + y^2}",
-            color=GREEN
-        ) .move_to([4, 0, 0])
-
+            r"c\mathbf{r}&=" + vec_scalar("c", ["x", "y"]),
+            r"\\\implies",
+            r"\|c\mathbf{r}\|",
+            r"&=",
+            r"|c|\|\mathbf{r}\| \\",
+            r"&=",
+            "|c|\sqrt{x^2 + y^2}",
+            color=GREEN,
+        ).move_to([4, 0, 0])
 
         self.play(Create(r), Write(rl[0]))
         self.wait()
-        self.play(Write(rl[1]), TransformMatchingShapes(
-            rl[0].copy(), rl[-1], transform_mismatches=True
-        ))
+        self.play(
+            Write(rl[1]),
+            TransformMatchingShapes(rl[0].copy(), rl[-1], transform_mismatches=True),
+        )
         self.wait()
 
         self.play(
             Create(re),
             TransformMatchingShapes(
-                rl[0].copy(), rel[0],
-                fade_transform_mismatches=True
-            )
+                rl[0].copy(), rel[0], fade_transform_mismatches=True
+            ),
         )
         self.wait()
         self.play(
             Write(rel[1]),
             TransformMatchingShapes(
-                rel[0][0:2].copy(), rel[2],
-                fade_transform_mismatches=True
-            )
+                rel[0][0:2].copy(), rel[2], fade_transform_mismatches=True
+            ),
         )
         self.play(Write(rel[3]))
-        self.play(TransformMatchingShapes(
-            rel[2].copy(), rel[4],
-            fade_transform_mismatches=True
-        ))
+        self.play(
+            TransformMatchingShapes(
+                rel[2].copy(), rel[4], fade_transform_mismatches=True
+            )
+        )
         self.play(Write(rel[5]))
-        self.play(TransformMatchingShapes(
-            rel[4].copy(), rel[6],
-            transform_mismatches=True
-        ))
+        self.play(
+            TransformMatchingShapes(rel[4].copy(), rel[6], transform_mismatches=True)
+        )
 
         self.wait()
         self.play(FadeOut(rl, rel))
 
-        br = Brace(r, direction=r.copy().rotate(PI/2).get_unit_vector())
+        br = Brace(r, direction=r.copy().rotate(PI / 2).get_unit_vector())
         brl = br.get_tex(r"\|\mathbf{r}\|")
 
-
-        bre = Brace(re, direction=re.copy().rotate(-PI/2).get_unit_vector())
+        bre = Brace(re, direction=re.copy().rotate(-PI / 2).get_unit_vector())
         brel = bre.get_tex(r"|c|\|\mathbf{r}\|")
         self.play(Write(brl), Write(br), Write(brel), Write(bre))
         self.wait()
 
         fig = VGroup(r, re, br, brl, bre, brel)
-        self.play(
-            FadeOut(plane),
-            fig.animate.scale(0.7).move_to([5, 0, 0])
-        )
+        self.play(FadeOut(plane), fig.animate.scale(0.7).move_to([5, 0, 0]))
 
         self.wait()
 
         l1 = MathTex(
             r"c\in\mathbb{R}",
-            r"\wedge \mathbf{r}=" + vec(["x", "y"]) + r"\in\mathbb{R}^2,"
+            r"\wedge \mathbf{r}=" + vec(["x", "y"]) + r"\in\mathbb{R}^2,",
         )
 
         l2 = MathTex(
-            r"\implies", r"\|c\mathbf{r}\|",
-            "=", r"\left\|" + vec(["cx", "cy"]) + r"\right\|",
-            "=", r"\sqrt{(cx)^2 + (cy)^2}",
+            r"\implies",
+            r"\|c\mathbf{r}\|",
+            "=",
+            r"\left\|" + vec(["cx", "cy"]) + r"\right\|",
+            "=",
+            r"\sqrt{(cx)^2 + (cy)^2}",
         )
 
         l3 = MathTex(
-            r"\implies", r"\|c\mathbf{r}\|",
-            "=", r"\sqrt{c^2x^2 + c^2y^2}",
-            "=", r"\sqrt{c^2(x^2 + y^2)}"
+            r"\implies",
+            r"\|c\mathbf{r}\|",
+            "=",
+            r"\sqrt{c^2x^2 + c^2y^2}",
+            "=",
+            r"\sqrt{c^2(x^2 + y^2)}",
         )
 
         l4 = MathTex(
-            r"\implies", r"\|c\mathbf{r}\|",
-            "=", r"\sqrt{c^2}", "\sqrt{x^2 + y^2}",
-            "=", r"|c|", r"\|\mathbf{r}\|"
+            r"\implies",
+            r"\|c\mathbf{r}\|",
+            "=",
+            r"\sqrt{c^2}",
+            "\sqrt{x^2 + y^2}",
+            "=",
+            r"|c|",
+            r"\|\mathbf{r}\|",
         )
 
         proof = VGroup(l1, l2, l3, l4)
         proof.arrange(DOWN, aligned_edge=LEFT, buff=0.5)
-        proof.move_to([-2, 0,0])
+        proof.move_to([-2, 0, 0])
 
         self.play(Write(l1[0]))
         self.wait()
         self.play(Write(l1[1]))
         self.wait()
 
-
         self.play(
             Write(l2[0]),
             TransformMatchingShapes(
-                VGroup(l1[0][0], l1[1][1]).copy(), l2[1],
-                fade_transform_mismatches=True
-            )
+                VGroup(l1[0][0], l1[1][1]).copy(), l2[1], fade_transform_mismatches=True
+            ),
         )
         self.play(Write(l2[2]))
 
         self.play(
             TransformMatchingShapes(
-                VGroup(l2[1][1], l1[1][3:7]).copy(), l2[3][4:-4],
-                transform_mismatches=True
+                VGroup(l2[1][1], l1[1][3:7]).copy(),
+                l2[3][4:-4],
+                transform_mismatches=True,
             )
             # TransformFromCopy(l2[0][2:-2], l2[3][2:-2])
         )
         self.wait()
         self.play(
             TransformMatchingShapes(
-                l2[1][0].copy(), l2[3][:4],
-                fade_transform_mismatches=True
+                l2[1][0].copy(), l2[3][:4], fade_transform_mismatches=True
             ),
             TransformMatchingShapes(
-                l2[1][-1].copy(), l2[3][-4:],
-                fade_transform_mismatches=True
-            )
+                l2[1][-1].copy(), l2[3][-4:], fade_transform_mismatches=True
+            ),
         )
 
         self.play(Write(l2[4]))
-        self.play(TransformMatchingShapes(
-            l2[3].copy(), l2[5],
-            fade_transform_mismatches=True
-        ))
+        self.play(
+            TransformMatchingShapes(l2[3].copy(), l2[5], fade_transform_mismatches=True)
+        )
         self.wait()
 
         self.play(Write(l3[2]))
 
         self.play(
             TransformMatchingShapes(
-                l2[-1][2:].copy(), l3[3][2:],
+                l2[-1][2:].copy(),
+                l3[3][2:],
             ),
-            ReplacementTransform(
-                l2[-1][:2].copy(), l3[3][:2]
-            )
+            ReplacementTransform(l2[-1][:2].copy(), l3[3][:2]),
         )
         self.wait()
         self.play(Write(l3[4]))
         self.play(
-            TransformMatchingShapes(
-                l3[3][2:].copy(), l3[5][2:],
-                path_arc = PI/2
-            ),
-            ReplacementTransform(l3[3][:2].copy(), l3[5][:2])
+            TransformMatchingShapes(l3[3][2:].copy(), l3[5][2:], path_arc=PI / 2),
+            ReplacementTransform(l3[3][:2].copy(), l3[5][:2]),
         )
         self.wait()
 
         self.play(Write(l4[2]))
         self.play(
             TransformMatchingShapes(
-                l3[-1].copy(), l4[3:5],
+                l3[-1].copy(),
+                l4[3:5],
             )
         )
 
         self.wait()
         self.play(Write(l4[5]))
-        self.play(TransformMatchingShapes(
-            l4[3].copy(), l4[6],
-            fade_transform_mismatches=True,
-            path_arc = PI/2
-        ))
+        self.play(
+            TransformMatchingShapes(
+                l4[3].copy(), l4[6], fade_transform_mismatches=True, path_arc=PI / 2
+            )
+        )
         self.wait()
-        self.play(ReplacementTransform(
-            l4[4].copy(), l4[7],
-            path_arc = PI/2
-        ))
+        self.play(ReplacementTransform(l4[4].copy(), l4[7], path_arc=PI / 2))
 
         self.wait()
 
         self.next_section(skip_animations=False)
-        result = MathTex(
-            r"\|c\mathbf{r}\|=",
-            r"|c|\|\mathbf{r}\|"
-        )
+        result = MathTex(r"\|c\mathbf{r}\|=", r"|c|\|\mathbf{r}\|")
 
         l1c = l1.copy()
         VGroup(l1c, result).arrange(DOWN, buff=0.2).move_to(ORIGIN)
-
 
         self.play(FadeOut(l2[3:], l2[0], l3[2:], l4[2:-2]))
         self.play(
             TransformMatchingShapes(l2[1:3], result[0]),
             ReplacementTransform(l4[-2:], result[1]),
-            ReplacementTransform(l1,l1c)
+            ReplacementTransform(l1, l1c),
         )
-

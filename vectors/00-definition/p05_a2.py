@@ -2,6 +2,7 @@ from manim import *
 from funcs.vec2D_tex import *
 from mobj.mobjets import number_plane
 
+
 class Add2(Scene):
     def construct(self):
         # self.next_section(skip_animations=True)
@@ -21,16 +22,14 @@ class Add2(Scene):
         v = Vector([4, -2], color=BLUE)
         r = Vector([5, 1], color=RED)
         ul = MathTex(r"\mathbf{u}", color=GREEN).next_to(u, LEFT)
-        vl = MathTex(r"\mathbf{v}", color=BLUE).move_to([2, -1.5,  0])
-        rl = MathTex(r"\mathbf{u}", "+", r"\mathbf{v}",
-                     color=RED).move_to([3, 0, 0])
+        vl = MathTex(r"\mathbf{v}", color=BLUE).move_to([2, -1.5, 0])
+        rl = MathTex(r"\mathbf{u}", "+", r"\mathbf{v}", color=RED).move_to([3, 0, 0])
 
         self.play(Create(u), Write(ul))
         self.play(Create(v), Write(vl))
         self.wait()
 
-        self.play(v.animate.move_to([3, 2, 0]),
-                  vl.animate.move_to([3, 2.5, 0]))
+        self.play(v.animate.move_to([3, 2, 0]), vl.animate.move_to([3, 2.5, 0]))
         self.wait()
         self.play(Create(r))
         self.play(
@@ -40,11 +39,15 @@ class Add2(Scene):
         )
         self.wait()
 
-
-        eq1 = MathTex(vec([1, 3]), "+", vec([4, -2]), "=",
-                      vec_add_int([1, 3], [4, -2]), "=",
-                      vec([5, 1]),
-                      ).move_to([3.5, -3, 0])
+        eq1 = MathTex(
+            vec([1, 3]),
+            "+",
+            vec([4, -2]),
+            "=",
+            vec_add_int([1, 3], [4, -2]),
+            "=",
+            vec([5, 1]),
+        ).move_to([3.5, -3, 0])
         eq1[0].set_color(GREEN)
         eq1[2].set_color(BLUE)
         eq1[6].set_color(RED)
@@ -54,21 +57,21 @@ class Add2(Scene):
         eq1[4][3].set_color(BLUE)
         eq1[4][6:-1].set_color(BLUE)
 
-
         self.play(Write(eq1))
         self.wait()
 
         self.play(v.animate.move_to([2, -1, 0]), vl.animate.move_to([2, -1.5, 0]))
         self.wait()
-        self.play(
-            u.animate.move_to([4.5, -0.5, 0]),
-            ul.animate.move_to([[5, -1, 0]])
-        )
+        self.play(u.animate.move_to([4.5, -0.5, 0]), ul.animate.move_to([[5, -1, 0]]))
         self.wait()
 
         eq2 = MathTex(
-            vec([4, -2]), "+", vec([1, 3]), "=",
-            vec_add_int([4, -2], [1, 3]), "=",
+            vec([4, -2]),
+            "+",
+            vec([1, 3]),
+            "=",
+            vec_add_int([4, -2], [1, 3]),
+            "=",
             vec([5, 1]),
         ).move_to([3.5, -3, 0])
 
@@ -88,7 +91,7 @@ class Add2(Scene):
             eq1[3].animate.move_to(eq2[3].get_center()),
             eq1[5].animate.move_to(eq2[5].get_center()),
             eq1[6].animate.move_to(eq2[6].get_center()),
-            run_time=1.5
+            run_time=1.5,
         )
         self.wait()
 
@@ -99,7 +102,7 @@ class Add2(Scene):
         v2 = Arrow([1, 3, 0], [5, 1, 0], color=BLUE, buff=0)
         r2 = Vector([5, 1], color=RED)
         u2l = MathTex(r"\mathbf{u}", color=GREEN).next_to(u2, LEFT)
-        v2l = MathTex(r"\mathbf{v}", color=BLUE).move_to([3, 2.5,  0])
+        v2l = MathTex(r"\mathbf{v}", color=BLUE).move_to([3, 2.5, 0])
         r2l = MathTex(r"\mathbf{u}", "+", r"\mathbf{v}", color=RED).move_to([3, 0, 0])
 
         vecs1 = VGroup(u2, v2, r2, u2l, v2l, r2l)
@@ -111,20 +114,31 @@ class Add2(Scene):
         self.play(
             vecs1.animate.scale(0.6).move_to([5, 1, 0]),
             vecs2.animate.scale(0.6).move_to([5.1, -1, 0]),
-            FadeOut(rl, eq2, plane)
+            FadeOut(rl, eq2, plane),
         )
 
-        
-        l1 = MathTex(r"\mathbf{u}", "+", r"\mathbf{v}", "=",
-                     vec_comps("u"), "+", vec_comps("v"), "=",
-                     vec_add_comps("u", "v"))
+        l1 = MathTex(
+            r"\mathbf{u}",
+            "+",
+            r"\mathbf{v}",
+            "=",
+            vec_comps("u"),
+            "+",
+            vec_comps("v"),
+            "=",
+            vec_add_comps("u", "v"),
+        )
 
-        l2 = MathTex(r"\mathbf{u}+\mathbf{v}=",
-                     vec_add_comps("v", "u"), "=",
-                     vec_comps("v"), "+", vec_comps("u"))
+        l2 = MathTex(
+            r"\mathbf{u}+\mathbf{v}=",
+            vec_add_comps("v", "u"),
+            "=",
+            vec_comps("v"),
+            "+",
+            vec_comps("u"),
+        )
 
-        l3 = MathTex(r"\mathbf{u}+\mathbf{v}", "=",
-                     r"\mathbf{v}", "+", r"\mathbf{u}")
+        l3 = MathTex(r"\mathbf{u}+\mathbf{v}", "=", r"\mathbf{v}", "+", r"\mathbf{u}")
 
         proof = VGroup(l1, l2, l3).arrange(DOWN, aligned_edge=LEFT, buff=0.5)
         proof.move_to([-2, 0, 0])
@@ -152,7 +166,6 @@ class Add2(Scene):
         )
         self.play(Write(l2[4]), Write(l2[5][0]), Write(l2[5][-1]))
 
-
         self.play(
             TransformFromCopy(l2[1][4:6], l2[5][1:3]),
             TransformFromCopy(l2[1][9:11], l2[5][3:5]),
@@ -163,8 +176,12 @@ class Add2(Scene):
         self.play(TransformFromCopy(l2[-2], l3[3]))
         self.play(TransformFromCopy(l2[-1], l3[-1]))
 
-        result = MathTex(r"\text{2. }", r"\mathbf{u}+\mathbf{v}=", r"\mathbf{v}+\mathbf{u}",
-                         r",\quad \forall \mathbf{u}, \mathbf{v} \in \mathbb{R}^2")
+        result = MathTex(
+            r"\text{2. }",
+            r"\mathbf{u}+\mathbf{v}=",
+            r"\mathbf{v}+\mathbf{u}",
+            r",\quad \forall \mathbf{u}, \mathbf{v} \in \mathbb{R}^2",
+        )
 
         result.move_to([-2, 0, 0])
 
@@ -175,8 +192,7 @@ class Add2(Scene):
         # self.next_section(skip_animations=False)
         self.play(FadeOut(l1[4:], l2[0][-1], l2[1:], l3[1]))
 
-        self.play(Transform(l1[0:4], result[1]),
-                  Transform(l3[2:], result[2]))
+        self.play(Transform(l1[0:4], result[1]), Transform(l3[2:], result[2]))
 
         self.play(Write(result[0]))
         self.wait()

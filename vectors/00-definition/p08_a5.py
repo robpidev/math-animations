@@ -10,10 +10,11 @@ class Add5(Scene):
         # self.next_section(skip_animations=True)
         self.wait()
 
-        a5 = Tex("(A5). ",
-                 r"$ \forall x \in \mathbb{R}, \exists -x \in \mathbb{R} :"
-                 + r"x + (-x) = 0$",)
-
+        a5 = Tex(
+            "(A5). ",
+            r"$ \forall x \in \mathbb{R}, \exists -x \in \mathbb{R} :"
+            + r"x + (-x) = 0$",
+        )
 
         self.play(Write(a5))
         self.wait()
@@ -22,20 +23,24 @@ class Add5(Scene):
         plane = number_plane()
         self.play(Create(plane))
 
-
         pu = [2, 3, 0]
         pv = [4, 2, 0]
         u = Vector(pu, color=GREEN)
         v = Arrow(pu, pv, buff=0, color=YELLOW)
         r = Vector(pv, color=RED)
 
-        eq = VGroup(
-            MathTex(vec_float(pu)), MathTex("+"),
-            MathTex(vec_float(vec_ab(pu, pv))),
-            MathTex("="), MathTex(vec_float(pv))
-        ).arrange(RIGHT, buff=0.3).move_to([3.5, -2.5, 0])
+        eq = (
+            VGroup(
+                MathTex(vec_float(pu)),
+                MathTex("+"),
+                MathTex(vec_float(vec_ab(pu, pv))),
+                MathTex("="),
+                MathTex(vec_float(pv)),
+            )
+            .arrange(RIGHT, buff=0.3)
+            .move_to([3.5, -2.5, 0])
+        )
 
-        
         eq[0].set_color(GREEN)
         eq[2].set_color(YELLOW)
         eq[4].set_color(RED)
@@ -52,7 +57,6 @@ class Add5(Scene):
 
         self.play(TransformFromCopy(r, eq[4]))
 
-
         x = ValueTracker(4)
         y = ValueTracker(2)
 
@@ -63,9 +67,7 @@ class Add5(Scene):
         )
 
         r.add_updater(
-            lambda m: m.become(
-                Vector([x.get_value(), y.get_value(), 0], color=RED)
-            )
+            lambda m: m.become(Vector([x.get_value(), y.get_value(), 0], color=RED))
         )
         self.add(eq)
 
@@ -74,10 +76,16 @@ class Add5(Scene):
                 VGroup(
                     MathTex(vec_float(pu)).set_color(GREEN),
                     MathTex("+"),
-                    MathTex(vec_float(vec_ab(pu, [x.get_value(), y.get_value(), 0]))).set_color(YELLOW),
+                    MathTex(
+                        vec_float(vec_ab(pu, [x.get_value(), y.get_value(), 0]))
+                    ).set_color(YELLOW),
                     MathTex("="),
-                    MathTex(vec_float([x.get_value(), y.get_value(), 0])).set_color(RED)
-                ).arrange(RIGHT, buff=0.3).move_to([3.5, -2.5, 0])
+                    MathTex(vec_float([x.get_value(), y.get_value(), 0])).set_color(
+                        RED
+                    ),
+                )
+                .arrange(RIGHT, buff=0.3)
+                .move_to([3.5, -2.5, 0])
             )
         )
 
@@ -97,8 +105,8 @@ class Add5(Scene):
         u = Vector([2, 3, 0], color=GREEN)
         v = Arrow([2, 3, 0], [0, 0, 0], buff=0, color=YELLOW)
 
-        r = ValueTracker((13)**0.5)
-        t = ValueTracker(arctan(3/2) * 180 / PI)
+        r = ValueTracker((13) ** 0.5)
+        t = ValueTracker(arctan(3 / 2) * 180 / PI)
 
         u.add_updater(
             lambda m: m.become(
@@ -121,17 +129,24 @@ class Add5(Scene):
         eq.add_updater(
             lambda m: m.become(
                 VGroup(
-                    MathTex(vec_float(vec_mod_angled(r.get_value(),
-                                                     t.get_value()))).set_color(GREEN),
+                    MathTex(
+                        vec_float(vec_mod_angled(r.get_value(), t.get_value()))
+                    ).set_color(GREEN),
                     MathTex("+"),
-                    MathTex(vec_float(vec_ab(vec_mod_angled(r.get_value(), t.get_value()),
-                                             [0, 0, 0]))).set_color(YELLOW),
+                    MathTex(
+                        vec_float(
+                            vec_ab(
+                                vec_mod_angled(r.get_value(), t.get_value()), [0, 0, 0]
+                            )
+                        )
+                    ).set_color(YELLOW),
                     MathTex("="),
-                    MathTex(vec_float([0, 0, 0])).set_color(RED)
-                ).arrange(RIGHT, buff=0.3).move_to([3.5, -2.5, 0])
+                    MathTex(vec_float([0, 0, 0])).set_color(RED),
+                )
+                .arrange(RIGHT, buff=0.3)
+                .move_to([3.5, -2.5, 0])
             )
         )
-
 
         self.clear()
         self.add(u, v, eq, plane, a5)
@@ -142,24 +157,37 @@ class Add5(Scene):
         self.play(r.animate.set_value(4), t.animate.set_value(390), run_time=2)
         self.wait()
 
-
         self.remove(u, v)
-        
+
         u = Vector(vec_mod_angled(4, 390), color=GREEN)
         v = Arrow(vec_mod_angled(4, 390), [0, 0, 0], buff=0, color=YELLOW)
         self.add(u, v)
 
         l1 = MathTex(
-            r"\mathbf{u}", "=", vec_comps("u"),
-            r",\quad \text{Def. }", r"-\mathbf{u}", "=", vec_comps("-u"), ","
+            r"\mathbf{u}",
+            "=",
+            vec_comps("u"),
+            r",\quad \text{Def. }",
+            r"-\mathbf{u}",
+            "=",
+            vec_comps("-u"),
+            ",",
         )
 
         l2 = MathTex(
-            r"\mathbf{u}", "+", r"(\mathbf {-u})", "=",
-            vec_comps("u"), "+", vec_comps("-u"),
-            "=", vec_matrix("u_x + (-u_x)", "u_y + (-u_y)"),
-            "=", vec_matrix("0", "0"),
-            "=", "\mathbf{0}",
+            r"\mathbf{u}",
+            "+",
+            r"(\mathbf {-u})",
+            "=",
+            vec_comps("u"),
+            "+",
+            vec_comps("-u"),
+            "=",
+            vec_matrix("u_x + (-u_x)", "u_y + (-u_y)"),
+            "=",
+            vec_matrix("0", "0"),
+            "=",
+            "\mathbf{0}",
         )
 
         l3 = Tex(
@@ -181,13 +209,19 @@ class Add5(Scene):
 
         self.remove(eq)
 
-        eq = VGroup(
-            MathTex(vec_float(vec_mod_angled(4, 390))).set_color(GREEN),
-            MathTex("+"),
-            MathTex(vec_float(vec_ab(vec_mod_angled(4, 390), [0, 0, 0]))).set_color(YELLOW),
-            MathTex("="),
-            MathTex(vec_float([0, 0, 0])).set_color(RED)
-        ).arrange(RIGHT, buff=0.3).move_to([3.5, -2.5, 0])
+        eq = (
+            VGroup(
+                MathTex(vec_float(vec_mod_angled(4, 390))).set_color(GREEN),
+                MathTex("+"),
+                MathTex(vec_float(vec_ab(vec_mod_angled(4, 390), [0, 0, 0]))).set_color(
+                    YELLOW
+                ),
+                MathTex("="),
+                MathTex(vec_float([0, 0, 0])).set_color(RED),
+            )
+            .arrange(RIGHT, buff=0.3)
+            .move_to([3.5, -2.5, 0])
+        )
         self.play(FadeOut(plane, eq))
         self.wait()
 
@@ -195,41 +229,35 @@ class Add5(Scene):
             TransformFromCopy(l1[0], l2[0]),
             Write(l2[1]),
             TransformMatchingShapes(l1[-4], l2[2]),
-            )
+        )
         self.wait()
         self.play(Write(l2[3]))
         self.play(TransformFromCopy(l1[2], l2[4]))
         self.play(Write(l2[5]))
         self.play(TransformFromCopy(l1[-2], l2[6]))
         self.wait()
-       
+
         self.play(Write(l2[7]))
         # self.play(Transform(l2[4:7].copy(), l2[8]))
         self.play(
             TransformFromCopy(l2[4][0], l2[8][0]),
             TransformFromCopy(l2[6][-1], l2[8][-1]),
             TransformMatchingShapes(
-                Group(l2[4][1:3].copy(), l2[6][1:4].copy(), l2[5].copy()
-            ), l2[8][1:9]),
+                Group(l2[4][1:3].copy(), l2[6][1:4].copy(), l2[5].copy()), l2[8][1:9]
+            ),
             TransformMatchingShapes(
-                Group(l2[4][3:5].copy(), l2[6][4:6].copy(), l2[5].copy()),
-                l2[8][9:17]
-            )
+                Group(l2[4][3:5].copy(), l2[6][4:6].copy(), l2[5].copy()), l2[8][9:17]
+            ),
         )
-
 
         rect = SurroundingRectangle(a5)
         self.play(Create(rect))
         self.play(Write(l2[9]))
         self.play(
+            TransformFromCopy(Group(l2[8][0], l2[8][-1]), Group(l2[10][0], l2[10][-1])),
             TransformFromCopy(
-                Group(l2[8][0], l2[8][-1]),
-                 Group(l2[10][0], l2[10][-1])
+                Group(l2[8][1:9], l2[8][9:17]), Group(l2[10][1], l2[10][2])
             ),
-            TransformFromCopy(
-                Group(l2[8][1:9], l2[8][9:17]),
-                Group(l2[10][1], l2[10][2])
-            )
         )
         self.play(FadeOut(rect))
         self.play(Write(l2[11]))
@@ -243,17 +271,17 @@ class Add5(Scene):
         self.add(a5, proof)
 
         result = MathTex(
-            r"\forall \mathbf{u} = "+ vec_comps("u"), r"\in\mathbb{R}^2,\quad",
-            r"\exists -\mathbf{u} ="+ vec_comps("-u") ,r"\in \mathbb{R}^2", ":",
+            r"\forall \mathbf{u} = " + vec_comps("u"),
+            r"\in\mathbb{R}^2,\quad",
+            r"\exists -\mathbf{u} =" + vec_comps("-u"),
+            r"\in \mathbb{R}^2",
+            ":",
         )
 
-        result1 = MathTex(
-            r"\mathbf{u} + (-\mathbf{u})", "=", r"\mathbf{0}"
-        )
+        result1 = MathTex(r"\mathbf{u} + (-\mathbf{u})", "=", r"\mathbf{0}")
 
         resultg = VGroup(result, result1).arrange(RIGHT, buff=0.5).shift(UP)
         self.play(
-
             FadeOut(l1[3], l1[-1], l2[4:-1], l3),
         )
 
@@ -264,18 +292,14 @@ class Add5(Scene):
             # TransformMatchingShapes(l2[:4], result1[:2], path_rc = PI/2),
         )
 
-        self.play(
-            TransformMatchingShapes(l1[4:7], result[2]),
-            FadeIn(result[-2])
-        )
+        self.play(TransformMatchingShapes(l1[4:7], result[2]), FadeIn(result[-2]))
 
         self.play(Write(result[-1]))
         self.wait()
 
         self.play(
-            TransformMatchingShapes(l2[:4], result1[:2], path_rc = PI/2),
+            TransformMatchingShapes(l2[:4], result1[:2], path_rc=PI / 2),
             Transform(l2[-1], result1[-1]),
-
         )
         self.wait()
 
@@ -286,18 +310,24 @@ class Add5(Scene):
         self.play(Write(enum))
         self.wait()
 
-
         self.play(FadeOut(a5, resultg, enum))
 
         # self.play(
-            # Write(result[1]),
+        # Write(result[1]),
         # )
 
         eq = MathTex(
             r"\mathbf{u} - \mathbf{v}",
-            "=", r"\mathbf{u}" ,"+",  "(-\mathbf{v})",
-            "=", vec_comps("u"), "+", vec_comps("-v"),
-            "=", vec_matrix("u_x + (-v_x)", "u_y + (-v_y)")
+            "=",
+            r"\mathbf{u}",
+            "+",
+            "(-\mathbf{v})",
+            "=",
+            vec_comps("u"),
+            "+",
+            vec_comps("-v"),
+            "=",
+            vec_matrix("u_x + (-v_x)", "u_y + (-v_y)"),
         )
         self.play(Write(eq[0:5]))
 
@@ -310,35 +340,36 @@ class Add5(Scene):
         self.play(TransformMatchingShapes(eq[6:9].copy(), eq[10]))
         self.wait()
 
-        eq_aux = MathTex(
-            vec_sub_comps("u", "v")
-        ).move_to(eq[-1].get_center())
+        eq_aux = MathTex(vec_sub_comps("u", "v")).move_to(eq[-1].get_center())
 
         self.play(TransformMatchingShapes(eq[10], eq_aux))
         self.wait()
         self.play(FadeOut(eq[2:-1]))
 
-
         eq_result = MathTex(
             r"\mathbf{u} - \mathbf{v}",
-            "=", vec_comps("u"), "-", vec_comps("v"),
-            "=", vec_sub_comps("u", "v")
-        ) 
+            "=",
+            vec_comps("u"),
+            "-",
+            vec_comps("v"),
+            "=",
+            vec_sub_comps("u", "v"),
+        )
 
         self.play(
             TransformFromCopy(eq[0][0], eq_result[2]),
             TransformFromCopy(eq[0][1], eq_result[3]),
-            TransformFromCopy(eq[0][2], eq_result[4])
+            TransformFromCopy(eq[0][2], eq_result[4]),
         )
         self.play(Write(eq_result[-2]))
         self.play(
             Transform(eq[0:2], eq_result[0:2]),
-            TransformMatchingShapes(eq_aux, eq_result[-1])
+            TransformMatchingShapes(eq_aux, eq_result[-1]),
         )
         self.wait()
         self.clear()
-        self.play(eq_result.animate.scale(0.8).to_edge(UP+LEFT))
-        
+        self.play(eq_result.animate.scale(0.8).to_edge(UP + LEFT))
+
         self.play(Create(plane))
 
         p = [4, 3, 0]
@@ -348,25 +379,24 @@ class Add5(Scene):
         v1 = Arrow(q, [0, 0, 0], buff=0, color=ORANGE)
         r = Arrow(q, p, buff=0, color=RED)
 
-
-
         ul = MathTex(r"\mathbf{u}", color=GREEN).move_to([2.5, 1.3, 0])
         vl = MathTex(r"\mathbf{v}", color=BLUE).move_to([-1.5, 0.5, 0])
-        v1l = MathTex(r"\mathbf{-v}", color=ORANGE).move_to([-.5, 1.5, 0])
-        rl = MathTex(
-            r"\mathbf{u}","+", r"(-\mathbf{v})",
-            color=RED
-        ).move_to([0.5, 3, 0])
+        v1l = MathTex(r"\mathbf{-v}", color=ORANGE).move_to([-0.5, 1.5, 0])
+        rl = MathTex(r"\mathbf{u}", "+", r"(-\mathbf{v})", color=RED).move_to(
+            [0.5, 3, 0]
+        )
 
-        rlc = MathTex(r"\mathbf{u}","-", r"\mathbf{v}",
-                      color=RED).move_to([0.5, 3, 0])
+        rlc = MathTex(r"\mathbf{u}", "-", r"\mathbf{v}", color=RED).move_to([0.5, 3, 0])
 
         self.play(Create(u), Write(ul))
         self.play(Create(v), Write(vl))
 
         eq = MathTex(
             r"\mathbf{u} - \mathbf{v}",
-            r"=", r"\mathbf{u} + (", "-\mathbf{v}" ,")",
+            r"=",
+            r"\mathbf{u} + (",
+            "-\mathbf{v}",
+            ")",
         ).move_to([0, -1.5, 0])
 
         self.play(Write(eq[0]))
@@ -382,7 +412,7 @@ class Add5(Scene):
         self.play(
             TransformFromCopy(ul, rl[0]),
             Write(rl[1]),
-            TransformMatchingShapes(v1l.copy(), rl[2])
+            TransformMatchingShapes(v1l.copy(), rl[2]),
         )
         self.wait()
         self.play(TransformMatchingShapes(rl, rlc))
@@ -408,9 +438,7 @@ class Add5(Scene):
 
         # self.next_section(skip_animations=False)
         eq = MathTex(
-            vec(p), "-", vec(q),
-            "=", vec_sub_int(p, q),
-            "=", vec_matrix("6", "1")
+            vec(p), "-", vec(q), "=", vec_sub_int(p, q), "=", vec_matrix("6", "1")
         ).move_to([0, -2, 0])
         eq[0].set_color(GREEN)
         eq[2].set_color(BLUE)
@@ -437,4 +465,3 @@ class Add5(Scene):
         self.wait()
         self.play(TransformFromCopy(eq[6], r))
         self.wait()
-

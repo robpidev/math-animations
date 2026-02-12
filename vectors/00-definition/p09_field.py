@@ -7,7 +7,7 @@ class Field(Scene):
         # self.next_section(skip_animations=True)
 
         group = MathTex(r"(\mathbb{R},+", ")")
-        field = MathTex(r"(\mathbb{R},+", "," "\cdot", ")")
+        field = MathTex(r"(\mathbb{R},+", ",\cdot", ")")
 
         self.play(Write(group))
         self.wait()
@@ -19,7 +19,7 @@ class Field(Scene):
         m1 = MathTex(
             r"\quad 1. \quad",
             r"x, y \in \mathbb{R} \implies x \cdot y \in \mathbb{R}",
-        ) 
+        )
 
         m2 = MathTex(
             r"2. \quad",
@@ -52,7 +52,7 @@ class Field(Scene):
             r"\quad \forall x, y, z \in \mathbb{R}",
         )
 
-        line  = Line([-5, 0, 0], [5, 0, 0], stroke_width=2)
+        line = Line([-5, 0, 0], [5, 0, 0], stroke_width=2)
         line.set_color(YELLOW)
 
         field_c = field.copy()
@@ -68,18 +68,16 @@ class Field(Scene):
         fieldg[-2:].shift(DOWN * 0.3)
 
         self.clear()
-        
+
         self.play(Transform(field_c, field))
         self.wait()
-
 
         for prop in fieldg[1:]:
             self.play(Write(prop))
             self.wait()
 
         field_name = MathTex(
-            r"\text{Campo (Cuerpo): }",
-            r"(\mathbb{R},+", "," "\cdot", ")"
+            r"\text{Campo (Cuerpo): }", r"(\mathbb{R},+", ",\cdot", ")"
         )
 
         field_name.move_to(fieldg[0].get_center() + RIGHT * 2)
@@ -88,25 +86,34 @@ class Field(Scene):
         self.wait()
 
         self.play(FadeOut(fieldg[1:], field_name))
-        
+
         write = MathTex(
-            "x\cdot y", ",",
-            r"\quad x \cdot \left(\frac{1}{y}\right)", ",",
-            r"\quad (x\cdot y) \cdot z", ",",
-            r"\quad xx", ",",
-            r"\quad x + x", ",",
+            "x\cdot y",
+            ",",
+            r"\quad x \cdot \left(\frac{1}{y}\right)",
+            ",",
+            r"\quad (x\cdot y) \cdot z",
+            ",",
+            r"\quad xx",
+            ",",
+            r"\quad x + x",
+            ",",
             "\quad\dots",
         )
 
         write_alt = MathTex(
-            r"xy", ",",
-            r"\quad \frac{x}{y}", ",",
-            r"\quad xyz", ",",
-            r"\quad x^2", ",",
-            r"\quad 2x", ",",
-            "\quad\dots"
+            r"xy",
+            ",",
+            r"\quad \frac{x}{y}",
+            ",",
+            r"\quad xyz",
+            ",",
+            r"\quad x^2",
+            ",",
+            r"\quad 2x",
+            ",",
+            "\quad\dots",
         )
-
 
         VGroup(write, write_alt).arrange(DOWN, buff=1)
         # write_alt =

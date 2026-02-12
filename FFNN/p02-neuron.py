@@ -1,4 +1,31 @@
-from manim import BLUE, BLUE_A, DOWN, LEFT, RIGHT, YELLOW, UP, Arrow, Circle, Create, FadeOut, Line, MathTex, ReplacementTransform, Scene, SurroundingRectangle, Text, Transform, TransformFromCopy, TransformMatchingShapes, TransformMatchingTex, VGroup, Write, color, Vector, Group
+from manim import (
+    BLUE,
+    BLUE_A,
+    DOWN,
+    LEFT,
+    RIGHT,
+    YELLOW,
+    UP,
+    Arrow,
+    Circle,
+    Create,
+    FadeOut,
+    Line,
+    MathTex,
+    ReplacementTransform,
+    Scene,
+    SurroundingRectangle,
+    Text,
+    Transform,
+    TransformFromCopy,
+    TransformMatchingShapes,
+    TransformMatchingTex,
+    VGroup,
+    Write,
+    color,
+    Vector,
+    Group,
+)
 
 
 class P01Neuron(Scene):
@@ -12,37 +39,27 @@ class P01Neuron(Scene):
         input = VGroup(
             *[
                 MathTex("a^{(0)}_" + str(i + 1), color=YELLOW).move_to(3 * i * DOWN)
-                for i in range(-1 , 2, 1)
+                for i in range(-1, 2, 1)
             ]
         ).to_edge(LEFT)
 
-
-        w1_conections = VGroup(
-            *[
-                Line(n, n1_draw, color=BLUE_A)
-                for n in input
-            ]
-        )
+        w1_conections = VGroup(*[Line(n, n1_draw, color=BLUE_A) for n in input])
 
         w1_labels = VGroup(
             *[
                 MathTex(f"w_{i}", color=BLUE_A).move_to(w).shift(0.5 * UP)
-                for i, w in enumerate(w1_conections) 
+                for i, w in enumerate(w1_conections)
             ]
         )
 
         w1 = VGroup(w1_conections, w1_labels)
-         
+
         out_con = Line(n1_draw, 4 * RIGHT, color=BLUE_A)
         out_label = MathTex("a^{(1)}", color=BLUE_A).move_to(out_con).shift(0.5 * UP)
 
         out = VGroup(out_con, out_label)
 
-        neuron = VGroup(
-            input, w1, out, n1
-        )
-
-
+        neuron = VGroup(input, w1, out, n1)
 
         # self.next_section(skip_animations=False)
         self.play(Create(n1_draw), Write(n1_bias))
@@ -76,13 +93,11 @@ class P01Neuron(Scene):
         self.play(FadeOut(sq))
 
         eq = [
-            "w_" + str(i // 2) + "a^{(0)}_" + str(i // 2)
-            if i % 2 == 0 else "+"
+            "w_" + str(i // 2) + "a^{(0)}_" + str(i // 2) if i % 2 == 0 else "+"
             for i in range(2 * len(input))
         ]
 
         eq.append("b_1")
-
 
         eq = MathTex(
             *eq,
@@ -91,9 +106,9 @@ class P01Neuron(Scene):
         # self.next_section(skip_animations=False)
 
         for i in range(len(input)):
-            self.play(TransformMatchingShapes(
-                Group(w1_labels[i], input[i]).copy(), eq[2 * i]
-            ))
+            self.play(
+                TransformMatchingShapes(Group(w1_labels[i], input[i]).copy(), eq[2 * i])
+            )
             self.wait(0.2)
 
             if i + 1 == len(input):
@@ -102,7 +117,4 @@ class P01Neuron(Scene):
             self.play(Write(eq[2 * i + 1]))
             self.wait(0.2)
 
-
         self.next_section(skip_animations=False)
-
-

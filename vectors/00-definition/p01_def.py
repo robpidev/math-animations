@@ -2,6 +2,7 @@ from manim import *
 from funcs.vec2D_tex import vec_matrix
 from mobj.mobjets import number_plane
 
+
 class Def(Scene):
     def construct(self):
         # self.next_section(skip_animations=True)
@@ -19,9 +20,8 @@ class Def(Scene):
 
         a = Dot([4, 3, 0])
         al = MathTex("A=(4,3)").next_to(a, RIGHT)
-        lx = Line(ORIGIN, 4*RIGHT, stroke_width=2).set_color(RED)
-        ly = Line(ORIGIN, 3*UP, stroke_width=2).set_color(YELLOW)
-
+        lx = Line(ORIGIN, 4 * RIGHT, stroke_width=2).set_color(RED)
+        ly = Line(ORIGIN, 3 * UP, stroke_width=2).set_color(YELLOW)
 
         self.play(Create(a))
         self.wait()
@@ -44,9 +44,11 @@ class Def(Scene):
         self.wait()
 
         r = Vector([4, 3], color=ORANGE)
-        rt = MathTex(
-            r"\vec r",r"=\overrightarrow{OA}", "=[4,3]"
-        ).next_to(r, 0.5*LEFT).set_color(ORANGE)
+        rt = (
+            MathTex(r"\vec r", r"=\overrightarrow{OA}", "=[4,3]")
+            .next_to(r, 0.5 * LEFT)
+            .set_color(ORANGE)
+        )
         self.play(Create(r))
         self.wait()
         self.play(Write(rt[0]))
@@ -60,7 +62,9 @@ class Def(Scene):
         self.play(Write(rt[2][5]))
         self.wait()
 
-        rtm = MathTex("=", vec_matrix(4, 3)).move_to(rt[2].get_center()).set_color(ORANGE)
+        rtm = (
+            MathTex("=", vec_matrix(4, 3)).move_to(rt[2].get_center()).set_color(ORANGE)
+        )
         self.play(TransformMatchingShapes(rt[2], rtm))
         self.wait()
         self.play(FadeOut(rtm, rt[:2]))
@@ -78,8 +82,9 @@ class Def(Scene):
         d3 = Dot([2, -3, 0])
         d3t = MathTex("D=(2,-3)").next_to(d3, RIGHT)
         r3 = Vector([2, -3], color=PURPLE)
-        r3t = MathTex(r"\vec d=", vec_matrix(2, -3)).next_to(d3, RIGHT).set_color(PURPLE)
-
+        r3t = (
+            MathTex(r"\vec d=", vec_matrix(2, -3)).next_to(d3, RIGHT).set_color(PURPLE)
+        )
 
         self.play(Create(d1))
         self.play(Write(d1t))
@@ -160,12 +165,13 @@ class Def(Scene):
         self.play(vg.animate.move_to([2, 1.5, 0]))
         self.wait()
 
+        vecs = MathTex(
+            r"\vec u =[", "u_x", ",", "u_y", r"],\quad\vec v=[", "v_x", ",", "v_y", "]"
+        )
 
-        vecs = MathTex(r"\vec u =[", "u_x",",", "u_y",
-                    r"],\quad\vec v=[", "v_x",",","v_y", "]")
-
-        igales = MathTex(r"\vec u = \vec v \iff", "u_x", "=", "v_x",
-                         r"\wedge", "u_y", "=", "v_y")
+        igales = MathTex(
+            r"\vec u = \vec v \iff", "u_x", "=", "v_x", r"\wedge", "u_y", "=", "v_y"
+        )
 
         vg = VGroup(vecs, igales).arrange(DOWN).move_to([-3, 2, 0])
 
@@ -181,7 +187,7 @@ class Def(Scene):
         self.wait()
 
         self.play(FadeOut(vg))
-        
+
         name = Text("Vector en posición normal").move_to([0, -2, 0])
         self.wait()
         self.play(Write(name))
@@ -191,7 +197,6 @@ class Def(Scene):
 
         self.play(FadeOut(r1, r1t, o, ot, a, al, r, lx, ly))
         self.wait()
-
 
         a = Dot([-3, 2, 0])
         al = MathTex("A=(", "-3", ",", "2", ")").next_to(a, UP)
@@ -208,7 +213,6 @@ class Def(Scene):
 
         self.play(Transform(plane, r))
         self.wait()
-
 
         # Animacion que me olvide
 
@@ -228,10 +232,8 @@ class Def(Scene):
         self.wait()
 
         l = Line(p1, p2).set_color(YELLOW)
-        lt = MathTex(r"3 - (-2)","=", "5").next_to(l, UP)
+        lt = MathTex(r"3 - (-2)", "=", "5").next_to(l, UP)
         rx = Arrow(p1, p2, buff=0).set_color(BLUE)
-
-
 
         self.play(Create(l))
         self.play(Write(lt[0]))
@@ -255,7 +257,7 @@ class Def(Scene):
             include_numbers=True,
             include_tip=True,
             label_direction=RIGHT,
-            rotation=90 * DEGREES
+            rotation=90 * DEGREES,
         )
 
         self.play(Transform(plane, ly))
@@ -264,8 +266,8 @@ class Def(Scene):
         p2 = Dot([0, 1, 0]).set_color(ORANGE)
 
         ry = Arrow(p1, p2, buff=0).set_color(BLUE)
-        rt = MathTex("1 - (-2)","=","3").next_to(ry, 1.5 * RIGHT)
-        rt1 = MathTex("-2 - 1","=","-3").next_to(ry, 1.5 * RIGHT)
+        rt = MathTex("1 - (-2)", "=", "3").next_to(ry, 1.5 * RIGHT)
+        rt1 = MathTex("-2 - 1", "=", "-3").next_to(ry, 1.5 * RIGHT)
 
         self.play(Create(p1))
         self.play(Create(p2))
@@ -282,7 +284,6 @@ class Def(Scene):
         self.play(Create(ry))
         self.wait()
 
-
         r = Arrow(a, b, buff=0)
 
         self.play(FadeOut(rt1, p1, p2, ry), Transform(plane, r), FadeIn(a, al, b, bl))
@@ -290,19 +291,23 @@ class Def(Scene):
         self.wait()
         # sigue con las animaciones
 
-
         rt = MathTex(r"\vec r = \overrightarrow{AB}").next_to(r, DOWN)
         self.play(Write(rt))
 
-        rt1 = MathTex(r"\vec r = \overrightarrow{AB}",
-                      "=[", "2", "-", "(-3)",",",
-                      "1", "-", "2", "]",
-                      ).next_to(r, DOWN)
+        rt1 = MathTex(
+            r"\vec r = \overrightarrow{AB}",
+            "=[",
+            "2",
+            "-",
+            "(-3)",
+            ",",
+            "1",
+            "-",
+            "2",
+            "]",
+        ).next_to(r, DOWN)
 
-        resp = MathTex(
-            r"\implies \vec r=[",
-            "5", ",", "-1", "]"
-        ).next_to(rt1, DOWN)
+        resp = MathTex(r"\implies \vec r=[", "5", ",", "-1", "]").next_to(rt1, DOWN)
 
         self.play(rt.animate.move_to(rt1[0].get_center()))
         self.play(Write(rt1[1]))
@@ -326,9 +331,6 @@ class Def(Scene):
         self.play(Write(resp[4]))
         self.wait()
 
-
-
-
         plane = number_plane()
         self.play(Transform(r.copy(), plane))
         self.wait()
@@ -345,7 +347,7 @@ class Def(Scene):
         self.play(Create(ry))
         self.wait()
 
-        rx =  Arrow([-3, 1, 0], [2, 1, 0], buff=0).set_color(BLUE)
+        rx = Arrow([-3, 1, 0], [2, 1, 0], buff=0).set_color(BLUE)
         self.play(Create(rx))
 
         self.wait()
@@ -356,5 +358,3 @@ class Def(Scene):
         self.play(rx.animate.shift(UP))
         self.wait()
         self.play(ry.animate.shift(RIGHT * 5))
-
-

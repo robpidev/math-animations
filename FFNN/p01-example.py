@@ -1,4 +1,19 @@
-from manim import BLUE, BLUE_A, LEFT, RIGHT, YELLOW, UP, Axes, Brace, Group, SurroundingRectangle, TransformFromCopy, TransformMatchingShapes, Write, Transform
+from manim import (
+    BLUE,
+    BLUE_A,
+    LEFT,
+    RIGHT,
+    YELLOW,
+    UP,
+    Axes,
+    Brace,
+    Group,
+    SurroundingRectangle,
+    TransformFromCopy,
+    TransformMatchingShapes,
+    Write,
+    Transform,
+)
 from manim import Circle, Create, Line, MathTex, Scene, VGroup, DOWN, color
 from manim import FadeOut
 
@@ -27,12 +42,7 @@ class P01Example(Scene):
             ]
         ).to_edge(LEFT)
 
-        w1_con = VGroup(
-            *[
-                Line(a, n1_draw, color=BLUE_A)
-                for a in a0
-            ]
-        )
+        w1_con = VGroup(*[Line(a, n1_draw, color=BLUE_A) for a in a0])
 
         w1_lab = VGroup(
             *[
@@ -58,7 +68,6 @@ class P01Example(Scene):
             self.play(Write(w1_lab[i]))
             self.wait(0.2)
 
-
         self.play(Create(a1), Write(a1_lab))
         self.wait(0.5)
 
@@ -68,36 +77,28 @@ class P01Example(Scene):
 
         # self.next_section(skip_animations=False)
         eq = [
-            f"{w1v[i // 2]} \\cdot {a0v[i // 2]}"
-            if i % 2 == 0 else "+"
+            f"{w1v[i // 2]} \\cdot {a0v[i // 2]}" if i % 2 == 0 else "+"
             for i in range(2 * len(a0))
         ]
 
         eq.append(f"{n1_biasv}")
 
         eq = MathTex(*eq).to_edge(DOWN).shift(UP)
-        
-
-
 
         for i in range(len(a0)):
-            self.play(Transform(
-                Group(a0[i], w1_lab[i]).copy(), eq[2 * i]
-            ))
+            self.play(Transform(Group(a0[i], w1_lab[i]).copy(), eq[2 * i]))
 
             self.wait(0.2)
 
             if i + 1 == len(a0):
                 break
 
-            self.play(Write(eq[2 * i +  1]))
+            self.play(Write(eq[2 * i + 1]))
             self.wait(0.2)
 
         # self.next_section(skip_animations=False)
 
-        result = sum([
-            i * j for i, j in zip(a0v, w1v)
-        ])
+        result = sum([i * j for i, j in zip(a0v, w1v)])
 
         brace = Brace(eq[:-2], DOWN)
         brace_lab = MathTex(f"{result}").next_to(brace, DOWN)
@@ -107,7 +108,6 @@ class P01Example(Scene):
 
         self.next_section(skip_animations=False)
         self.play(nn.animate.scale(0.5).to_edge(LEFT + UP))
-
 
         # DRAW Scalon function
         axes = Axes([-3, 3], [-1, 2], x_length=6, y_length=6, tips=True)
@@ -130,5 +130,3 @@ class P01Example(Scene):
 
         self.play(Create(axes))
         self.wait()
-
-

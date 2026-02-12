@@ -4,7 +4,7 @@ from manim import *
 class Intro(Scene):
     def construct(self):
         self.wait()
-        
+
         # self.next_section(skip_animations=True)
         rect = Rectangle(width=2, height=1, color=BLUE).shift(UP * 0.5)
         m = MathTex(r"m = 10\text{ kg}").move_to([0, 0.5, 0]).scale(0.7)
@@ -25,9 +25,8 @@ class Intro(Scene):
                 Line([-5, 0.6, 0], [10, 0.6, 0]),
                 rate_func=lambda t: t**2,
             ),
-                run_time = 2,
+            run_time=2,
         )
-
 
         # self.next_section(skip_animations=False)
         n = Vector([0, 2, 0])
@@ -51,10 +50,10 @@ class Intro(Scene):
         ).move_to([3, -2.5, 0])
 
         p = Dot([-4, -2.47, 0])
-        pl = MathTex(r"P = (x_0, y_0)").next_to(p, LEFT + 0.5*UP)
+        pl = MathTex(r"P = (x_0, y_0)").next_to(p, LEFT + 0.5 * UP)
 
         x = Dot([3, 1.57, 0])
-        xl = MathTex(r"X = (x, y)").next_to(x, RIGHT*1.5)
+        xl = MathTex(r"X = (x, y)").next_to(x, RIGHT * 1.5)
 
         self.play(Create(p), Create(x), Write(pl), Write(xl))
 

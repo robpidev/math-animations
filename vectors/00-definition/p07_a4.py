@@ -7,10 +7,11 @@ class Add4(Scene):
         # self.next_section(skip_animations=True)
         self.wait()
 
-        a4 = Tex("(A4). ",
-                 r"$\exists 0 \in \mathbb{R} : x + 0 = x,"
-                + r"\quad \forall x \in \mathbb{R}$",
-                 )
+        a4 = Tex(
+            "(A4). ",
+            r"$\exists 0 \in \mathbb{R} : x + 0 = x,"
+            + r"\quad \forall x \in \mathbb{R}$",
+        )
         self.play(Write(a4))
 
         self.wait()
@@ -30,16 +31,27 @@ class Add4(Scene):
         # self.add(plane)
 
         l1 = MathTex(
-            r"\mathbf{0}", "=", vec_matrix(0, 0),
-            ",\quad", r"\mathbf{0} \in \mathbb{R}^2",
+            r"\mathbf{0}",
+            "=",
+            vec_matrix(0, 0),
+            ",\quad",
+            r"\mathbf{0} \in \mathbb{R}^2",
         )
         l2 = MathTex(
-                r"\mathbf{u}", "+", r"\mathbf{0}",
-                "=", vec_comps("u"), "+", vec_matrix(0, 0),
-                "=", vec_matrix("u_x + 0", "u_y + 0"),
-                "=", vec_matrix("u_x", "u_y"),
-                "=", r"\mathbf{u}"
-            )
+            r"\mathbf{u}",
+            "+",
+            r"\mathbf{0}",
+            "=",
+            vec_comps("u"),
+            "+",
+            vec_matrix(0, 0),
+            "=",
+            vec_matrix("u_x + 0", "u_y + 0"),
+            "=",
+            vec_matrix("u_x", "u_y"),
+            "=",
+            r"\mathbf{u}",
+        )
 
         proof = VGroup(l1, l2)
         proof.arrange(DOWN, buff=1)
@@ -73,8 +85,11 @@ class Add4(Scene):
         self.wait()
 
         result = MathTex(
-            r"\exists", r"\mathbf{0} \in \mathbb{R}^2", ":",
-            r"\mathbf{u} + \mathbf{0}", r"=\mathbf{u}",
+            r"\exists",
+            r"\mathbf{0} \in \mathbb{R}^2",
+            ":",
+            r"\mathbf{u} + \mathbf{0}",
+            r"=\mathbf{u}",
             r",\quad \forall \mathbf{u} \in \mathbb{R}^2",
         )
 
@@ -94,5 +109,3 @@ class Add4(Scene):
         enum = Tex("4. ").next_to(result, LEFT)
         self.play(Write(enum))
         self.wait()
-
-
