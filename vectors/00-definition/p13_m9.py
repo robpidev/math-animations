@@ -1,6 +1,6 @@
-from manim import *
-from funcs.vec_algebra import vec_scale
 from funcs.vec2D_tex import *
+from funcs.vec_algebra import vec_scale
+from manim import *
 from mobj.mobjets import number_plane
 
 
@@ -187,11 +187,11 @@ class Prop9(Scene):
             r"\mathbf{u}",
             "+",
             r"(3\cdot5)",
-            "\mathbf{v}",
+            r"\mathbf{v}",
         )
 
         eq1 = MathTex(
-            "3 (2\mathbf{u} + 5\mathbf{v})",
+            r"3 (2\mathbf{u} + 5\mathbf{v})",
             "=",
             r"6",
             r"\mathbf{u}",

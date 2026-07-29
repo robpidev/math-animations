@@ -1,6 +1,6 @@
 from manim import *
-from numpy import sin, cos
 from mobj.mobjets import number_plane
+from numpy import cos, sin
 
 
 def vec(r: ValueTracker, u: ValueTracker) -> list:

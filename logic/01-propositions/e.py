@@ -1,4 +1,4 @@
-from manim import Scene, MathTex
+from manim import MathTex, Scene
 
 
 class E(Scene):

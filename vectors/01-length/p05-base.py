@@ -1,8 +1,6 @@
-from manim import *
-from moderngl_window.context import base
-
-from mobj.mobjets import number_plane
 from funcs.vec2D_tex import *
+from manim import *
+from mobj.mobjets import number_plane
 
 
 class P05_Base(Scene):
@@ -107,7 +105,7 @@ class P05_Base(Scene):
         self.play(FadeOut(rts[3], plane, rv, rx, ry, iv, jv))
 
         baseG = VGroup(
-            Tex("Base de $\mathbb{R}^2$").scale(1.5),
+            Tex(r"Base de $\mathbb{R}^2$").scale(1.5),
             MathTex(r"\{\mathbf{\hat{\imath}}, \mathbf{\hat{\jmath}}\}"),
         ).arrange(DOWN, buff=1.5)
 

@@ -1,4 +1,4 @@
-from math import cos, sin, pi
+from math import cos, pi, sin
 
 
 def vec_ab(a: list, b: list) -> list:

@@ -1,5 +1,5 @@
-from manim import *
 from funcs.vec2D_tex import *
+from manim import *
 
 
 class Add4(Scene):
@@ -34,7 +34,7 @@ class Add4(Scene):
             r"\mathbf{0}",
             "=",
             vec_matrix(0, 0),
-            ",\quad",
+            r",\quad",
             r"\mathbf{0} \in \mathbb{R}^2",
         )
         l2 = MathTex(

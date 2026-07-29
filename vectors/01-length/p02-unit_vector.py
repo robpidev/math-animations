@@ -1,6 +1,6 @@
+from funcs.vec2D_tex import *
 from manim import *
 from mobj.mobjets import number_plane
-from funcs.vec2D_tex import *
 
 
 def vut(name: str) -> str:
@@ -29,7 +29,7 @@ class P02_UnitVector(Scene):
 
         l2 = MathTex(
             r"\implies",
-            "\mathbf{\|u_r\|}",
+            r"\mathbf{\|u_r\|}",
             "=",
             r"\left\|\frac{1}{\|\mathbf{r}\|}\mathbf{r}\right\|",
             "=",

@@ -7,7 +7,7 @@ class Field(Scene):
         # self.next_section(skip_animations=True)
 
         group = MathTex(r"(\mathbb{R},+", ")")
-        field = MathTex(r"(\mathbb{R},+", ",\cdot", ")")
+        field = MathTex(r"(\mathbb{R},+", r",\cdot", ")")
 
         self.play(Write(group))
         self.wait()
@@ -77,7 +77,7 @@ class Field(Scene):
             self.wait()
 
         field_name = MathTex(
-            r"\text{Campo (Cuerpo): }", r"(\mathbb{R},+", ",\cdot", ")"
+            r"\text{Campo (Cuerpo): }", r"(\mathbb{R},+", r",\cdot", ")"
         )
 
         field_name.move_to(fieldg[0].get_center() + RIGHT * 2)
@@ -88,7 +88,7 @@ class Field(Scene):
         self.play(FadeOut(fieldg[1:], field_name))
 
         write = MathTex(
-            "x\cdot y",
+            r"x\cdot y",
             ",",
             r"\quad x \cdot \left(\frac{1}{y}\right)",
             ",",
@@ -98,7 +98,7 @@ class Field(Scene):
             ",",
             r"\quad x + x",
             ",",
-            "\quad\dots",
+            r"\quad\dots",
         )
 
         write_alt = MathTex(
@@ -112,7 +112,7 @@ class Field(Scene):
             ",",
             r"\quad 2x",
             ",",
-            "\quad\dots",
+            r"\quad\dots",
         )
 
         VGroup(write, write_alt).arrange(DOWN, buff=1)

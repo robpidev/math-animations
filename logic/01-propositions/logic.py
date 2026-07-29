@@ -1,14 +1,22 @@
-from manim import Scene
-from manim import Text, MathTex, Tex
-from manim import SurroundingRectangle
-from manim import Write, Create, VGroup
-from manim import Transform
-from manim import FadeOut
-
 # from manim import NumberPlane
-from manim import Arrow
-from manim import DOWN, LEFT
-from manim import GREEN, RED, PURPLE_A
+from manim import (
+    DOWN,
+    GREEN,
+    LEFT,
+    PURPLE_A,
+    RED,
+    Arrow,
+    Create,
+    FadeOut,
+    MathTex,
+    Scene,
+    SurroundingRectangle,
+    Tex,
+    Text,
+    Transform,
+    VGroup,
+    Write,
+)
 
 
 class Logic(Scene):

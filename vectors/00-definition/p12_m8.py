@@ -1,6 +1,6 @@
-from manim import *
-from funcs.vec_algebra import *
 from funcs.vec2D_tex import *
+from funcs.vec_algebra import *
+from manim import *
 from mobj.mobjets import number_plane
 
 
@@ -80,7 +80,7 @@ class Prop8(Scene):
 
         l1 = MathTex(
             r"c, d",
-            "\in \mathbb{R}",
+            r"\in \mathbb{R}",
             r"\wedge",
             r"\mathbf{u}",
             r"\in \mathbb{R}^2",
@@ -120,7 +120,7 @@ class Prop8(Scene):
             r"\in \mathbb{R}",
             r"\wedge",
             r"\forall",
-            "\mathbf{u}",
+            r"\mathbf{u}",
             r"\in \mathbb{R}^2",
         )
 

@@ -1,8 +1,7 @@
-import copy
+from funcs.vec2D_tex import *
+from funcs.vec_algebra import *
 from manim import *
 from mobj.mobjets import number_plane
-from funcs.vec_algebra import *
-from funcs.vec2D_tex import *
 
 
 class P04_Resultant(Scene):
@@ -10,7 +9,7 @@ class P04_Resultant(Scene):
         self.wait()
         # self.next_section(skip_animations=True)
 
-        title = Tex("Longitud de la resultante: $\|\mathbf{u + v}\|$")
+        title = Tex(r"Longitud de la resultante: $\|\mathbf{u + v}\|$")
 
         self.play(Write(title))
         self.wait()

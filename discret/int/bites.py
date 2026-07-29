@@ -1,4 +1,4 @@
-from manim import RIGHT, WHITE, YELLOW, Square, Text, VGroup
+from manim import RIGHT, WHITE, YELLOW, Text, VGroup
 from manim.mobject.svg.svg_mobject import RoundedRectangle
 
 font = "JetBrainsMono Nerd Font"

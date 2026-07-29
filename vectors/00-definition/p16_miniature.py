@@ -1,6 +1,7 @@
 from math import atan
+
+from funcs.vec2D_tex import vec_comps
 from manim import *
-from funcs.vec2D_tex import vec_comps, vec_scalar
 
 
 class Miniature(Scene):
@@ -12,7 +13,7 @@ class Miniature(Scene):
         w = u.copy().shift([1, 0.5, 0])
         u = u.shift([-1, -0.5, 0])
 
-        vl = MathTex("\mathbf{u}").move_to([-2, -1.5, 0]).set_color(RED)
+        vl = MathTex(r"\mathbf{u}").move_to([-2, -1.5, 0]).set_color(RED)
 
         vecs = VGroup(u, v, w)
 

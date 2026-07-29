@@ -1,7 +1,7 @@
-from manim import *
-from mobj.mobjets import number_plane
 from funcs.vec2D_tex import *
 from funcs.vec_algebra import *
+from manim import *
+from mobj.mobjets import number_plane
 
 
 class P01_Length(Scene):
@@ -149,7 +149,7 @@ class P01_Length(Scene):
             r"\text{de un vector } ",
             r"\mathbf{r} =",
             vec(["x", "y"]),
-            "\in \mathbb{R}^2",
+            r"\in \mathbb{R}^2",
         )
 
         l3 = MathTex(r"\text{es un escalar } \|\mathbf{r}\| \text{ definido por }")
@@ -190,9 +190,9 @@ class P01_Length(Scene):
 
         mod_r1 = MathTex(
             r"\implies \|\mathbf{r}\| =",
-            "\sqrt{(-2)^2 + 1^2}",
+            r"\sqrt{(-2)^2 + 1^2}",
             "=",
-            "\sqrt{5}",
+            r"\sqrt{5}",
             color=YELLOW_B,
         ).next_to(r1l, RIGHT)
         self.play(Write(mod_r1[0][0:2]))
@@ -308,7 +308,7 @@ class P01_Length(Scene):
         rl = MathTex(
             r"\mathbf{r} &= " + vec(["x", "y"]),
             r"\\\implies",
-            "\|\mathbf{r}\| &= \sqrt{x^2 + y^2}",
+            r"\|\mathbf{r}\| &= \sqrt{x^2 + y^2}",
             color=RED,
         ).move_to([-2, 0, 0])
 
@@ -321,7 +321,7 @@ class P01_Length(Scene):
             r"&=",
             r"|c|\|\mathbf{r}\| \\",
             r"&=",
-            "|c|\sqrt{x^2 + y^2}",
+            r"|c|\sqrt{x^2 + y^2}",
             color=GREEN,
         ).move_to([4, 0, 0])
 
@@ -401,7 +401,7 @@ class P01_Length(Scene):
             r"\|c\mathbf{r}\|",
             "=",
             r"\sqrt{c^2}",
-            "\sqrt{x^2 + y^2}",
+            r"\sqrt{x^2 + y^2}",
             "=",
             r"|c|",
             r"\|\mathbf{r}\|",

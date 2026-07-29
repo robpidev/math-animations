@@ -6,7 +6,6 @@ from manim import (
     Text,
     ValueTracker,
     VGroup,
-    color,
 )
 
 

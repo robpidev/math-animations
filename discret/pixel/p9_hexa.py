@@ -19,11 +19,10 @@ from manim import (
     Text,
     Transform,
     TransformMatchingShapes,
-    VGroup,
     Vector,
+    VGroup,
     Write,
 )
-
 from pixel import FONT, animate_pixel, pixel_hexa, pixel_rgb, rgb, to_hexa
 
 

@@ -1,4 +1,4 @@
-from manim import Circle, Create, MathTex, Scene, Text, Write
+from manim import Circle, Create, Scene
 
 
 class P00Intro(Scene):

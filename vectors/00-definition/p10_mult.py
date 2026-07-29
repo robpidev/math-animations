@@ -1,9 +1,7 @@
-from manim import *
-
-
-from mobj import mobjets
 from funcs.vec2D_tex import *
 from funcs.vec_algebra import *
+from manim import *
+from mobj import mobjets
 
 
 def vec_scalar_comps_color(k: ValueTracker, a: list) -> MathTex:
@@ -144,7 +142,7 @@ class Def_Mult(Scene):
 
         eq3 = (
             VGroup(
-                MathTex(vec_matrix("2\cdot2", "2\cdot 1")).set_color(GREEN),
+                MathTex(vec_matrix(r"2\cdot2", r"2\cdot 1")).set_color(GREEN),
                 MathTex("="),
                 MathTex(vec(b)).set_color(RED),
             )
@@ -220,12 +218,12 @@ class Def_Mult(Scene):
         )
 
         result = MathTex(
-            "6. \quad",
+            r"6. \quad",
             r"\mathbf{u} \in \mathbb{R}^2",
             r"\wedge c \in \mathbb{R}",
             r"\implies",
             r"c \mathbf{u}",
-            "\in \mathbb{R}^2",
+            r"\in \mathbb{R}^2",
         )
 
         def_g = VGroup(VGroup(l1, l2).arrange(DOWN, aligned_edge=LEFT), l3, result)

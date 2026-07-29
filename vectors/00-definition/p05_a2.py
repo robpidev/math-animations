@@ -1,5 +1,5 @@
-from manim import *
 from funcs.vec2D_tex import *
+from manim import *
 from mobj.mobjets import number_plane
 
 

@@ -1,9 +1,8 @@
 import numpy as np
-from manim import *
-
-from mobj.mobjets import number_plane
 from funcs.vec2D_tex import *
 from funcs.vec_algebra import *
+from manim import *
+from mobj.mobjets import number_plane
 
 
 class P03_UnitCsvec(Scene):

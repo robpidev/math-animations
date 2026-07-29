@@ -1,7 +1,7 @@
-from manim import *
 from funcs.vec2D_tex import *
-from mobj.mobjets import number_plane
 from funcs.vec_algebra import *
+from manim import *
+from mobj.mobjets import number_plane
 from numpy import arctan
 
 
@@ -187,7 +187,7 @@ class Add5(Scene):
             "=",
             vec_matrix("0", "0"),
             "=",
-            "\mathbf{0}",
+            r"\mathbf{0}",
         )
 
         l3 = Tex(
@@ -321,7 +321,7 @@ class Add5(Scene):
             "=",
             r"\mathbf{u}",
             "+",
-            "(-\mathbf{v})",
+            r"(-\mathbf{v})",
             "=",
             vec_comps("u"),
             "+",
@@ -395,7 +395,7 @@ class Add5(Scene):
             r"\mathbf{u} - \mathbf{v}",
             r"=",
             r"\mathbf{u} + (",
-            "-\mathbf{v}",
+            r"-\mathbf{v}",
             ")",
         ).move_to([0, -1.5, 0])
 

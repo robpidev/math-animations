@@ -1,6 +1,6 @@
-from manim import *
-from funcs.vec_algebra import *
 from funcs.vec2D_tex import *
+from funcs.vec_algebra import *
+from manim import *
 from mobj.mobjets import number_plane
 
 

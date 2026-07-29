@@ -1,21 +1,25 @@
 from manim import (
     BLUE,
     BLUE_A,
+    DOWN,
     LEFT,
     RIGHT,
-    YELLOW,
     UP,
+    YELLOW,
     Axes,
     Brace,
+    Circle,
+    Create,
+    FadeOut,
     Group,
+    Line,
+    MathTex,
+    Scene,
     SurroundingRectangle,
-    TransformFromCopy,
-    TransformMatchingShapes,
-    Write,
     Transform,
+    VGroup,
+    Write,
 )
-from manim import Circle, Create, Line, MathTex, Scene, VGroup, DOWN, color
-from manim import FadeOut
 
 
 class P01Example(Scene):

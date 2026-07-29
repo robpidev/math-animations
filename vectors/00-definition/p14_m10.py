@@ -24,9 +24,9 @@ class Prop10(Scene):
         eq = MathTex(
             r"3 \mathbf{u} + \mathbf{u}",
             "=",
-            "3 \mathbf{u} + 1\mathbf{u}",
+            r"3 \mathbf{u} + 1\mathbf{u}",
             "=",
-            "4 \mathbf{u}",
+            r"4 \mathbf{u}",
         )
 
         self.play(Write(eq[0]))

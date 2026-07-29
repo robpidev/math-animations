@@ -1,3 +1,4 @@
+from bites import create_byte, int_to_bin
 from manim import (
     DOWN,
     UP,
@@ -10,15 +11,11 @@ from manim import (
     Text,
     Transform,
     TransformFromCopy,
-    VGroup,
     ValueTracker,
     Vector,
+    VGroup,
     Write,
 )
-
-
-from bites import create_byte, int_to_bin
-
 
 font = "JetBrainsMono Nerd Font"
 
@@ -30,20 +27,20 @@ class P1Unsigned(Scene):
 
         num = ValueTracker(113)
 
-        num_text = Text(f"{int(num.get_value())}", font=font).scale(2)
+        byte_text = Text(f"{int(num.get_value())}", font=font).scale(2)
         byte = create_byte(int_to_bin(num.get_value())).scale(0.75)
 
-        gbyte = VGroup(num_text, byte)
+        gbyte = VGroup(byte_text, byte)
 
-        self.play(Write(num_text))
+        self.play(Write(byte_text))
         self.wait()
-        num_text_c = num_text.copy()
-        num_text.set_opacity(0)
+        num_text_c = byte_text.copy()
+        byte_text.set_opacity(0)
         self.play(ReplacementTransform(num_text_c, byte))
         self.wait()
         self.play(gbyte.animate.arrange(DOWN, buff=1))
-        num_text.set_opacity(1)
-        self.play(TransformFromCopy(byte, num_text))
+        byte_text.set_opacity(1)
+        self.play(TransformFromCopy(byte, byte_text))
         self.wait()
 
         # === Def U8 ===
@@ -59,7 +56,7 @@ class P1Unsigned(Scene):
         self.play(FadeOut(brace_label, brace))
         self.wait()
 
-        num_text.add_updater(
+        byte_text.add_updater(
             lambda m: m.become(
                 Text(f"{int(num.get_value())}", font=font).scale(2).move_to(m)
             )
@@ -106,17 +103,26 @@ class P1Unsigned(Scene):
         self.play(Create(eq[0]))
         self.wait()
 
-        self.play(TransformFromCopy(
-            text, eq[1]
-            ))
+        self.play(TransformFromCopy(text, eq[1]))
 
         self.wait()
+
+        self.remove(*self.mobjects)
+        self.add(byte, byte_text, counter)
 
         resut = MathTex("256").scale(2)
         resut.move_to(eq[:2])
 
-        self.play(Transform(eq[:2], resut))
+        self.play(TransformFromCopy(eq[:2], resut))
         self.wait()
 
         self.play(Transform(resut, eq[:2]))
+        self.wait()
+
+        self.next_section(skip_animations=False)
+        self.play(num.animate.set_value(0))
+        self.wait()
+        self.play(num.animate.set_value(255))
+        self.wait()
+        self.play(Write(eq[2:]))
         self.wait()

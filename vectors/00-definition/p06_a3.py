@@ -1,6 +1,6 @@
-from manim import *
 from funcs.vec2D_tex import *
 from funcs.vec_algebra import *
+from manim import *
 from mobj.mobjets import number_plane
 
 
@@ -43,10 +43,10 @@ class Add3(Scene):
             [0, 0.5, 0]
         )
         ruvl = MathTex(
-            r"(\mathbf{u} + \mathbf{v})", "+", "\mathbf{w}", color=RED
+            r"(\mathbf{u} + \mathbf{v})", "+", r"\mathbf{w}", color=RED
         ).move_to([0, -1, 0])
         rvwl = MathTex(
-            r"\mathbf{u}", "+", "(\mathbf{v} + \mathbf{w})", color=RED
+            r"\mathbf{u}", "+", r"(\mathbf{v} + \mathbf{w})", color=RED
         ).move_to([0, -1, 0])
 
         vecs = VGroup(u, v, w, ul, vl, wl)
@@ -69,7 +69,7 @@ class Add3(Scene):
 
         self.next_section(skip_animations=False)
         eq1 = MathTex(
-            "\left(",
+            r"\left(",
             vec(vec_ab(pp, pq)),
             "+",
             vec(vec_ab(pq, pr)),
@@ -233,7 +233,7 @@ class Add3(Scene):
         l1 = MathTex(
             r"(\mathbf{u} + \mathbf{v})",
             "+",
-            "\mathbf{w}",
+            r"\mathbf{w}",
             "=",
             r"\left(",
             vec_comps("u"),
@@ -247,7 +247,7 @@ class Add3(Scene):
         l2 = MathTex(
             r"(\mathbf{u} + \mathbf{v})",
             "+",
-            "\mathbf{w}",
+            r"\mathbf{w}",
             "=",
             vec_add_comps("u", "v"),
             "+",
@@ -261,7 +261,7 @@ class Add3(Scene):
         l3 = MathTex(
             r"(\mathbf{u} + \mathbf{v})",
             "+",
-            "\mathbf{w}",
+            r"\mathbf{w}",
             "=",
             vec_matrix(
                 r"u_x + \left(v_x + w_x\right)", r"u_y + \left(v_y + w_y\right)"
@@ -275,11 +275,11 @@ class Add3(Scene):
         l4 = MathTex(
             r"(\mathbf{u} + \mathbf{v})",
             "+",
-            "\mathbf{w}",
+            r"\mathbf{w}",
             "=",
             vec_comps("u"),
             "+",
-            "\left(",
+            r"\left(",
             vec_comps("v"),
             "+",
             vec_comps("w"),
