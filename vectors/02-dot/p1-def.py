@@ -13,6 +13,7 @@ from manim import (
     Brace,
     Create,
     DashedLine,
+    FadeIn,
     FadeOut,
     MathTex,
     NumberPlane,
@@ -25,7 +26,12 @@ from manim import (
     Vector,
     VGroup,
     Write,
+    config,
 )
+from utils.panels import PanelLayout
+
+config.frame_width = 9
+config.frame_height = 16  # Re
 
 
 def number_plane():
@@ -34,10 +40,10 @@ def number_plane():
         y_range=[-10, 10],
         background_line_style={
             "stroke_width": 2,
-            "stroke_opacity": 0.3,
+            "stroke_opacity": 0.0,
         },
         axis_config={
-            "stroke_width": 1,
+            "stroke_width": 2,
             "stroke_opacity": 0.5,
         },
     )
@@ -93,8 +99,18 @@ assert project([3, 3], [0, 1]) == [0, 3]
 
 class P1DotDef(Scene):
     def construct(self):
-        u_c = [5, 1]
-        v_c = [2, 3]
+
+        # self.next_section(skip_animations=True)
+
+        # === Layout ===
+        layout = PanelLayout(2)
+        # borders = layout.show_borders()
+        # self.play(Create(borders))
+
+        self.wait()
+
+        u_c = [5, 1, 0]
+        v_c = [2, 3, 0]
         u = Vector(u_c, color=BLUE)
         ul = MathTex(r"\mathbf{u}", color=BLUE).next_to(u, RIGHT).shift(UP * 0.5)
 
@@ -128,6 +144,8 @@ class P1DotDef(Scene):
             Angle(u, v, radius=0.8 + 0.3).point_from_proportion(0.5)
         )
 
+        # self.next_section(skip_animations=False)
+
         objects = VGroup(
             e1.set_opacity(0),
             e2.set_opacity(0),
@@ -144,7 +162,6 @@ class P1DotDef(Scene):
         objects.move_to(ORIGIN)
 
         self.wait(0.5)
-        self.next_section(skip_animations=True)
 
         self.play(Create(u), Write(ul))
         self.play(Create(v), Write(vl))
@@ -157,7 +174,7 @@ class P1DotDef(Scene):
 
         self.play(Create(p))
 
-        self.next_section(skip_animations=True)
+        # self.next_section(skip_animations=False)
 
         brace = Brace(p, direction=p.copy().rotate(-PI / 2).get_unit_vector())
         self.play(Write(brace))
@@ -169,15 +186,16 @@ class P1DotDef(Scene):
         self.play(TransformFromCopy(a_l, brace_tex[2]))
         self.wait()
 
+        # self.next_section(skip_animations=False)
         objects.add(brace, brace_tex)
-        self.play(objects.animate.to_edge(UP))
+        # self.play(objects.animate.to_edge(UP))
+        # self.play(objects.animate.move_to(LEFT))
+        # self.play(layout.animate_fit(objects, index=0))
         self.wait()
-
-        self.next_section(skip_animations=True)
 
         dot_def = MathTex(
             r"\mathbf u", "\\cdot", r"\mathbf v", "=", "u", "v", "\\cos", "\\theta"
-        ).shift(DOWN * 1.5)
+        ).next_to(objects, DOWN * 1.5)
 
         self.play(TransformFromCopy(u, dot_def[4]))
         self.wait(0.5)
@@ -192,15 +210,20 @@ class P1DotDef(Scene):
 
         self.wait()
 
+        objects.add(dot_def)
+        [sm.points[:, 2].fill(0) for sm in objects.get_family() if len(sm.points)]
+
         self.play(
             FadeOut(p, brace, brace_tex),
-            dot_def.animate.to_edge(UP).shift(1.5 * RIGHT + 0.8 * DOWN),
+            layout.animate_fit(objects, index=0),
         )
-        self.next_section(skip_animations=True)
+
+        # self.next_section(skip_animations=False)
 
         plane = number_plane().move_to(u.get_start())
+        # plane = Axes(x_range=[-10, 10], y_range=[-10, 10], color=BLUE)
 
-        self.play(Create(plane))
+        self.play(FadeIn(plane))
         self.wait()
 
         alpha = Angle(e1, u, radius=0.5, color=BLUE)
@@ -220,10 +243,14 @@ class P1DotDef(Scene):
 
         self.play(FadeOut(plane))
 
-        self.next_section(skip_animations=False)
+        # self.next_section(skip_animations=True)
 
-        dot_def_copy = dot_def.copy().move_to(ORIGIN)
+        # self.next_section(skip_animations=False)
 
+        dot_def_copy = dot_def.copy()
+
+        layout.fit(dot_def_copy, index=1)
+        dot_def_copy.shift(UP * 3)
         self.play(TransformFromCopy(dot_def, dot_def_copy))
         self.wait()
 
@@ -234,76 +261,102 @@ class P1DotDef(Scene):
             "=",
             "u",
             "v",
-            "\\cos",
+            r"\cos",
             r"(\beta - \alpha)",
-        ).shift(DOWN)
+        )
 
-        self.play(TransformFromCopy(dot_def_copy, dot_dif))
+        dot_dif.move_to(dot_def_copy)
 
-        dot_dif11 = MathTex(
-            r"\mathbf u",
-            r"\cdot",
-            r"\mathbf v",
-            "=",
-            "u",
-            "v",
-            r"\left[",
-            r"\cos(\beta) \cos(\alpha) ",
-            r"+",
-            r"\sin(\beta) \sin(\alpha) ",
-            r"\right]",
-        ).next_to(dot_dif, DOWN)
+        self.wait()
+
+        # self.next_section(skip_animations=True)
+
+        self.play(
+            TransformMatchingTex(dot_def_copy, dot_dif, transform_mismatches=True)
+        )
+
+        self.wait()
+
+        dot_dif11 = (
+            MathTex(
+                r"\mathbf u",
+                r"\cdot",
+                r"\mathbf v",
+                "=",
+                "u",
+                "v",
+                r"\left[",
+                r"\cos(\beta) \cos(\alpha) ",
+                r"+",
+                r"\sin(\beta) \sin(\alpha) ",
+                r"\right]",
+            )
+            .next_to(dot_dif, DOWN)
+            .scale(0.7)
+        )
 
         self.play(
             TransformMatchingTex(dot_dif.copy(), dot_dif11, transform_mismatches=True)
         )
         self.wait()
 
-        dot_dif1 = MathTex(
-            r"\mathbf u",
-            "\\cdot",
-            r"\mathbf v",
-            "=",
-            "u",
-            "v",
-            r"\cos(\beta) \cos(\alpha) ",
-            "+",
-            "u",
-            "v",
-            r"\sin(\beta) \sin(\alpha) ",
-        ).next_to(dot_dif11, DOWN)
+        dot_dif1 = (
+            MathTex(
+                r"\mathbf u",
+                "\\cdot",
+                r"\mathbf v",
+                "=",
+                "u",
+                "v",
+                r"\cos(\beta) \cos(\alpha) ",
+                "+",
+                "u",
+                "v",
+                r"\sin(\beta) \sin(\alpha) ",
+            )
+            .next_to(dot_dif11, DOWN)
+            .scale(0.7)
+        )
 
         self.play(TransformMatchingTex(dot_dif11.copy(), dot_dif1))
         self.wait()
 
-        dot_dif2 = MathTex(
-            r"\mathbf u",
-            "\\cdot",
-            r"\mathbf v",
-            "=",
-            "u",
-            r"\cos(\beta)",
-            "v",
-            r"\cos(\alpha) ",
-            "+",
-            "u",
-            r"\sin(\beta)",
-            "v",
-            r"\sin(\alpha) ",
-        ).move_to(dot_dif1, DOWN)
+        dot_dif2 = (
+            MathTex(
+                r"\mathbf u",
+                "\\cdot",
+                r"\mathbf v",
+                "=",
+                "u",
+                r"\cos(\beta)",
+                "v",
+                r"\cos(\alpha) ",
+                "+",
+                "u",
+                r"\sin(\beta)",
+                "v",
+                r"\sin(\alpha) ",
+            )
+            .move_to(dot_dif1, DOWN)
+            .scale(0.7)
+        )
 
         self.play(TransformMatchingTex(dot_dif1, dot_dif2, path_arc=PI / 2))
         self.wait()
 
         self.remove(dot_dif2)
 
-        dot_dif2_alt = MathTex(
-            *(
-                r"\mathbf{u} \cdot \mathbf{v} = u\cos(\beta) v\cos(\alpha) + u\sin(\beta) v\sin(\alpha)".split(
-                    " "
+        dot_dif2_alt = (
+            MathTex(
+                *(
+                    r"\mathbf{u} \cdot \mathbf{v} = u\cos(\beta) v\cos(\alpha) + u\sin(\beta) v\sin(\alpha)".split(
+                        " "
+                    )
                 )
             )
-        ).move_to(dot_dif2)
+            .move_to(dot_dif2)
+            .scale(0.7)
+        )
 
         self.add(dot_dif2_alt)
 
@@ -317,7 +370,7 @@ class P1DotDef(Scene):
             )
             .scale(0.5)
             .move_to(ul)
-            .shift(RIGHT)
+            .shift(UP + LEFT)
         )
         vm = (
             MathTex(
@@ -330,6 +383,7 @@ class P1DotDef(Scene):
             .next_to(
                 v.point_from_proportion(0.5), v.copy().rotate(PI / 2).get_unit_vector()
             )
+            .shift(LEFT * 0.1)
         )
 
         self.play(Transform(ul, um))
@@ -339,7 +393,7 @@ class P1DotDef(Scene):
 
         dot_dif3 = MathTex(
             r"\mathbf u",
-            "\\cdot",
+            r"\cdot",
             r"\mathbf v",
             "=",
             r"u_x",
